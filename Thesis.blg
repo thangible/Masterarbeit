@@ -1,0 +1,49 @@
+This is BibTeX, Version 0.99e (TeX Live 2026)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: Thesis.aux
+The style file: plain.bst
+Database file #1: thesis.bib
+Warning--I didn't find a database entry for "166"
+Warning--can't use both volume and number fields in chen2025aop
+You've used 41 entries,
+            2118 wiz_defined-function locations,
+            722 strings with 14144 characters,
+and the built_in function-call counts, 18447 in all, are:
+= -- 1728
+> -- 1266
+< -- 9
++ -- 501
+- -- 458
+* -- 1513
+:= -- 3092
+add.period$ -- 126
+call.type$ -- 41
+change.case$ -- 346
+chr.to.int$ -- 0
+cite$ -- 42
+duplicate$ -- 529
+empty$ -- 1171
+format.name$ -- 458
+if$ -- 3719
+int.to.chr$ -- 0
+int.to.str$ -- 41
+missing$ -- 35
+newline$ -- 206
+num.names$ -- 82
+pop$ -- 358
+preamble$ -- 1
+purify$ -- 305
+quote$ -- 0
+skip$ -- 406
+stack$ -- 0
+substring$ -- 1077
+swap$ -- 132
+text.length$ -- 9
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 164
+warning$ -- 1
+while$ -- 145
+width$ -- 43
+write$ -- 443
+(There were 2 warnings)

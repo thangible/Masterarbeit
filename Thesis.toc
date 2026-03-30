@@ -35,10 +35,10 @@
 \contentsline {subsubsection}{Phase 1: Adaptation and Encoder Refinement}{18}{section*.21}%
 \contentsline {subsubsection}{Phase 2: Automated Prompt Generation}{20}{section*.22}%
 \contentsline {section}{\numberline {3.2}Dataset Preparation}{20}{section.3.2}%
-\contentsline {section}{\numberline {3.3}Architectures}{20}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}Encoder Adaptation}{20}{subsection.3.3.1}%
-\contentsline {subsubsection}{Learnable Token-based approach}{20}{section*.25}%
-\contentsline {subsubsection}{LoRA approach}{20}{section*.27}%
+\contentsline {section}{\numberline {3.3}Architectures}{22}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Encoder Adaptation}{22}{subsection.3.3.1}%
+\contentsline {subsubsection}{Learnable Token-based approach}{22}{section*.25}%
+\contentsline {subsubsection}{LoRA approach}{22}{section*.27}%
 \contentsline {subsection}{\numberline {3.3.2}Automatical Prompt Generation}{23}{subsection.3.3.2}%
 \contentsline {subsection}{\numberline {3.3.3}CGNet}{23}{subsection.3.3.3}%
 \contentsline {subsubsection}{Multi-scale Fusion}{23}{section*.29}%

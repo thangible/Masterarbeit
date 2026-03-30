@@ -48,8 +48,6 @@ INPUT c:/texlive/2026/texmf-dist/tex/latex/makecell/makecell.sty
 INPUT c:/texlive/2026/texmf-dist/tex/latex/makecell/makecell.sty
 INPUT c:/texlive/2026/texmf-dist/tex/latex/tools/array.sty
 INPUT c:/texlive/2026/texmf-dist/tex/latex/tools/array.sty
-INPUT c:/texlive/2026/texmf-dist/tex/latex/subfig/subfig.sty
-INPUT c:/texlive/2026/texmf-dist/tex/latex/subfig/subfig.sty
 INPUT c:/texlive/2026/texmf-dist/tex/latex/acronym/acronym.sty
 INPUT c:/texlive/2026/texmf-dist/tex/latex/acronym/acronym.sty
 INPUT c:/texlive/2026/texmf-dist/tex/latex/bigfoot/suffix.sty
@@ -139,6 +137,8 @@ INPUT c:/texlive/2026/texmf-dist/tex/latex/multirow/multirow.sty
 INPUT c:/texlive/2026/texmf-dist/tex/latex/multirow/multirow.sty
 INPUT c:/texlive/2026/texmf-dist/tex/latex/graphics/rotating.sty
 INPUT c:/texlive/2026/texmf-dist/tex/latex/graphics/rotating.sty
+INPUT c:/texlive/2026/texmf-dist/tex/latex/subfig/subfig.sty
+INPUT c:/texlive/2026/texmf-dist/tex/latex/subfig/subfig.sty
 INPUT c:/texlive/2026/texmf-dist/tex/latex/url/url.sty
 INPUT c:/texlive/2026/texmf-dist/tex/latex/url/url.sty
 INPUT c:/texlive/2026/texmf-dist/tex/latex/tools/xspace.sty
@@ -192,6 +192,9 @@ INPUT c:/texlive/2026/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
 INPUT c:/texlive/2026/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
 INPUT c:/texlive/2026/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
 INPUT c:/texlive/2026/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
+INPUT ./Thesis.aux
+INPUT ./Thesis.aux
+INPUT Thesis.aux
 OUTPUT Thesis.aux
 INPUT c:/texlive/2026/texmf-dist/tex/latex/caption/ltcaption.sty
 INPUT c:/texlive/2026/texmf-dist/tex/latex/caption/ltcaption.sty
@@ -203,8 +206,14 @@ INPUT c:/texlive/2026/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 INPUT c:/texlive/2026/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 INPUT c:/texlive/2026/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 INPUT c:/texlive/2026/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
-OUTPUT Thesis.out
+INPUT ./Thesis.out
+INPUT ./Thesis.out
+INPUT Thesis.out
+INPUT Thesis.out
 OUTPUT Thesis.pdf
+INPUT ./Thesis.out
+INPUT ./Thesis.out
+OUTPUT Thesis.out
 INPUT ./src/uhhLogoL.pdf
 INPUT ./src/uhhLogoL.pdf
 INPUT ./src/uhhLogoL.pdf
@@ -241,6 +250,9 @@ INPUT c:/texlive/2026/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
 INPUT c:/texlive/2026/texmf-dist/fonts/tfm/public/cm/cmti12.tfm
 INPUT c:/texlive/2026/texmf-dist/fonts/tfm/public/cm/cmr17.tfm
 INPUT c:/texlive/2026/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
+INPUT ./Thesis.toc
+INPUT ./Thesis.toc
+INPUT Thesis.toc
 OUTPUT Thesis.toc
 INPUT ./ChapterContent.tex
 INPUT ./ChapterContent.tex
@@ -424,6 +436,9 @@ INPUT ./master_thesis_content/results/result_multiscaled.tex
 INPUT ./master_thesis_content/results/result_multiscaled.tex
 INPUT ./master_thesis_content/results/result_multiscaled.tex
 INPUT master_thesis_content/results/result_multiscaled.tex
+INPUT ./Thesis.bbl
+INPUT ./Thesis.bbl
+INPUT Thesis.bbl
 INPUT Thesis.aux
 INPUT ./Thesis.out
 INPUT ./Thesis.out

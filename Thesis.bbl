@@ -1,0 +1,206 @@
+\begin{thebibliography}{10}
+
+\bibitem{beckert2023three}
+Andreas~A Beckert, Lea Eisenstein, Annika Oertel, Tim Hewson, George~C Craig, and Marc Rautenhaus.
+\newblock The three-dimensional structure of fronts in mid-latitude weather systems as represented by numerical weather prediction models.
+\newblock {\em Geoscientific Model Development Discussions}, 2023:1--40, 2023.
+
+\bibitem{biard2019automated}
+James~C Biard and Kenneth~E Kunkel.
+\newblock Automated detection of weather fronts using a deep learning neural network.
+\newblock {\em Advances in Statistical Climatology, Meteorology and Oceanography}, 5(2):147--160, 2019.
+
+\bibitem{boukabara2021outlook}
+Sid-Ahmed Boukabara, Vladimir Krasnopolsky, Stephen~G Penny, Jebb~Q Stewart, Amy McGovern, David Hall, John~E Ten~Hoeve, Jason Hickey, Hung-Lung Allen~Huang, John~K Williams, et~al.
+\newblock Outlook for exploiting artificial intelligence in the earth and environmental sciences.
+\newblock {\em Bulletin of the American Meteorological Society}, 102(5):E1016--E1032, 2021.
+
+\bibitem{bourdin2022intercomparison}
+Stella Bourdin, S{\'e}bastien Fromang, William Dulac, Julien Cattiaux, and Fabrice Chauvin.
+\newblock Intercomparison of four algorithms for detecting tropical cyclones using era5.
+\newblock {\em Geoscientific Model Development}, 15(17):6759--6786, 2022.
+
+\bibitem{chen2025aop}
+Yi~Chen, Muyoung Son, Chuanbo Hua, and Joo-Young Kim.
+\newblock Aop-sam: Automation of prompts for efficient segmentation.
+\newblock In {\em Proceedings of the AAAI Conference on Artificial Intelligence}, volume~39, pages 2284--2292, 2025.
+
+\bibitem{chen2024sam}
+Zhen Chen, Qing Xu, Xinyu Liu, and Yixuan Yuan.
+\newblock Un-sam: Universal prompt-free segmentation for generalized nuclei images.
+\newblock {\em arXiv preprint arXiv:2402.16663}, 2024.
+
+\bibitem{dawe2012statistical}
+JT~Dawe and PH~Austin.
+\newblock Statistical analysis of an les shallow cumulus cloud ensemble using a cloud tracking algorithm.
+\newblock {\em Atmospheric Chemistry and Physics}, 12(2):1101--1119, 2012.
+
+\bibitem{gao2025clipadapterbettervisionlanguagemodels}
+Peng Gao, Shijie Geng, Renrui Zhang, Teli Ma, Rongyao Fang, Yongfeng Zhang, Hongsheng Li, and Yu~Qiao.
+\newblock Clip-adapter: Better vision-language models with feature adapters, 2025.
+
+\bibitem{gimeno2014atmospheric}
+Luis Gimeno, Raquel Nieto, Marta V{\'a}zquez, and David~A Lavers.
+\newblock Atmospheric rivers: A mini-review.
+\newblock {\em Frontiers in Earth Science}, 2:2, 2014.
+
+\bibitem{guan2015detection}
+Bin Guan and Duane~E Waliser.
+\newblock Detection of atmospheric rivers: Evaluation and application of an algorithm for global studies.
+\newblock {\em Journal of Geophysical Research: Atmospheres}, 120(24):12514--12535, 2015.
+
+\bibitem{hengstebeck2018radar}
+Thomas Hengstebeck, Kathrin Wapler, Dirk Heizenreder, and Paul Joe.
+\newblock Radar network--based detection of mesocyclones at the german weather service.
+\newblock {\em Journal of Atmospheric and Oceanic Technology}, 35(2):299--321, 2018.
+
+\bibitem{hewson2010objective}
+Tim~D Hewson and Helen~A Titley.
+\newblock Objective identification, typing and tracking of the complete life-cycles of cyclonic features at high spatial resolution.
+\newblock {\em Meteorological Applications}, 17(3):355--381, 2010.
+
+\bibitem{higgins2023using}
+Timothy~B Higgins, Aneesh~C Subramanian, Andre Graubner, Lukas Kapp-Schwoerer, Peter~AG Watson, Sarah Sparrow, Karthik Kashinath, Sol Kim, Luca Delle~Monache, and Will Chapman.
+\newblock Using deep learning for an analysis of atmospheric rivers in a high-resolution large ensemble climate data set.
+\newblock {\em Journal of Advances in Modeling Earth Systems}, 15(4):e2022MS003495, 2023.
+
+\bibitem{hko_coriolis_tc}
+{Hong Kong Observatory}.
+\newblock Why do tropical cyclones always form more than 5 degrees of latitude away from the equator?
+\newblock \url{https://www.hko.gov.hk/en/education/tropical-cyclone/intensity/00150-why-do-tropical-cyclones-always-form-more-than-5-degrees-of-latitude-away-from-the-equator.html}, 2019.
+\newblock Accessed: 2025-03-10.
+
+\bibitem{jia2022visual}
+Menglin Jia, Luming Tang, Bor-Chun Chen, Claire Cardie, Serge Belongie, Bharath Hariharan, and Ser-Nam Lim.
+\newblock Visual prompt tuning.
+\newblock In {\em European conference on computer vision}, pages 709--727. Springer, 2022.
+
+\bibitem{kapp2020spatio}
+Lukas Kapp-Schwoerer, Andre Graubner, Sol Kim, and Karthik Kashinath.
+\newblock Spatio-temporal segmentation and tracking of weather patterns with light-weight neural networks.
+\newblock In {\em AI for Earth Sciences Workshop at NeurIPS 2020}. NIPS, 2020.
+
+\bibitem{ke2023segment}
+Lei Ke, Mingqiao Ye, Martin Danelljan, Yu-Wing Tai, Chi-Keung Tang, Fisher Yu, et~al.
+\newblock Segment anything in high quality.
+\newblock {\em Advances in Neural Information Processing Systems}, 36:29914--29934, 2023.
+
+\bibitem{khattak2023maple}
+Muhammad~Uzair Khattak, Hanoona Rasheed, Muhammad Maaz, Salman Khan, and Fahad~Shahbaz Khan.
+\newblock Maple: Multi-modal prompt learning.
+\newblock In {\em Proceedings of the IEEE/CVF conference on computer vision and pattern recognition}, pages 19113--19122, 2023.
+
+\bibitem{kirillov2023segment}
+Alexander Kirillov, Eric Mintun, Nikhila Ravi, Hanzi Mao, Chloe Rolland, Laura Gustafson, Tete Xiao, Spencer Whitehead, Alexander~C Berg, Wan-Yen Lo, et~al.
+\newblock Segment anything.
+\newblock In {\em Proceedings of the IEEE/CVF international conference on computer vision}, pages 4015--4026, 2023.
+
+\bibitem{lagerquist2019deep}
+Ryan Lagerquist, Amy Mcgovern, and David~John Gagne~II.
+\newblock Deep learning for spatially explicit prediction of synoptic-scale fronts.
+\newblock {\em Weather and Forecasting}, 34(4):1137--1160, 2019.
+
+\bibitem{lawrence2018characterizing}
+Zachary~D Lawrence and Gloria~L Manney.
+\newblock Characterizing stratospheric polar vortex variability with computer vision techniques.
+\newblock {\em Journal of Geophysical Research: Atmospheres}, 123(3):1510--1535, 2018.
+
+\bibitem{liu2023explicitvisualpromptinglowlevel}
+Weihuang Liu, Xi~Shen, Chi-Man Pun, and Xiaodong Cun.
+\newblock Explicit visual prompting for low-level structure segmentations, 2023.
+
+\bibitem{noaa_jetstream_tropical}
+{National Oceanic and Atmospheric Administration}.
+\newblock Tropical cyclone introduction.
+\newblock \url{https://www.noaa.gov/jetstream/tropical/tropical-cyclone-introduction}, 2025.
+\newblock Accessed: 2025-03-10.
+
+\bibitem{neu2013imilast}
+Urs Neu, Mirseid~G Akperov, Nina Bellenbaum, Rasmus Benestad, Richard Blender, Rodrigo Caballero, Angela Cocozza, Helen~F Dacre, Yang Feng, Klaus Fraedrich, et~al.
+\newblock Imilast: A community effort to intercompare extratropical cyclone detection and tracking algorithms.
+\newblock {\em Bulletin of the American Meteorological Society}, 94(4):529--547, 2013.
+
+\bibitem{niebler2022automated}
+Stefan Niebler, Annette Miltenberger, Bertil Schmidt, and Peter Spichtinger.
+\newblock Automated detection and classification of synoptic-scale fronts from atmospheric data grids.
+\newblock {\em Weather and Climate Dynamics}, 3(1):113--137, 2022.
+
+\bibitem{prabhat2020climatenet}
+Prabhat, Karthik Kashinath, Mayur Mudigonda, Sol Kim, Lukas Kapp-Schwoerer, Andre Graubner, Ege Karaismailoglu, Leo von Kleist, Thorsten Kurth, Annette Greiner, et~al.
+\newblock Climatenet: An expert-labelled open dataset and deep learning architecture for enabling high-precision analyses of extreme weather.
+\newblock {\em Geoscientific Model Development Discussions}, 2020:1--28, 2020.
+
+\bibitem{radke2024explaining}
+Tim Radke, Susanne Fuchs, Christian Wilms, Iuliia Polkova, and Marc Rautenhaus.
+\newblock Explaining neural networks for detection of tropical cyclones and atmospheric rivers in gridded atmospheric simulation data.
+\newblock {\em Geoscientific Model Development Discussions}, 2024:1--34, 2024.
+
+\bibitem{rautenhaus2017visualization}
+Marc Rautenhaus, Michael B{\"o}ttinger, Stephan Siemen, Robert Hoffman, Robert~M Kirby, Mahsa Mirzargar, Niklas R{\"o}ber, and R{\"u}diger Westermann.
+\newblock Visualization in meteorology—a survey of techniques and tools for data analysis tasks.
+\newblock {\em IEEE Transactions on Visualization and Computer Graphics}, 24(12):3268--3296, 2017.
+
+\bibitem{rebuffi2017learningmultiplevisualdomains}
+Sylvestre-Alvise Rebuffi, Hakan Bilen, and Andrea Vedaldi.
+\newblock Learning multiple visual domains with residual adapters, 2017.
+
+\bibitem{shields2018atmospheric}
+Christine~A Shields, Jonathan~J Rutz, Lai-Yung Leung, F~Martin Ralph, Michael Wehner, Brian Kawzenuk, Juan~M Lora, Elizabeth McClenny, Tashiana Osborne, Ashley~E Payne, et~al.
+\newblock Atmospheric river tracking method intercomparison project (artmip): Project goals and experimental design.
+\newblock {\em Geoscientific Model Development}, 11(6):2455--2474, 2018.
+
+\bibitem{tian2023deep}
+Yuan Tian, Yang Zhao, Seok-Woo Son, Jing-Jia Luo, Seok-Geun Oh, and Yinjun Wang.
+\newblock A deep-learning ensemble method to detect atmospheric rivers and its application to projected changes in precipitation regime.
+\newblock {\em Journal of Geophysical Research: Atmospheres}, 128(12):e2022JD037041, 2023.
+
+\bibitem{wei2024prompting}
+Zhikai Wei, Wenhui Dong, Peilin Zhou, Yuliang Gu, Zhou Zhao, and Yongchao Xu.
+\newblock Prompting segment anything model with domain-adaptive prototype for generalizable medical image segmentation.
+\newblock In {\em International Conference on Medical Image Computing and Computer-Assisted Intervention}, pages 533--543. Springer, 2024.
+
+\bibitem{wu2025multi}
+Zhongyuan Wu, Chuan-Xian Ren, Yu~Wang, Xiaohua Ban, Jianning Xiao, and Xiaohui Duan.
+\newblock Multi-sequence parotid gland lesion segmentation via expert text-guided segment anything model.
+\newblock {\em arXiv preprint arXiv:2508.09645}, 2025.
+
+\bibitem{xiao2024cat}
+Aoran Xiao, Weihao Xuan, Heli Qi, Yun Xing, Ruijie Ren, Xiaoqin Zhang, Ling Shao, and Shijian Lu.
+\newblock Cat-sam: Conditional tuning for few-shot adaptation of segment anything model.
+\newblock In {\em European Conference on Computer Vision}, pages 189--206. Springer, 2024.
+
+\bibitem{xie2025self}
+Bin Xie, Hao Tang, Dawen Cai, Yan Yan, and Gady Agam.
+\newblock Self-prompt sam: Medical image segmentation via automatic prompt sam adaptation.
+\newblock {\em arXiv preprint arXiv:2502.00630}, 2025.
+
+\bibitem{xu2023adapternetworkopenvocabularysemantic}
+Mengde Xu, Zheng Zhang, Fangyun Wei, Han Hu, and Xiang Bai.
+\newblock Side adapter network for open-vocabulary semantic segmentation, 2023.
+
+\bibitem{zhang2024improving}
+Haojie Zhang, Yongyi Su, Xun Xu, and Kui Jia.
+\newblock Improving the generalization of segmentation foundation model under distribution shift via weakly supervised adaptation.
+\newblock In {\em Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition}, pages 23385--23395, 2024.
+
+\bibitem{zhang2023personalize}
+Renrui Zhang, Zhengkai Jiang, Ziyu Guo, Shilin Yan, Junting Pan, Xianzheng Ma, Hao Dong, Peng Gao, and Hongsheng Li.
+\newblock Personalize segment anything model with one shot.
+\newblock {\em arXiv preprint arXiv:2305.03048}, 2023.
+
+\bibitem{zhou2024sam}
+Chunpeng Zhou, Kangjie Ning, Qianqian Shen, Sheng Zhou, Zhi Yu, and Haishuai Wang.
+\newblock Sam-sp: Self-prompting makes sam great again.
+\newblock {\em arXiv preprint arXiv:2408.12364}, 2024.
+
+\bibitem{zhou2022learning}
+Kaiyang Zhou, Jingkang Yang, Chen~Change Loy, and Ziwei Liu.
+\newblock Learning to prompt for vision-language models.
+\newblock {\em International journal of computer vision}, 130(9):2337--2348, 2022.
+
+\bibitem{zhu2024melo}
+Yitao Zhu, Zhenrong Shen, Zihao Zhao, Sheng Wang, Xin Wang, Xiangyu Zhao, Dinggang Shen, and Qian Wang.
+\newblock Melo: Low-rank adaptation is better than fine-tuning for medical image diagnosis.
+\newblock In {\em 2024 IEEE International Symposium on Biomedical Imaging (ISBI)}, pages 1--5. IEEE, 2024.
+
+\end{thebibliography}

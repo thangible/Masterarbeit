@@ -1,3 +1,4 @@
+% \bibliography{thesis.bib}
 \documentclass[12pt,final,twoside]{report}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Some credits:
@@ -19,7 +20,7 @@
 % \newcommand{\trgutachterB}{\href{mailto:tim.radke@uni-hamburg.de}{Tim Radke}}
 %\newcommand{\trbetreuung}{\href{mailto:tbd@informatik.uni-hamburg.de}{Dipl.-Inform. To Be Defined}}
 \newcommand{\trfach}{Computer Vision Group}
-% \newcommand{\trdate}{02.10.2025}
+\newcommand{\trdate}{\today}
 \newcommand{\trkeywords}{Computer Vision, Augmentation, Segmentation}
 %Optionally: it is also allowed to provide a street name on the
 %\newcommand{\trstrasse}{Streetname 42}
@@ -55,7 +56,7 @@
 % Bind packages:
 \usepackage{makecell}
 
-\usepackage{subfig}
+% \usepackage{subfig}
 % \usepackage{thread}
 \usepackage{acronym}                    % Acronyms
 % \usepackage{algorithmic}                % Algorithms and Pseudocode
@@ -97,7 +98,7 @@
 % \usepackage{pgfgantt}
 %\usepackage{siunitx}					% Nicer display of units and number according to SI standards
 %\sisetup{tight-spacing=true}  
-\usepackage[hang]{subfig}            % Allows to use multiple (partial) figures in a fig
+\usepackage{subfig}            % Allows to use multiple (partial) figures in a fig
 %HINT: subfigure may be depricated already - maybe try subfig instead 
 %\usepackage[font=footnotesize,labelfont=rm]{subfig}    % Pictures in a floating environment
 % \usepackage{tabularx}                   % Tables with fixed width but variable rows
@@ -236,7 +237,7 @@
       %im Arbeitsbereich \trfach\\
       at \trfach\\
       \trgutachterA\medskip\\
-      \trgutachterB\medskip\\
+    %   \trgutachterB\medskip\\
       %Fachbereich Informatik\\
       Department of Informatics\\
       %MIN-Fakult\"at\\
@@ -257,7 +258,7 @@
     \begin{tabular}{ll}
     %Gutachter: & \trgutachterA \\
     Examiners: & \trgutachterA \\
-                   & \trgutachterB \\
+                %    & \trgutachterB \\
     %Betreuung: & \trbetreuung \\    	% Adviser are not allowed to demand getting mentioned here, but are happy getting credited by student's initiative
     \end{tabular}
     \end{center}
