@@ -3,11 +3,10 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: Thesis.aux
 The style file: plain.bst
 Database file #1: thesis.bib
-Warning--I didn't find a database entry for "166"
 Warning--can't use both volume and number fields in chen2025aop
 You've used 41 entries,
             2118 wiz_defined-function locations,
-            722 strings with 14144 characters,
+            721 strings with 14141 characters,
 and the built_in function-call counts, 18447 in all, are:
 = -- 1728
 > -- 1266
@@ -46,4 +45,4 @@ warning$ -- 1
 while$ -- 145
 width$ -- 43
 write$ -- 443
-(There were 2 warnings)
+(There was 1 warning)

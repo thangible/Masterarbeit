@@ -1,11 +1,11 @@
+
+
 \subsection{Loss Function}
 To adapt the Segment Anything Model (SAM) to the unique characteristics of the ClimateNet dataset, a systematic hyperparameter optimization was conducted. The primary goal of this search was to identify the optimal balance between pixel-wise classification accuracy and regional mask overlap, specifically addressing the extreme class imbalance where background pixels constitute approximately 93.9\% of the data.
 
-\subsubsection{Search Strategy and Configuration
-}\label{searchstrat}  
+\subsubsection{Search Strategy and Configuration}\label{searchstrat}  
 
-We implemented a random search strategy over 40 iterations to explore the high-dimensional space of the hybrid loss function. To ensure computational efficiency during this search phase, the models were trained on a representative subset consisting of 20\% of the training data. Validation was performed using the ViT-B (Vision Transformer Base) version of the SAM image encoder.
-
+We implemented a random search strategy over 40 iterations to explore the high-dimensional space of the hybrid loss function. To ensure computational efficiency during this search phase, the models were trained on a representative subset consisting of 20\% of the training data. Validation was performed using the ViT-B (Vision Transformer Base) version of the SAM image encoder. 
 This methodology is grounded in several practical considerations:
 
 \begin{itemize}

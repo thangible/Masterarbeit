@@ -48,7 +48,7 @@ L_{dice} = 1 - \frac{2|A \cap B|}{|A| + |B|} = 1 - \frac{2TP}{2TP + FP + FN}
     \item $FN$: False Negatives; the missed detection pixels.
 \end{itemize}
 
-Dice Loss is scale-invariant. Because it normalizes the intersection by total pixels, a small error on a tiny TC mask is penalized as heavily as an error on a large AR mask \cite{166}. However, standard Dice Loss treats FP and FN with equal importance, which may not be ideal for meteorological applications where missing a rare TC (a False Negative) is often more critical than a slight over-estimation of its boundary. This limitation leads to the introduction of a more flexible framework: the Tversky Loss.
+Dice Loss is scale-invariant. Because it normalizes the intersection by total pixels, a small error on a tiny TC mask is penalized as heavily as an error on a large AR mask. However, standard Dice Loss treats FP and FN with equal importance, which may not be ideal for meteorological applications where missing a rare TC (a False Negative) is often more critical than a slight over-estimation of its boundary. This limitation leads to the introduction of a more flexible framework: the Tversky Loss.
 
 \subsubsection{Tversky Loss}
 The Tversky Index (TI) is a generalization of the Dice coefficient that allows for asymmetrical weighting of False Positives and False Negatives.

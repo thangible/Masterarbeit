@@ -33,11 +33,18 @@ where $W_0$ is the frozen pre-trained weight, and $B \in \mathbb{R}^{d \times r}
 
 This dual-decoder design allows the model to learn class-specific localization priors and structural discovery independently for each meteorological feature.
 
+% \ifdefined\pdfobjcompresslevel
+%   \pdfobjcompresslevel=0
+% \fi
+% \ifdefined\pdfvariable
+%   \pdfvariable objcompresslevel=0
+% \fi
+
 \begin{figure}[!h]
     \centering
-    \begin{minipage}[b]{0.45\textwidth}
+    \begin{minipage}[b]{0.5\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{graphics/approach/lora_overview.png}
+        \includegraphics[width=\textwidth]{graphics/approach/lora_overview.pdf}
         \caption{Overview}
     \end{minipage}
     \hfill
