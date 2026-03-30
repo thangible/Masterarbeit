@@ -1,0 +1,20 @@
+\section{Augmentation Techniques Backgrounds}\label{Augmentations}
+
+This section introduces four groups of commonly used image augmentation techniques in computer vision: geometric, color-space, cutout and mixed. Each technique is demonstrated using three images of birds, including Genus Fulmarus (Eissturmvogel), Common Goldeneye (Schnellente), and Great Cormorant (Kormoran). These three images are selected to demonstrate the effects in scenarios where the object of interest is clear (Kormoran), the object shape is small (Eissturmvogel), and when working with a group of birds (Schnellente).
+\subsection{Geometric augmentation}
+Geometric augmentations are a type of image augmentation technique used in computer vision that modify the geometric properties of an image, such as its size, position, orientation, and perspective. In this section, we will focus on five common geometric augmentations that are particularly useful for aerial images: Cropout, Flipping, Motion Blur, Perspective and Rotation. 
+\input{3approach4-geo.tex}
+\subsection{Color-space augmentation}
+Color-space augmentation is an image augmentation technique that involves altering the color channels of an image to create new training images for machine learning models. This technique can be used to modify the color distribution of images, introduce color variations, and aid models in adapting to various lighting conditions. In this section, we will present Contrast Limited Adaptive Histogram Equalization (CLAHE), Sharpen, Channel Shuffling, Color Jitter, Solarize, ToGray, ToSepia, and Gaussian Noise Injection as examples of color-space augmentation.
+\input{3approach3-color.tex}
+\subsection{Cutout, GridDropout, Random Erasing}
+In this section, we will introduce three augmentation techniques: Cutout, GridDropout, and Random Erasing. These techniques are frequently used to enhance the model's ability to concentrate on the important information in the image and increase its resistance to occlusion or missing data.
+\input{3approach2-cutout.tex}
+\subsection{Mixed technique} 
+This section will review shortly about the mixed approaches in image augmentation. Custom mixed augmentation and RandAugment will be introduced.
+\input{3approach1-mixed.tex}
+% \subsection{GAN-based augmentation}
+
+% GAN-generated methods can help in augmentation by generating synthetic data that can be used to supplement the original training data, especially in cases where the training data is limited or imbalanced. The GAN model \ref{bg:gan} can learn the underlying distribution of the training data and generate new data samples that are similar to the real data but have different features that can help the model generalize better. These synthetic samples can be used to augment the training set and improve the model's performance. Additionally, GAN-generated methods can also be used to improve performance on edge cases, which are often underrepresented in the training data. By generating synthetic data for these edge cases, the model can be trained to better handle them, leading to improved overall performance.
+% '
+% TODO: Explain how GAN learn and helps.

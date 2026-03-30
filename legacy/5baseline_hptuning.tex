@@ -1,0 +1,26 @@
+The augmentation techniques that required tuning included CLAHE, Color Jittering, Griddropout, Cutout, Sharpen, Motion Blur, Perspective, and RandAugment. We conducted the tuning process using grid search and random grid methods. Table \ref{tab:multicol} presents a summary of the optimal hyperparameters obtained from the tuning process, and a more detailed description of the hyperparameter search can be found in the \hyperref[app:Appendix]{Appendix}.
+
+\begin{table}[!ht]
+\begin{center}
+\caption{Hyperparameter tuning results for augmentations} \label{tab:multicol}
+\begin{tabular}{|c|c|c|c|}
+    \hline
+    \textbf{Method} & \textbf{Hyperparameter} & \textbf{\makecell{Optimal\\ values}} & \textbf{Search Space} \\ \hline
+    \multirow{2}{*}{\hyperref[tab:clahe_hp]{CLAHE}}& Clipping Limit & 16 & [2, 4, 8, 16, 32]\\ \cline{2-4} 
+    & Filter Size & 4 & [2, 4, 8, 16, 32]\\ 
+    \hline
+    \multirow{4}{*}{\hyperref[tab:colorjittering_hp]{Color Jittering}}& Brightness limit& 0.8 & \makecell{Randomly between \\ 0.2 and 0.8}\\ \cline{2-4} 
+    &Hue & 0.42 & \makecell{Randomly between \\ 0.2 and 0.8}\\ \cline{2-4} 
+    &Contrast limit & 0.54 & \makecell{Randomly between \\ 0.2 and 0.8}\\\cline{2-4} 
+    &Saturation limit & 0.65 & \makecell{Randomly between \\ 0.2 and 0.8}\\ \hline
+    \hyperref[tab:griddropout_hp]{GridDropout}  & Hole Ratio & 0.5 & [0.2, 0.3, 0.4, 0.5, 0.6]\\ \hline
+    \multirow{2}{*}{\hyperref[tab:sharpen_hp]{Sharpen}}& Alpha range & (0.6, 0.8)  & \makecell{0.2-interval between 0.2 and 0.8 \\ with window sliding step of 0.1}\\ \cline{2-4} 
+    & Lightness range & (0.6, 1.0)  & \makecell{0.2-interval between 0.2 and 0.8 \\ with window sliding step of 0.1}\\ \hline
+    \hyperref[tab:motion_blur_hp]{Motion blur} & Blur Limit & 21 & [11, 21, 31, 41, 51, 61, 71] \\ \hline
+    \hyperref[tab:perspective_hp]{Perspective} & Scale limit & 0.2 & [0.2, 0.3, 0.4, 0.5, 0.6, 0.7] \\ \hline
+    RandAug & \makecell{Number of \\combinations} & 2 & [2, 3, 4] \\ \hline
+\end{tabular}
+\end{center}
+
+
+\end{table}

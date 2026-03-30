@@ -1,0 +1,78 @@
+In this session, we will discuss the evaluation metrics used in this thesis and their significance. The evaluation metrics are categorized into classification metrics and detection metrics, which are specific to their respective tasks. The classification metrics include accuracy, recall, precision, and F1-score, while the detection metrics include Intersection over Union (IoU), mean average precision (mAP), precision, class loss, object loss, and classification loss. We will provide a brief explanation and overview of each metric.
+\subsection{Classfication Metrics}
+In classification tasks, evaluation metrics are used to measure the accuracy of a model in predicting the correct class label for an input instance. Some of the most important metrics in classification tasks used in this thesis are accuracy, precision, recall, F1-score and their top-N metrics:
+\subsubsection{Accuracy, precision, recall and F1-score}
+\begin{itemize}
+    \item Accuracy is a commonly used metric that measures the overall correctness of the predictions made by a model, expressed as the percentage of correctly classified samples over the total number of samples. 
+    \item Precision, also known as positive predictive value, measures the proportion of true positives that are correctly identified by the model over the total number of positive predictions. This metric is important in cases where false positives can have significant consequences, such as in the case of misidentifying an important class.
+    \item Recall, also known as sensitivity or true positive rate, measures the proportion of true positives that are correctly identified by the model over the total number of actual positives. This metric is particularly important in cases where false negatives can have severe consequences, such as in the detection of rare species.
+    \item The F1 score is a weighted average of precision and recall, and provides a more balanced measure of the model's performance. It is calculated as the harmonic mean of precision and recall. It is calculated as:
+    \begin{equation}
+        \frac{2 \cdot (precision \cdot recall)}{(precision + recall)}
+    \end{equation}
+\end{itemize}
+
+While precision and recall are both important metrics for different reasons - precision measures the model's ability to correctly identify true positives, while recall measures the model's ability to identify all positive instances -  F1 score is often considered the most relevant metric for evaluating a machine learning model. By providing a balanced measure of the model's precision and recall,  F1-score offers a more comprehensive evaluation of a model's performance. This is especially useful for imbalanced datasets, such as ours, where precision and recall alone may not accurately represent the model's performance. Therefore, in our thesis, we will use F1-score, beside accuracy, as the primary metric to compare significant outcomes.
+
+\subsubsection{Top N Metrics}
+
+When evaluating a classification model with a high number of classes, such as in our case with more than 100 classes, top-N metrics such as top-N accuracy or top-N F1 score can be useful. Top-N metrics are a variation of the traditional metrics that consider a prediction to be correct if the true class label is among the N highest-ranked predicted class labels. This is particularly useful when a model can provide a ranked list of predictions, as it allows for partial credit to be given for correct predictions that may not be the top-ranked prediction. The specific value of N can be chosen based on the problem domain and use case, typically a small value such as 1 or 5. In our case, we will use top-1 and top-3 metrics.
+
+To illustrate the concepts of top-N metrics, let's use a sample of class ``herring gull''  or ``Silbermöwe'', as illustrated in Figure \ref{fig:twobirds}a).  For this given test example, EfficientNet produces a ranked list of predicted labels, along with their associated probabilities as follows: 
+
+\begin{itemize}
+    \item Herring Gull (Silbermöwe): 60\%
+    \item Common Gull (Sturmmöwe): 20\%
+    \item Buoy  or mooring ring (Boje oder Bojenkette): 10\%
+    \item Mallard Duck ( Stockente): 10\%
+\end{itemize}
+
+If the prediction in this example was Common Gull, it would be considered a false prediction in top-1 accuracy, but true in top-3 accuracy. This example also highlights the importance of using top-N metrics, as our dataset contains over 100 classes, and some bird classes, such as Herring Gull and Common Gull in Figure \ref{fig:twobirds}, have very similar appearances. Thus, we can still give credit to the models when their predictions are close to the actual labels.
+
+\begin{figure}
+\hfill
+\subfigure[Herring Gull]{\includegraphics[width=5cm]{src/background/Silbermoewe.png}}
+\hfill
+\subfigure[Common Gull]{\includegraphics[width=5cm]{src/background/sturmmoewe.jpg}}
+\hfill
+\caption{Illustration of (a) Herring Gull (Silbermöwe) and (b) Common Gull (Sturmmöwe) to illustrate similar-looking classes}
+\label{fig:twobirds}
+\end{figure}
+
+\subsection{Detection Metrics}
+In detection tasks, it is crucial to evaluate the accuracy of a model in both localizing and classifying objects in an image. Therefore, besides the metrics used in classification tasks such as precision or recall, there are metrics specifically designed to measure the accuracy of predicted localization. This section will introduce some of the important statistics, including Intersection over Union (IoU), Mean Average Precision (mAP), and various loss metrics such as class loss, object loss, and classification loss used during training.
+\subsubsection{Intersection over Union (IoU)}
+IoU is a measure of the overlap between predicted bounding boxes and ground-truth bounding boxes. IoU is calculated as the ratio of the area of intersection between the predicted and ground-truth bounding boxes to the area of their union. It ranges from 0 to 1, where 1 indicates perfect overlap and 0 indicates no overlap. IoU is commonly used as a threshold for determining true positive or false positive detections, with 0.5 being a common threshold. Figure \ref{fig:iou} illustrates the intersection over union calculations.
+
+\begin{figure}
+	 \centerline{\includegraphics[width=0.8\textwidth]{src/background/iou.png}}
+	 {\caption{Illustration of the Intersection over Union  calculation \cite{map}} \label{fig:iou}}
+\end{figure}
+
+\subsubsection{Mean Average Precision (mAP)} \label{mAP}
+The average precision (AP) is a measure of the accuracy of an object detection model in detecting objects of a particular class. AP is calculated by computing the precision and recall for a range of IoU thresholds, and then calculating the area under the precision-recall curve (PR curve).
+
+The following steps describe how to calculate the AP at a certain IoU:
+\begin{itemize}
+    \item For each object class, calculate the precision and recall.
+    \item Plot the precision-recall curve by plotting the precision values against the corresponding recall values at each IoU threshold.
+    \item Calculate the area under the precision-recall curve. The resulting value is the AP for that object class.
+\end{itemize}
+
+AP is a useful metric for measuring the accuracy of an object detection model for a specific class, but its calculation is dependent on the IoU threshold, which can be arbitrary and varies for different tasks. To address this ambiguity, mean average precision (mAP) was introduced as a comprehensive metric that evaluates the model's accuracy across multiple object classes and IoU thresholds.
+
+Calculating mAP is a simple process that builds upon the calculation of AP. Firstly, a set of thresholds is considered for AP calculation. In this thesis, we use thresholds ranging from 0.5 to 0.95 with a step size of 0.05 (mAP@[0.5:0.95]). AP is then calculated across the set of IoU thresholds for each object class, and the average of all AP values is taken to obtain the mAP. mAP@[0.5:0.95] is a widely used metric for evaluating object detection models because it provides a comprehensive evaluation of the model's accuracy across a reasonable range of IoU levels. 
+
+\subsubsection{Loss Metrics}
+During training we use box loss, classification loss, and object loss. 
+
+\begin{itemize}
+    \item Box loss measures the discrepancy between predicted and ground-truth bounding box coordinates. It encourages the model to better localize objects in an image.
+    \item Classification loss measures the discrepancy between predicted and ground-truth class probabilities. It encourages the model to correctly classify objects in an image.
+    \item Object loss is a combination of box loss and classification loss, and is used to evaluate the overall accuracy of the model in localizing and classifying objects in an image.
+\end{itemize}
+
+
+    
+
+    

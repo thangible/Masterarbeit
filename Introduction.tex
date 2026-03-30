@@ -1,0 +1,111 @@
+\section{Background [Cont.]}
+
+The automated detection and tracking of tropical cyclones (TCs) and atmospheric rivers (ARs) play a crucial role in meteorology, improving weather forecasting \cite{hewson2010objective, hengstebeck2018radar}, climate research \cite{dawe2012statistical, lawrence2018characterizing}, and data analysis \cite{rautenhaus2017visualization, beckert2023three}.
+
+In the past, atmospheric features were detected through physical and mathematical rules. For example, cyclones were identified by examining minima or maxima in variables like sea level pressure and lower-tropospheric vorticity \cite{neu2013imilast, bourdin2022intercomparison}. Similarly, atmospheric rivers were recognized by applying specific thresholds in integrated water vapor transport \cite{guan2015detection, shields2018atmospheric}. While there exist many empirical heuristics for detecting extreme events, the disparities between the output of these different methods even for a single event are large and often difficult to reconcile \cite{hodges1995feature, prabhat2015teca, shields2018atmospheric}.
+
+Recently, deep learning approaches have shown significant success in addressing similar problems in computer vision. Using machine-learning approach for feature detection through semantic segmentation offers several benefits. These include enhanced computational performance \cite{boukabara2021outlook, higgins2023using} and the ability to learn features that are challenging to express through a set of physical rules \cite{prabhat2020climatenet, niebler2022automated, tian2023deep}. 
+
+\subsection{ClimateNet}
+
+Many studies utilizing the ``ClimateNet” dataset, have shown promising results using CNN-based models like CGNet and U-Net to detect TCs and ARs. Trained on labeled atmospheric data, including wind speeds and humidity levels, these models can identify phenomena by detecting complex patterns in the input fields. Prabhat et al. introduced ClimateNet \cite{prabhat2020climatenet}, an open dataset of expert-labeled tropical cyclones and atmospheric rivers. They explored deep learning for segmentation, utilizing the state-of-the-art DeepLabv3+ \cite{chen2018encoder,chollet2017xception} architecture to simultaneously predict TCs and ARs. The model was trained using only four input variables: TMQ, U850 and V850, and PRECT. This smaller set of variables was sufficient even though a broader group of six "leading variables" was presented to human experts via the ClimateContours tool to guide their labeling, demonstrating that not all available physical variables were required for effective detection.
+
+Radke et al \cite{radke2024explaining}. applied Layer-wise Relevance Propagation, an explainable AI technique, to assess which inputs a Context-Guided Network (CG-Net) used for detection. To find the most relevant input variables, they trained the CG-Net using all 16 variables from the ClimateNet dataset. The LRP analysis revealed that TMQ was the most relevant variable for both TCs and ARs. For TCs, the top four included TMQ, QREFHT, U850, and V850. For ARs, the most relevant overall were TMQ, TREFHT, and U850. Ultimately, subsequent testing demonstrated that the smaller subset of TMQ, U850, and V850 achieved IoU scores as high as or higher than the model trained with all 16 variables, confirming these inputs as major contributors consistent with physical intuition.
+
+\begin{table}[h!]
+\centering
+\caption{Baseline IoU Results for TC and AR Detection}
+\label{tab:baseline_iou}
+\begin{tabular}{lccc} % Updated from lcccc to lccc
+\toprule
+\textbf{Study} & \thead{\textbf{TC IoU} \\ \textbf{(\%)}} & \thead{\textbf{AR IoU} \\ \textbf{(\%)}} & \thead{\textbf{Key Variables} \\ \textbf{Used}} \\
+\midrule
+Prabhat et al. (2021) \\ (\textbf{DeepLabv3+}) & 24.41 & 39.10 & TMQ, U850, V850, PRECT \\
+Radke et al. (2024) \\ (\textbf{CG-Net}) & 35.9 & 40.3 & TMQ, PSL, U850, V850 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\subsection{Adapting SAM}
+SAM \cite{kirillov2023segment} demonstrates strong zero-shot capabilities for prompt-driven image segmentation. However, its performance degrades in domains with sparse representation or those outside its training distribution, such as aerial, medical, and non-RGB imagery \cite{chen2023sam, ji2024segment} like the ClimateNet dataset. Because it is pre-trained on 1 billion masks from 11 million natural images, causing its feature space to poorly represent the unique spectral, textural, and sparse-object characteristics of specialized imagery. This distributional shift necessitates efficient tuning strategies for the massive encoder to learn domain-specific features without catastrophic forgetting.
+
+Furthermore, SAM's zero-shot strength fundamentally depends on a high-quality prompt (point, box, or mask). In large-scale, automated applications, such as monitoring climate phenomena across extensive regions, the manual creation of expert-level prompts is unscalable and economically prohibitive. To facilitate deployment in realistic scenarios, research efforts are concentrating on developing Self-Prompting frameworks.
+
+Consequently, two core challenges need resolution:
+\begin{enumerate}
+    \item \textbf{Adaptation:} How to efficiently adapt the SAM encoder to accurately recognize weather features in domain-specific models like ClimateSAM?
+    \item \textbf{Automation:} How to enable the adapted model to perform well without external prompts, essentially by creating a Self-Prompting capability?
+\end{enumerate}
+
+\subsubsection{Adaptation}
+Recent advancements in Parameter-Efficient Tuning (PEFT) \cite{bommasani2021opportunities, gu2023systematic} for the SAM generally fall into two categories, applying or adapting the successful strategies from LLMs. The first is Reparameterization-Based Tuning, with Low-Rank Adaptation (LoRA) \cite{zhang2023customized, zhong2024convolution} being the main technique; it efficiently approximates the necessary weight changes by injecting small, trainable low-rank matrices into the attention or MLP layers, keeping the core weights frozen. The second is Additive/Prompt-Based Adaptation, which introduces new, small, trainable components: this includes Adapter Tuning \cite{pu2025classwise}, where small bottleneck networks (adapters) are inserted into SAM's transformer blocks, and Prompt Tuning, where learnable soft prompt tokens are inserted into the data stream to condition the model's behavior for a specific task \cite{xiao2024cat, teuber2025parameterefficientfinetuningsegment, han2024parameterefficientfinetuninglargemodels}.  
+
+In the scope of thesis, we are interested in a variant of  Prompt Tuning on SAM, called CAT-SAM-T proposed by Xiao et al \cite{xiao2024cat}. Given that SAM's image encoder is significantly larger than its mask decoder, CAT-SAM-T employs a strategy of decoder-conditioned joint tuning. This mechanism enables lightweight decoder tuning to guide the optimization of the heavier encoder. Specifically, the method introduces learnable prompt tokens into both the input space and as adapters positioned alongside the input patch embeddings.
+
+\subsubsection{Automation}
+
+To make SAM prompt-free, there are also two main approaches. First, it uses the intermediate embeddings of SAM's strong image encoder. For example, Xie et al. introduced Self-Prompt-SAM \cite{xie2025self}, a framework utilizing a multi-scale prompt generator integrated with the image encoder to derive auxiliary masks. These masks facilitate the automatic generation of bounding box and point prompts for the SAM. Simultaneously, the SAM authors proposed MaskSAM \cite{xie2024masksam} , which couples auto-prompt generation with a mask classification mechanism. This enables the model to output both the segmentation mask and its associated semantic class label.
+
+The second approach, often used in conjunction with the first, uses an auxiliary network to generate masks, we then process the auxiliary masks to create geometric prompts. For example, AoP-SAM  \cite{chen2025aop}  proposes a lightweight Prompt Predictor model that identifies optimal regions for prompt placement; this predictor is designed to reuse SAM's computed image embeddings. Another method, DAPSAM  \cite{wei2024prompting}, incorporates a prototype-based prompt generator alongside a generalized adapter to specifically tackle single-source domain generalization in medical images. Furthermore, SAM-SP \cite{zhou2024sam} introduces a novel self-prompting fine-tuning strategy, using the output mask from a previous model iteration to guide the subsequent one, thereby generating prompts autonomously.
+
+\section{Problem Statement}
+Previous research indicates that while not all variables are necessary for the determination of climate phenomena, the precise relationship between these variables and accurate feature detection remains largely unexplored \cite{radke2024explaining, prabhat2020climatenet}. This work develops a segmentation model for AR and TC using all 16 ClimateNet input features, aiming to function as a black-box for variable selection while considering established heuristics (TMQ, U850, V850). 
+
+A key objective of this work is to adapt the Segment Anything Model (SAM) for the ClimateNet dataset, including the development of a suitable training pipeline. While SAM is inherently an instance segmentation model (distinguishing only foreground from background), the adapted model is designed to simultaneously detect and output separate semantic masks for Atmospheric Rivers and Tropical Cyclones, and will operate without requiring external geometric prompts.
+
+\subsubsection{Research questions}
+The thesis explores the following questions, aiming to surpass the current IoU baseline (AR: 40.3\%, TC: 35.9\%).
+
+
+\begin{enumerate}
+
+\item \begin{minipage}[t]{\linewidth}
+Image Encoder Adaptation:
+\begin{enumerate}
+\item \begin{minipage}[t]{\linewidth}
+How can SAM be adapted to learn the simultaneous detection and separate semantic mask output for ARs and TCs?
+\end{minipage}
+\item \begin{minipage}[t]{\linewidth}
+What is the optimal MLP ratio for the token adapter to effectively learn the underlying weather features of ARs and TCs?
+\end{minipage}
+\item \begin{minipage}[t]{\linewidth}
+What is the minimal optimal ViT backbone configuration required for efficient performance?
+\end{minipage}
+\end{enumerate}
+\end{minipage}
+
+\item \begin{minipage}[t]{\linewidth}
+Prompt-Free Operation (Geometric Prompt):
+\begin{enumerate}
+\item \begin{minipage}[t]{\linewidth}
+How should intermediate embeddings from the ViT be utilized to generate effective geometric prompts?
+\end{minipage}
+\item \begin{minipage}[t]{\linewidth}
+Is a uniform grid prompt a viable and performant option for SAM in this domain?
+\end{minipage}
+\item \begin{minipage}[t]{\linewidth}
+What constitutes the optimal choice for prompt modality (Bounding Box, Points, or Both)?
+\end{minipage}
+\item \begin{minipage}[t]{\linewidth}
+Should the prompt generator be trained separately using true masks or jointly with the image encoder during the main pipeline optimization?
+\end{minipage}
+\end{enumerate}
+\end{minipage}
+
+\item \begin{minipage}[t]{\linewidth}
+Training Pipeline:
+\begin{enumerate}
+\item \begin{minipage}[t]{\linewidth}
+Data Augmentations: Will image augmentations (Horizontal Flipping, Vertical Flipping, or Horizontal Shifting) improve model performance, or are the necessary geometric features intrinsically bound to the data distribution?
+\end{minipage}
+\item \begin{minipage}[t]{\linewidth}
+Training Strategy: Should the prompt generator and the encoder adapter be trained simultaneously or in distinct, phased stages?
+\end{minipage}
+\end{enumerate}
+\end{minipage}
+\end{enumerate}
+
+
+
+\noindent The thesis code can be found at: \texttt{https://github.com/thangible/ClimateSAM}

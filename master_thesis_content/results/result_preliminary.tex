@@ -1,0 +1,116 @@
+
+\subsection{Hyperparameter Optimisation}
+
+Hyperparameter optimization uses a multi-fidelity approach employed by utilizing a ViT-B encoder and subsampling both the training and validation sets to 20\% of their original size, as described in \autoref{searchstrat}. To assess the effectiveness of each configuration, two primary metrics are reported: Best Max mIoU and Mean Max mIoU. 
+
+The Best Max mIoU represents the absolute peak performance achieved by a single run within a specific parameter group, indicating the model's highest potential under those conditions. Mean Max mIoU averages the peak mIoU across all runs sharing the same parameter setting, serving as an indicator of the setting's reliability and stability. High performance in both metrics suggests a configuration that is not only capable of reaching high accuracy but does so consistently.
+
+The experiments specifically targeted the extreme class imbalance within ClimateNet, where TCs occupy only 0.5\% of the global grid (a 257:1 background-to-foreground ratio) compared to 5.7\% for ARs (a 17:1 ratio).
+
+\subsubsection{Tversky Loss Parameters for Tropical Cyclones}
+For the TC class, the search space was biased toward high recall to mitigate the severe imbalance. Experimental results indicate that an $\alpha_{tc}$ of 0.3 paired with a $\beta_{tc}$ of 0.7 yielded the most robust performance, achieving a peak mIoU of 0.3326. Extremely aggressive recall settings, such as an $\alpha_{tc}$ of 0.05, led to training instability and a failure to converge, resulting in a negligible mIoU of 0.0051. 
+
+% This suggests that while recall is a priority for microscopic targets, a moderate alpha-beta trade-off is necessary to maintain gradient stability during the adaptation phase.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{@{}cccc@{}}
+\toprule
+$\alpha_{tc}$ & $\beta_{tc}$ & Mean Max IoU TC & Best Max IoU TC\\ \midrule
+0.30 & 0.70 & 0.2092 & 0.3326 \\
+0.20 & 0.80 & 0.1946 & 0.3096 \\
+0.15 & 0.85 & 0.1864 & 0.2001 \\
+0.10 & 0.90 & 0.1737 & 0.1970 \\
+0.05 & 0.95 & 0.0051 & 0.0051 \\ \bottomrule
+\end{tabular}
+\caption{Impact of Tversky $\alpha/\beta$ parameters on Tropical Cyclone segmentation.}
+\end{table}
+
+\subsubsection{Tversky Loss Parameters for Atmospheric Rivers}
+Atmospheric Rivers, characterized by a more moderate 17:1 imbalance ratio, benefited from a more balanced loss configuration. The highest mIoU for the AR class, 0.3028, was achieved with a balanced configuration of $\alpha_{ar}=0.5$ and $\beta_{ar}=0.5$. Unlike the TC class, AR detection does not require extreme recall weighting. 
+% The data shows that shifting $\alpha_{ar}$ to 0.4 still maintains high performance (mean mIoU of 0.2392), but the balanced approach provides the most consistent boundary definitions for these larger meteorological structures.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{@{}cccc@{}}
+\toprule
+$\alpha_{ar}$ & $\beta_{ar}$ & Mean Max IoU AR& Best Max IoU AR\\ \midrule
+0.50 & 0.50 & 0.2387 & 0.3028 \\
+0.40 & 0.60 & 0.2392 & 0.2788 \\
+0.30 & 0.70 & 0.2190 & 0.2801 \\
+0.20 & 0.80 & 0.1902 & 0.1902 \\ \bottomrule
+\end{tabular}
+\caption{Impact of Tversky $\alpha/\beta$ parameters on Atmospheric River segmentation.}
+\end{table}
+
+\subsubsection{Focal Loss Alpha and Gamma for Tropical Cyclones}
+The Focal loss configuration for TC prioritized high $\alpha$ and $\gamma$ values to penalize missing difficult targets. A $\gamma_{tc}$ of 5.0 combined with an $\alpha$ of 0.99 provides the optimal focus parameter, providing necessary emphasis on hard boundary pixels. Increasing $\gamma_{tc}$ to 8.0 caused performance to drop to a max mIoU of 0.2714, likely because the loss became overly sensitive to outliers or ground truth noise.
+
+
+\begin{table}[h]
+\centering
+\begin{tabular}{@{}cccc@{}}
+\toprule
+$\alpha_{f\_tc}$ & $\gamma_{tc}$ & Mean Max IoU TC& Best Max IoU TC\\ \midrule
+0.990 & 5.0 & 0.2123 & 0.3326 \\
+0.990 & 2.0 & 0.2101 & 0.3001 \\
+0.995 & 8.0 & 0.1482 & 0.2714 \\ \bottomrule
+\end{tabular}
+\caption{Performance of Tropical Cyclone detection across Focal Gamma settings.}
+\end{table}
+
+\subsubsection{Focal Loss Alpha and Gamma for Atmospheric Rivers}
+For the AR class, a standard $\gamma_{ar}$ of 2.0 outperformed higher focus settings. This setting achieved the peak mIoU of 0.3028. Higher $\gamma$ values, such as 5.0, were less effective for ARs, reducing the peak performance to 0.2652. This confirms that for features with a moderate 17:1 ratio, extreme focal weighting is unnecessary and can potentially hinder the model's ability to learn the general shape of the atmospheric feature.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{@{}cccc@{}}
+\toprule
+
+$\alpha_{f\_ar}$ & $\gamma_{ar}$ & Mean Max IoU AR& Best Max IoU AR\\ \midrule
+0.90 & 2.0 & 0.2444 & 0.3028 \\
+0.85 & 5.0 & 0.2310 & 0.2652 \\
+0.80 & 3.0 & 0.0765 & 0.1902 \\ \bottomrule
+\end{tabular}
+\caption{Performance of Atmospheric River detection across Focal Gamma settings.}
+\end{table}
+
+\subsubsection{Loss Component Weight}
+Optimization revealed a numerical imbalance between Focal and Tversky loss components. Initial experiments showed Focal loss values were consistently lower than Tversky components. While heuristics often suggest weighting smaller components for numerical parity, empirical evidence showed this degraded segmentation performance. As shown below, increasing focal weight beyond 10 dropped performance despite achieving comparable loss magnitudes.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{@{}ccccc@{}}
+\toprule
+Focal Weight & Mean Focal Loss & Mean Tversky Loss & Max mIoU TC & Max mIoU AR \\ \midrule
+1 & 0.03 & 1.98 & 0.3326 & 0.2684 \\
+5 & 0.12 & 2.43 & 0.1600 & 0.2198 \\
+10 & 0.22 & 2.53 & 0.3410 & 0.2359 \\
+20 & 0.25 & 2.69 & 0.2418 & 0.2033 \\
+50 & 0.28 & 2.88 & 0.1664 & 0.1572 \\
+100 & 0.42 & 3.03 & 0.1334 & 0.1478 \\ \bottomrule
+\end{tabular}
+\caption{Comparison of loss component magnitudes and resulting segmentation performance across different Focal weights.}
+\end{table}
+
+The region\_based Tversky signal primarily drives spatial localization for microscopic targets. High focal weights cause gradients to be dominated by pixel\_wise classification pressures, prematurely biasing the model toward background suppression before Tropical Cyclone structural features are localized. A focal weight of 10 best balances these components, preserving Tversky dominance for structural discovery while allowing Focal loss to refine boundaries.
+
+\subsubsection{Summary of Hyperparameter Optimization Results}
+
+The table below summarizes the optimal parameter settings identified during the random search and their corresponding peak performance metrics.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Metric Category & Parameter & Optimal Value & Peak mIoU \\ \midrule
+\textbf{Tversky TC} & $\alpha_{tc} / \beta_{tc}$ & 0.3 / 0.7 & 0.3326 \\
+\textbf{Tversky AR} & $\alpha_{ar} / \beta_{ar}$ & 0.5 / 0.5 & 0.3028 \\
+\textbf{Focal TC} & $\alpha_{f\_tc} / \gamma_{tc}$ & 0.99 / 5.0 & 0.3326 \\
+\textbf{Focal AR} & $\alpha_{f\_ar} / \gamma_{ar}$ & 0.90 / 2.0 & 0.3028 \\
+% \textbf{Overall} & Learning Rate & 1e-3 & 0.3326 \\ \bottomrule
+\end{tabular}
+\caption{Summary of optimal loss hyperparameters for ClimateSAM adaptation.}
+\end{table}
+
+

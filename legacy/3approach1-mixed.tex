@@ -1,0 +1,27 @@
+\subsubsection{RandAugment}\label{RandAugment}
+RandAugment is a random image augmentation technique that applies a sequence of randomly selected image transformations to the training images \cite{cubuk2020randaugment}. The specific transformations and the sequence of their application are randomly generated for each image using a set of hyperparameters, resulting in a diverse set of training images with a wide range of visual variations. This can improve the performance of machine learning models by helping them to better generalize to new, unseen data, but careful tuning of the hyperparameters is necessary to avoid overfitting or underfitting the model. RandAugment is seen as a strong and useful way to increase data
+for machine learning, and it is still being used today.
+
+\begin{algorithm}[H]
+\caption{RandAugment}\label{algo:randaugment}
+% \begin{algorithmic}[1]
+\Procedure{RandAugment}{$image, n, m$}
+    \State $trans_list \gets$ a list of possible image transformations
+    \State $trans_seq \gets$ a random sequence of $n$ transformations from $trans_list$
+\For{$transform \in trans_seq$}
+    \State $mag \gets$ a random number between 0 and $m$
+    \State Apply the transformation $transform$ to the $image$ with magnitude $mag$
+\EndFor
+\State \textbf{return} the augmented image
+\EndProcedure
+% \end{algorithmic}
+\end{algorithm}
+
+This pseudo code \ref{algo:randaugment} of RandAugment  takes an input image, the number of transformations to apply ($n$), and the magnitude of the transformations ($m$) as parameters. The procedure first defines a list of possible image transformations and then generates a random sequence of $n$ transformations from this list. For each transformation in the sequence, the procedure applies the transformation to the input image with a randomly selected magnitude between 0 and $m$. Finally, the procedure returns the augmented image.
+
+These specifics will depend on the application and dataset and may need to be adjusted accordingly. In our experiment, RandAugment takes transformation of \hyperref[Rotation]{Rotation}, \hyperref[Flipping]{Flipping}, \hyperref[MotionBlur]{Motion Blur}, \hyperref[Sharpen]{Sharpen}, \hyperref[CenterCrop]{Center Crop 0.4}, \hyperref[GaussNoise]{Gaussian Noise Injection}, \hyperref[ChannelShuffles]{Channel Shuffling}, \hyperref[{Cutout}]{Cutout}, and \hyperref[ColorJitter]{Color Jittering}. The samples of augmented images are illustrated in figure \ref{fig:RandAugment}
+
+\begin{figure} [!h]
+	 \centerline{\includegraphics[width=0.8\textwidth]{src/augmentations/RandAug.png}}
+	 {\caption{Examples of RandAugment} \label{fig:RandAugment}}
+\end{figure}

@@ -1,0 +1,174 @@
+\section{Data input for one-shot trainning}
+In this study, we employ a one-shot training approach using a world projection visualization to train \textbf{TC-1-A}. The image, presented in Figure~\ref{fig:training_TC}, represents meteorological data in an RGB format, where each channel corresponds to a specific atmospheric variable:
+
+\begin{itemize} \item \textbf{Red (R)}: Total Precipitable Water (TMQ) \item \textbf{Green (G)}: Zonal Wind at 850 hPa (U850) \item \textbf{Blue (B)}: Meridional Wind at 850 hPa (V850) \end{itemize}
+
+These variables have been preprocessed and normalized to the range [0,255][0,255] to ensure compatibility with standard image representations, facilitating their use in deep learning models. The highlighted regions within the image indicate ground truth areas used for supervised training.
+
+The transformations applied for data augmentation include \texttt{HorizontalFlip} and \texttt{VerticalFlip}, each with a probability of 50\%.
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.48\textwidth]{graphics/training_TC.png}
+    \caption{Training image for One-Shot Training fot TC.}
+    \label{fig:training_TC}
+\end{figure}
+
+\section{Methods}
+% Methodology.
+The purpose of this results chapter is to evaluate the performance of the CAT-SAM model in detecting atmospheric and meteorological phenomena. We analyze its segmentation accuracy across different training settings, comparing full-shot, few-shot, and one-shot training approaches. Additionally, we assess the differences between CAT-SAM-A and CAT-SAM-T to determine their effectiveness in various detection tasks.
+
+Table \ref{tab:climatenet} provides an overview of the training configurations used in our experiments. Each model is identified by a short name, describing its specific task and training methodology. The CAT-SAM model is a binary segmentation network trained for 50 epochs. Given the similarity in results between Atmospheric Rivers (AR) and Tropical Cyclones (TC) [see Appendix], we first present the comparative analysis for TC detection.
+
+\begin{table}[h]
+    \centering
+    \caption{Model Training Configurations for Atmospheric and Cyclone Detection}
+    \label{tab:climatenet}
+    \begin{tabular}{l l c}
+        \toprule
+        \textbf{Model ID} & \textbf{Description} & \textbf{Type of Training} \\
+        \midrule
+        TC-1-A & Tropical Cyclones Detection with CAT-SAM-A & 1-shot \\
+        TC-1-T & Tropical Cyclones Detection with CAT-SAM-T & 1-shot \\
+        TC-16-A & Tropical Cyclones Detection with CAT-SAM-A & 16-shot \\
+        TC-16-T & Tropical Cyclones Detection with CAT-SAM-T & 16-shot \\
+        TC-FULL-A & Tropical Cyclones Detection with CAT-SAM-A & Full-shot \\
+        TC-FULL-T & Tropical Cyclones Detection with CAT-SAM-T & Full-shot \\
+        AC-1-A & Atmospheric Rivers Detection with CAT-SAM-A & 1-shot \\
+        AC-1-T & Atmospheric Rivers Detection with CAT-SAM-T & 1-shot \\
+        AR-16-A & Atmospheric Rivers Detection with CAT-SAM-A & 16-shot \\
+        AR-16-T & Atmospheric Rivers Detection with CAT-SAM-T & 16-shot \\
+        AR-FULL-A & Atmospheric Rivers Detection with CAT-SAM-A & Full-shot \\
+        AR-FULL-T & Atmospheric Rivers Detection with CAT-SAM-T & Full-shot \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\section{Overall}
+
+Table \ref{tab:performance} presents the performance metrics for different training configurations of the CAT-SAM model on Tropical Cyclone detection, comparing full-shot, few-shot, and one-shot training across two model variations: CAT-SAM-A and CAT-SAM-T. The results show that the model type only affects performance in the one-shot setting, where CAT-SAM-T significantly outperforms CAT-SAM-A, while for few-shot and full-shot training, both variants perform nearly identically.
+
+In the one-shot setting, CAT-SAM-T achieves an F1 score of 0.75, surpassing CAT-SAM-A’s 0.53 by 22 percentage points. The recall gap is even larger, with TC-1-T reaching 0.80 compared to TC-1-A’s 0.37, suggesting that CAT-SAM-T is far better suited for extreme low-data regimes. However, adding more training data does not dramatically improve performance. Increasing from one-shot to 16-shot training only raises the F1 score by 4 percentage points (0.75 → 0.79), while moving from 16-shot to full-shot provides just a 3-point gain (0.79 → 0.82).
+
+These results highlight the model’s efficiency in learning from limited data, with few-shot training performing nearly as well as full training. The strong one-shot results, particularly for CAT-SAM-T, suggest that the model generalizes well even with minimal examples, making it highly effective for meteorological segmentation tasks where labeled datasets are scarce.
+
+\begin{table}[h]
+    \centering
+    \caption{Performance Metrics for Different Training Models}
+    \label{tab:performance}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{l c c c c c c c}
+        \toprule
+        \textbf{Name} & \textbf{F1 Score} & \textbf{Mean Acc} & \textbf{Mean FG IoU} & \textbf{Mean IoU} & \textbf{Overall Acc} & \textbf{Precision} & \textbf{Recall} \\
+        \midrule
+        TC-1-A & 0.53 & 0.68 & 0.36 & 0.67 & 0.99 & 0.94 & 0.37 \\
+        TC-1-T & 0.75 & 0.90 & 0.60 & 0.80 & 0.99 & 0.71 & 0.80 \\
+        TC-16-A & 0.79 & 0.93 & 0.66 & 0.83 & 0.99 & 0.74 & 0.86 \\
+        TC-16-T & 0.79 & 0.93 & 0.66 & 0.83 & 0.99 & 0.74 & 0.86 \\
+        TC-FULL-A & 0.82 & 0.94 & 0.69 & 0.84 & 0.99 & 0.76 & 0.89 \\
+        TC-FULL-T & 0.82 & 0.94 & 0.69 & 0.84 & 0.99 & 0.76 & 0.90 \\
+        \bottomrule
+    \end{tabular}%
+    }
+\end{table}
+
+\section{One-shot, 16-shot and Full-shot}
+
+The Figure ~\ref{fig:mIOU_comparison} illustrates the mean Intersection over Union (mIOU) performance over 50 training epochs for configurations TC-A and TC-T. Each graph compares three training strategies: TC-1, TC-16, and TC-FULL. The x-axis represents epochs, and the y-axis denotes mIOU values (0.4 to 1.0).
+
+TC-FULL converges rapidly within the first few epochs, stabilizing early. TC-16 follows a similar trend but stabilizes around epochs 10-15, requiring more iterations for refinement. TC-1, however, converges much slower, exhibiting fluctuations and stabilizing only after ~30 epochs, highlighting the inefficiency of the 1-shot approach.
+
+Performance across TC-A and TC-T is similar for TC-FULL and TC-16, showing nearly identical convergence rates and final mIOU values. However, in TC-1, TC-T demonstrates a more stable training process, whereas TC-A exhibits greater fluctuations before convergence. This indicates that configuration choice is more critical with limited training samples, whereas with larger samples, the impact is negligible.
+
+
+\begin{figure}[!h]
+    \centering
+    \subfigure[mIOU for CAT-SAM-A]{\includegraphics[width=0.45\textwidth]{graphics/miou-tc-a.png}}
+    \hfill
+    \subfigure[mIOU for CAT-SAM-T]{\includegraphics[width=0.45\textwidth]{graphics/miou-tc-t.png}}
+    \caption{Comparison of mIOU results for CAT-SAM-A (a) and CAT-SAM-T (b).}
+    \label{fig:mIOU_comparison}
+\end{figure}
+
+\section{One-shot in details}
+
+The four images in \ref{fig:world_projection_grid} illustrate the model’s performance at different training epochs, showing how predictions (red) evolve compared to the ground truth (green). The background represents meteorological data, with the model identifying tropical cyclones.
+
+At epoch 1, the model struggles with cyclone detection, producing scattered and inaccurate predictions with numerous false positives. By epoch 13, it begins recognizing cyclone structures but lacks precision, particularly in boundary definition. At epoch 24, alignment with the ground truth improves, with reduced false positives and more refined detections, though some cyclones remain partially identified. By epoch 50, the model achieves near-optimal performance, accurately detecting most cyclones with minimal errors. This progression highlights the effectiveness of Cat-SAM in learning spatial segmentation tasks over time, refining its decision boundaries and generalizing well to unseen meteorological data.
+
+
+\begin{figure}[!h]
+    \centering
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{graphics/epoch1.png}
+        \caption{Epoch 1}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{graphics/epoch13.png}
+        \caption{Epoch 13}
+    \end{minipage}
+    
+    \vspace{0.5cm} % Add some vertical space
+    
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{graphics/epoch24.png}
+        \caption{Epoch 24}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{graphics/epoch50.png}
+        \caption{Epoch 50}
+    \end{minipage}
+    
+    \caption{World projection visualizations at different training epochs, showing model predictions (red) against ground truth (green) for TC-1-A}
+    \label{fig:world_projection_grid}
+\end{figure}
+
+
+
+
+
+% \title{Comparison of mIOU between TC\_A and TC\_T}
+
+
+% \begin{figure}[h]
+%     \centering
+%     \begin{subfigure}{0.45\textwidth}
+%         \centering
+%         \includegraphics[width=\textwidth]{graphics/mIOU_TC_A.svg}
+%         \caption{mIOU for TC\_A}
+%     \end{subfigure}
+%     \hfill
+%     \begin{subfigure}{0.45\textwidth}
+%         \centering
+%         \includegraphics[width=\textwidth]{graphics/mIOU_TC_T.svg}
+%         \caption{mIOU for TC\_T}
+%     \end{subfigure}
+%     \caption{Comparison of mIOU results for different configurations.}
+%     \label{fig:mIOU_comparison}
+% \end{figure}
+
+
+
+
+
+
+% TCs full, 16, 1. A and T. 
+% TCs A vs T Fullshot: similar.
+% TCs A vs T 16-shot: A converge faster.
+% Tcs A vs T one-shot: T outperforms.
+% River vs TC: similar.
+
+
+% Cyclone_1_t: picture epoch 1 -> Epoch 25 --> Epoch 50 strategy: random small, training images.
+% cyclone_1_a: 
+
+
+% F1 scores of 1 shot 16 shot 
+% __
+% metrics: precision based counts

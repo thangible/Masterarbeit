@@ -1,0 +1,87 @@
+\chapter{Introduction}\label{introduction}
+\input{master_thesis_content/introduction/introduction}
+\chapter{Background}
+\section{Related work}
+\input{master_thesis_content/background/background_relatedwork}
+\section{ClimateNet Dataset}
+\input{master_thesis_content/background/background_climatenet}
+\section{Segment Anything Model}
+\input{master_thesis_content/background/background_sam}
+\section{Metrics}
+\input{master_thesis_content/background/background_metrics}
+\chapter{Approach}
+\section{Pipeline}
+\input{master_thesis_content/approach/approach_pipeline}
+\section{Architectures}
+\input{master_thesis_content/approach/approach_model}
+\section{Hyperparameter Optimisation}
+\input{master_thesis_content/approach/approach_hp}
+\section{Metrics}
+
+\chapter{Result}
+\section{Preliminary Result}
+\input{master_thesis_content/results/result_preliminary}
+\section{Adapt SAM to ClimateNet}
+\subsection{Lora}
+\input{master_thesis_content/results/result_lora}
+\subsection{Token-based}
+\input{master_thesis_content/results/result_token}
+\section{Automatic Prompt Generator for SAM}
+\subsection{SAM with CGNet as helper}
+\input{master_thesis_content/results/result_cgnet}
+\subsection{SAM with multi-scale feature infusion}
+\input{master_thesis_content/results/result_multiscaled}
+% % \section{Motivation}
+% % \section{Research Questions}
+% \chapter{Approach}\label{approach}
+% \input{Approach}
+
+
+
+% \section{Implementation plan and schedules}
+% \chapter{}
+
+% 1. Topic introduction:
+
+% The automated detection and tracking of two-dimensional (2-D) and three-dimensional (3-D) atmospheric features, such as cyclones, fronts, jet streams, and atmospheric rivers (ARs), in both simulation and observational data, has become integral to meteorology. These automated techniques find applications in weather forecasting, statistical and climatological studies, and visual data analysis.
+
+% Traditionally, atmospheric features have been detected using physical and mathematical rules. Cyclones, for example, are identified through minima or maxima in variables like sea level pressure and lower-tropospheric vorticity, while fronts are detected via derivatives of thermal variables and threshold-based filters. Atmospheric rivers are identified based on thresholds in integrated water vapor transport. 
+
+
+
+% motivation: why detecting tropical cyclone and atmospherical rivers important. (3 Sentences - with references)  traditionally how it was doned. Then there was  an interface and describe how climate scientist do it by hand and costs many hours.
+
+
+
+% Example:
+% The automated detection and tracking of 2-D and 3-D atmospheric features including cyclones, fronts, jet streams, or atmospheric rivers (ARs) in simulation and observation data has multiple applications in meteorology. For example, automatically detected features are used for weather forecasting (e.g., Hewson and Titley, 2010; Mittermaier et al., 2016; Hengstebeck et al., 2018), statistical and climatological studies (e.g., Dawe and Austin, 2012; Pena-Ortiz et al., 2013;
+% Schemm et al., 2015; Sprenger et al., 2017; Lawrence and Manney, 2018), and visual data analysis (e.g., Rautenhaus et al., 2018; Bösiger et al., 2022; Beckert et al., 2023). Features are typically detected based on a set of physical and mathematical rules. For example, cyclones can be identified by searching for minima or maxima in variables including mean 
+% sea level pressure and lower-tropospheric vorticity (Neu et
+% al., 2013; Bourdin et al., 2022). Atmospheric fronts can be
+% identified by means of derivatives of a thermal variable combined with threshold-based filters (Jenkner et al., 2010; Hewson and Titley, 2010; Beckert et al., 2023) and ARs based on thresholding and geometric requirements (Guan and Waliser,
+% 2015; Shields et al., 2018).
+
+
+% Then there is machine learning approach, startrted 
+
+% the manual works in reading 
+
+
+
+
+
+% 1. Short Motivation. (half page)
+% 2. Related Works.
+% - SAM
+% - CAT-SAM
+% - SOS
+% - Tim Radke Work: 
+
+% approach:
+
+
+% Mask prompts:
+
+
+% - Using a U-NET for dimension reductions.
+% - 

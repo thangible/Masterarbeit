@@ -1,0 +1,47 @@
+In this section, we provide a brief overview of two popular deep learning models that we use to evaluate our augmentation methods: YOLOv5s for object detection and EfficientNet version B0 for image classification. The evaluation is based on F1-score for classification task and mAP@[0.5:0.95] for detection task. Understanding these models is essential to accurately interpret the results of our evaluation.
+
+\subsection{EfficientNet}
+There are numerous classification models available, such as YOLOv8 Classification, ResNet, EfficientNet, and Vision Transformer. Despite their good performance, as demonstrated in benchmarks like ImageNet \cite{benchmark}, we have opted for EfficientNet due to its ease of modification and implementation using the Timm library \cite{wightman2020timm}.
+
+EfficientNet \cite{tan2019efficientnet} is a family of neural network models that achieve state-of-the-art performance on various computer vision tasks. It is a convolutional neural network architecture designed to achieve high accuracy while keeping the number of parameters low. This is achieved through a technique called ``compound scaling'' where the network's depth, width, and resolution are scaled in a balanced way, but independently based on a fixed scaling coefficient. This approach is different from traditional neural network scaling, where the dimensions are increased simultaneously by a fixed factor, which can lead to overfitting, computational inefficiency, and decreased accuracy.
+
+This approach allows EfficientNet to achieve better performance than previous models, such as ResNet and Inception, while requiring fewer parameters. This makes EfficientNet an attractive choice for our classification task, as we are dealing with a large dataset with more than 100 classes and limited computational resources. Another advantage of using EfficientNet is that it has been pre-trained on a large-scale dataset such as ImageNet, which can help improve the performance of our model on our specific dataset. Figure \ref{fig:efficientnet} provides a more comprehensive understanding of the performance of EfficientNet between different models \cite{tan2019efficientnet}.
+
+\begin{figure}[!h]
+	 \centerline{\includegraphics[width=0.6\textwidth]{src/background/efficientNet.png}}
+	 {\caption{Model Size vs. Accuracy Comparison. EfficientNet-B0 is the baseline network developed by AutoML MNAS, while Efficient-B1 to B7 are obtained by scaling up the baseline network. In particular, EfficientNet-B7 achieves new state-of-the-art 84.4\% top-1 / 97.1\% top-5 accuracy, while being 8.4x smaller than the best existing CNN.  \cite{tan2019efficientnet}} \label{fig:efficientnet}}
+\end{figure}
+
+EfficientNet models come in several sizes, from EfficientNet B0 (the smallest) to EfficientNet B7 (the largest). The larger models have more layers and more parameters, and are capable of achieving higher accuracy, but require more computational resources to train and run. This thesis uses pretrained EfficientNet with version B0. Although the performance may be affected by using version B0, it aligns with the goal of our thesis to compare various augmentations, making it acceptable. By using version B0, which has fewer parameters, we can train the model faster with different configurations, resulting in quicker analysis. Figure \ref{fig:efficientnetb0} shows the architecture of our baseline network EfficientNet-B0.
+
+\begin{figure}[!h]
+	 \centerline{\includegraphics[width=1\textwidth]{src/background/efficientnetb0.png}}
+	 {\caption{The architecture for our baseline network EfficientNet-B0 \cite{tan2019efficientnetArticle}} \label{fig:efficientnetb0}}
+\end{figure}
+
+
+\subsection{YOLOv5 (You Only Look Once version 5)}
+
+YOLOv5 (You Only Look Once version 5) \cite{glenn_jocher_2022_7347926}  is a state-of-the-art object detection model developed by Ultralytics. It is inspired by the success of previous versions of YOLO \cite{bochkovskiy2020YOLOv4} and introduces several improvements, including a new backbone architecture and a more efficient training process (mixed precision training \cite{micikevicius2017mixed} and gradient accumulation \cite{hermans2017accumulated}).
+
+Figure \ref{fig:YOLO-general} shows the high-level architecture for an object detector like YOLOv5 which is comprised of three components: backbone, neck, and head \cite{YOLOarticle}. 
+
+\begin{itemize}
+    \item The model backbone: a pre-trained network used for feature extraction from the images, which reduces the spatial resolution while increasing the feature (channel) resolution.
+    \item The model neck: responsible for extracting feature pyramids, which enables the model to effectively detect objects of varying sizes and scales, leading to better generalization performance.
+    \item The model head: responsible for performing the final operations, which involve applying anchor boxes to feature maps and producing the final output. This output includes information such as object classes, objectness scores, and bounding box coordinates.
+\end{itemize}
+
+\begin{figure}[!h]
+	 \centerline{\includegraphics[width=1\textwidth]{src/background/YOLO-general.png}}
+	 {\caption{Single-Stage Detector Architecture\cite{bochkovskiy2020YOLOv4}} \label{fig:YOLO-general}}
+\end{figure}
+
+The network architecture of YOLOv5 is shown in Figure \ref{fig:YOLOv5s}, where the backbone architecture is based on CSPNet (Cross Stage Partial Network) \cite{wang2020cspnet}. CSPNet is a novel CNN design that divides a standard convolution layer into two parallel streams, reducing computation costs and enhancing the model's ability to capture complex features. The Neck of YOLOv5 incorporates Spatial Pyramid Pooling (SPP) and Path Aggregation Network (PANet). SPP enables object recognition of different sizes without image resizing or cropping by dividing the image into a fixed number of regions and pooling features from each region. PANet utilizes a bottom-up pathway to extract features from the input image and a top-down pathway to generate a feature map for object detection, effectively aggregating multi-scale features to capture objects at different scales and resolutions. The head of YOLOv5 is composed from three convolution layers that predicts the location of the bounding boxes (x, y, height, width), the scores and the objects classes.
+
+\begin{figure}[!h]
+	 \centerline{\includegraphics[width=1\textwidth]{src/background/YOLOv5s.png}}
+	 {\caption{Network architecture for YOLOv5e \cite{xu2021forest}} \label{fig:YOLOv5s}}
+\end{figure}
+
+There are different sizes available in YOLOv5, ranging from YOLOv5n with 1.9 million trainable parameters to YOLOv5x6 with 140.7 million trainable parameters. As the model size increases, it becomes more capable of achieving higher mAP \cite{glenn_jocher_2022_7347926}. However, to ensure our computational resources are not exceeded, we will use YOLOv5s with 7.2 million trainable parameters.

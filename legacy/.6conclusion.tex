@@ -1,0 +1,35 @@
+\chapter{Conclusion} \label{discussion}
+This thesis investigated the effectiveness of various types of augmentations, including geometric, color-space, cutout, and mixed, for the marine wildlife image dataset in both classification and detection tasks. Specifically, we utilized EfficientNet B0 for classification and YOLOv5s for detection. 
+
+Furthermore, we explored the potential of GAN-generated methods to improve the classification of underrepresented classes (edge class) and implemented Vanilla GAN, Wasserstein GAN (WGAN), and Wasserstein GAN with Gradient Penalty (WGAN-GP) to achieve this goal.
+
+In this chapter, we will discuss the main findings of the research, the limitations of the thesis, and potential avenues for future research.
+\section{Main findings}
+The results from our study indicate that the effectiveness of augmentation techniques is not only dependent on the dataset used, but also highly influenced by the task and model employed. As demonstrated in both the classification and detection tasks, certain augmentation policies proved effective for one model but failed to yield improvements in another. For instance, the CenterCrop technique significantly improved the mean average precision (mAP) score in YOLOv5s, but resulted in decreased performance in EfficientNet B0 for classification. Similarly, while rotation was the most effective policy for EfficientNet, it failed to yield any improvement in YOLOv5.
+
+Geometric augmentations have been observed to have a negative impact on bounding box classification for the dataset under study. Specifically, Rotation, Flipping, and Perspective augmentations were found to decrease the model's performance by generating more varied square shapes of the object. On the other hand, these identical augmentations showcased a significant enhancement in the performance of pixel-based classification (EfficientNet B0), emphasizing once again the model-specific nature of augmentation policy decisions.
+
+In terms of color-space augmentation, a trade-off has been observed when utilizing these techniques with YOLOv5, as they have been shown to improve classification performance while simultaneously decreasing the model's ability to detect bounding boxes. Despite this limitation, the overall increase in mean average precision (mAP) renders color-space augmentation a favorable method for augmenting YOLOv5. However, for classification tasks, most color-space augmentations appear to be ineffective.
+
+While our study's examination of GAN-generated augmentations is limited, it can be generally stated that vanilla GAN should be avoided due to its tendency to experience mode collapse and the absence of a reliable stopping criterion. Using GAN-GP instead is more practical, as it requires less hyperparameter tuning compared to regular WGAN.
+
+\section{Limitation of the thesis}
+% This section provides a retrospective analysis of potential areas for improvement in the thesis
+% \subsection{Hyperparameter tuning}
+The hyperparameter tuning approach used in this work for the augmentation methods can be improved. The training time was limited to 8 iterations due to time and computational constraints, but a more efficient approach such as  early stopping could allow for more exploration of the search space. 
+
+It is important to note that the hyperparameter tuning was not performed using the optimal learning rate of the classifier $10^{-5}$, but rather a learning rate of $10^{-4}$. While this may not be an issue if the optimal augmentation only depends on the dataset itself, the results show that each augmentation has a different impact on different models. Therefore, optimizing the hyperparameters for each model and using the optimal learning rate could potentially improve the performance of the augmentation methods.
+
+The determination of a suitable configuration for RandAugment is also a challenging task, as it requires a heuristic approach to determine the number and magnitude of augmentation methods. In this study, only a subset of the best augmentations were employed, which may not be sufficient to fully explore the potential of RandAugment.
+
+In addition, the selection process for GAN architectures (Vanilla GANs, WGANs, and WGAN-GP) in this thesis was not conducted in a systematic manner. An optimal approach is to begin with a well-established architecture such as WGAN-GP and then adjust its hyperparameters.
+
+\section{Future work}
+There is significant scope for further research on augmentation techniques for aerial images in general and for this dataset specifically. We suggest a more refined approach that addresses the limitations of our current work. A comprehensive hyperparameter tuning process would offer a promising augmentation policy for the specific dataset, enabling effective comparisons with other aerial image datasets such as BigEarthNet \cite{sumbul2019bigearthnet}, Airbus Wind Turbines \cite{windmilldataset} for classification tasks, or xView \cite{xview2018} for detection tasks.
+
+Furthermore, expanding the augmentation techniques beyond the ones studied in this thesis, incorporating additional techniques such as adversarial training, neural style transfer, undersampling, and image mixing as mentioned in the related work, could be a promising direction for future research. This approach could potentially provide valuable insights into which augmentation techniques yield the most significant performance improvements with the least computational costs.
+
+While selecting an effective augmentation policy is important, it is equally important to understand why a particular augmentation method is effective. The subject of interpretability holds potential interest. While currently, the augmentation techniques are applied to the dataset, and the resulting performance is merely observed, it would be beneficial to explain the effectiveness of the augmentations by utilizing quantitative metrics such as sharpness and contrast or subjective measures such as human evaluation and eye-tracking.
+
+Additionally, exploring the use of diffusion models, such as Stable Diffusion Models \cite{trabucco2023effective}, for image generation, is another potential area for future work. Diffusion models model the diffusion process of noise in the image directly, unlike traditional generative models like GANs, which allows for more efficient training and better handling of high-dimensional data. This could potentially improve the effectiveness and efficiency of image generation tasks.
+

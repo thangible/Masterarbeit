@@ -1,0 +1,69 @@
+\subsection{Loss Functions}
+
+In the ClimateNet dataset, a significant challenge arises from the extreme class imbalance. Background pixels constitute approximately \textbf{93.9\%} of the data, while Atmospheric Rivers (ARs) represent \textbf{5.7\%} and Tropical Cyclones (TCs) represent only \textbf{0.5\%} \cite{56, 68}. Furthermore, TCs are substantially rarer and smaller than ARs, with an average of only \textbf{2.6} TC masks per image compared to \textbf{7.4} for ARs \cite{54, 76}. The ratio of background area to TC area is particularly skewed at \textbf{257:1} \cite{56, 76}. 
+
+To effectively tackle these disparities and the ``ribbon-like" or ``circular" structures of these phenomena, a well-designed loss function is required \cite{72, 255}. Originally, SAM utilized a hybrid approach combining Focal Loss and Dice Loss to balance pixel-level classification with regional overlap \cite{166}.
+
+\subsubsection{Focal Loss}
+Standard Cross-Entropy loss often fails when foreground objects are proportionally much smaller than the background, as the model can achieve high accuracy by simply predicting the majority class. Focal Loss addresses this by adding a modulating factor to the standard criterion to focus on ``hard" examples \cite{166}.
+
+\begin{equation}
+L_{focal} = -\alpha_t (1 - p_t)^\gamma \log(p_t)
+\end{equation}
+
+\begin{itemize}
+    \item $p_t$: Represents the model's estimated probability for the ground truth class \cite{166}. 
+    \item $\gamma$: The focusing parameter. When $\gamma = 0$, Focal Loss is equivalent to Cross-Entropy. As $\gamma$ increases, the loss for ``easy" examples is down-weighted \cite{166}.
+    \item $(1 - p_t)^\gamma$: The modulating factor. It reduces the loss contribution from easy pixels, forcing the model to concentrate on ambiguous pixels typically found at the boundaries of TCs and ARs \cite{166}.
+    \item $\alpha_t$: A balancing parameter used to handle the prior probability of classes, providing a baseline weight to the rare TC and AR pixels \cite{166}.
+\end{itemize}
+
+The modulating factor $(1-p_t)^\gamma$ acts as a dynamic weight that determines which outcomes contribute most to the gradient:
+\begin{equation}
+L_{focal} = 
+\begin{cases} 
+-\alpha (1 - p)^\gamma \log(p) & \text{if } y=1 \text{ (Focuses on False Negatives)} \\
+-(1 - \alpha) p^\gamma \log(1 - p) & \text{if } y=0 \text{ (Focuses on False Positives)} 
+\end{cases}
+\end{equation}
+\begin{itemize}
+    \item Easy TP: When $y=1$ (ground truth = 1) and $p \to 1$, $(1-p)^\gamma$ approaches 0, effectively ``muting" pixels the model is already confident about \cite{166}.
+    \item Hard FN: When $y=1$ but $p \to 0$ (a missed detection), $(1-p)^\gamma$ remains near 1, keeping the loss signal high to force the model to identify the missed TC or AR \cite{166, 255}.
+    \item Easy TN: When $y=0$ and $p \to 0$, $p^\gamma$ becomes very small. This prevents the 93.9\% of background pixels from overwhelming the gradient \cite{68, 166}.
+    \item Hard FP: When $y=0$ but $p \to 1$ (a false alarm), $p^\gamma$ stays high to penalize over-segmentation in clear atmospheric regions \cite{166}.
+\end{itemize}
+
+\subsubsection{Dice Loss}
+While Focal Loss operates at the individual pixel level, Dice Loss evaluates the global overlap between the predicted mask and the ground truth. To better understand its relationship with classification metrics, it can be expressed in terms of True Positives (TP), False Positives (FP), and False Negatives (FN).
+
+\begin{equation}
+L_{dice} = 1 - \frac{2|A \cap B|}{|A| + |B|} = 1 - \frac{2TP}{2TP + FP + FN}
+\end{equation}
+
+\begin{itemize}
+    \item $A$: The set of predicted pixels for the mask.
+    \item $B$: The set of ground truth pixels.
+    \item $TP$: True Positives; pixels correctly identified as part of the TC or AR.
+    \item $FP$: False Positives; the over-segmentation pixels.
+    \item $FN$: False Negatives; the missed detection pixels.
+\end{itemize}
+
+Dice Loss is scale-invariant. Because it normalizes the intersection by total pixels, a small error on a tiny TC mask is penalized as heavily as an error on a large AR mask \cite{166}. However, standard Dice Loss treats FP and FN with equal importance, which may not be ideal for meteorological applications where missing a rare TC (a False Negative) is often more critical than a slight over-estimation of its boundary. This limitation leads to the introduction of a more flexible framework: the Tversky Loss.
+
+\subsubsection{Tversky Loss}
+The Tversky Index (TI) is a generalization of the Dice coefficient that allows for asymmetrical weighting of False Positives and False Negatives.
+
+\begin{equation}
+L_{Tversky} = 1 - \frac{TP}{TP + \alpha FP + \beta FN}
+\end{equation}
+
+\begin{itemize}
+    \item $\alpha$: The weight assigned to False Positives. Increasing $\alpha$ improves precision by penalizing predicted pixels that do not belong to the ground truth.
+    \item $\beta$: The weight assigned to False Negatives. Increasing $\beta$ improves recall (sensitivity) by penalizing the model for missing ground truth pixels.
+\end{itemize}
+If $\alpha = \beta = 0.5$, the function simplifies to the Dice Loss. If $\alpha = \beta = 1.0$, it simplifies to the Jaccard Index (IoU).
+
+\subsubsection{Hybrid Loss Functions}
+Modern segmentation adaptations, such as CAT-SAM \cite{389} and HQ-SAM \cite{383}, frequently employ hybrid loss strategies to leverage the strengths of both distribution-based and region-based functions \cite{162, 383, 389}. While the original SAM architecture focuses on a linear combination of Focal and Dice losses for general-purpose segmentation, domain-specific adaptations often swap Dice for Tversky to handle high-stakes sensitivity requirements \cite{166, 389}.
+
+In this study, we use the combination of Tversky and Focal Loss for adapting SAM to the ClimateNet domain. While the Tversky component ensures the model captures the full extent of weather features by prioritizing recall through $\beta$, the Focal component ensures the model classifies difficult boundary pixels that are otherwise lost in the massive background grid \cite{207, 255}. This hybrid approach effectively mitigates the challenges posed by the extreme background-to-TC ratio \cite{56}.

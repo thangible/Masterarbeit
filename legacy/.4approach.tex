@@ -1,0 +1,65 @@
+\chapter{Approach} \label{approach}
+This chapter presents our experimental approach, which includes the evaluation metrics and models for both classification and detection tasks. We will also discuss the specific GAN-generated architectures used and provide an overview of the overall pipeline for the experiments.
+
+\section{Metrics}
+\input{2metrics.tex}
+\section{Evaluation Models}
+\input{2models.tex}
+\section{Training Pipeline}
+This section presents a detailed description of the experimental set-up and training pipeline used in our thesis.
+
+The experiments were performed on a computer with an AMD Ryzen Threadripper 2970WX 24-Core Processor and 188 Gb RAM. The deep learning models Yolov5s and GANs were trained on an NVIDIA GeForce RTX 3090 graphics card, while the EfficientNet model was trained on an NVIDIA GeForce RTX 2080 Ti. The software environment included Python 3.10.8, Pytorch, and the Albumentations library for data augmentation.
+\subsection{Pipeline for basic augmentations}
+Figure \ref{fig:basic_pipieline} illustrates the experiment pipeline for non-GAN approaches. For the basic augmentations, including geometric, color-space, cutout, and mixed augmentations, we apply online augmentation during training for the classification task. This involves directly applying the transformations to the images during training and then feeding them to the EfficientNet version B0. However, for the detection task using YOLOv5s format, we perform the augmentations offline on the dataset before feeding it into the model. 
+
+\begin{figure}[!h]
+	 \centerline{\includegraphics[width=0.7\textwidth]{src/approach/basic_pipeline.pdf}}
+	 {\caption{Experiment process for basic augmentations (Color-space, geometrical, cutout and mixed augmentations)} \label{fig:basic_pipieline}}
+\end{figure}
+
+\subsection{Pipeline for GAN-generated augmentation}
+Figure \ref{fig:gan_pipieline} shows the pipeline for GAN-generated methods. We focus on improving the edge cases in our dataset. To achieve this, we only train the GAN on classes that have less than 10 samples, which we consider as edge cases. Once the GAN is trained, we use it to generate half the amount of available images for the edge cases and add them to the training set. We then train this extended training set without any additional augmentation and compare the results to the baseline. It is also important to note that we pay special attention to the underrepresented classes in our dataset. This is because we want to ensure that our models perform well on all classes, not just the most frequently occurring ones. By comparing the results of our GAN-generated methods on the edge cases to the baseline, we can see if the model's performance has been significantly improved for these underrepresented classes.
+
+\begin{figure}[!h]
+	 \centerline{\includegraphics[width=0.8\textwidth]{src/approach/gan_pipeline.pdf}}
+	 {\caption{Experiment process for GAN-generated approach} \label{fig:gan_pipieline}}
+\end{figure}
+
+The performance of GANs heavily relies on the specific architecture of the networks used. Both vanilla GAN and Wasserstein GAN have their own unique architectures that can significantly impact their performance. In the following sections, we will delve into the details of the architectures used for vanilla GAN and Wasserstein GAN.
+
+\subsubsection{Vanilla GAN architecture}
+\begin{figure}[!h]
+	 \centerline{\includegraphics[width=0.9\textwidth]{src/approach/vanilla_architecture.pdf}}
+	 {\caption{he architecture of our generator and discriminator in Vanilla GAN } \label{fig:vanilla_architecture}}
+\end{figure}
+
+The architecture of our vanilla GAN, depicted in Figure \ref{fig:vanilla_architecture}, uses a concatenated input of the one-hot coded label and noise for the generator. The generator is composed of four dense layers, each followed by LeakyReLU activation layer with a slop of 0.2. Starting with 512 neurons, the output has a size of 196608 at the end, which is then reshaped into (3, 256, 256) after going through tanh() function for normalization to the range of -1 and 1. For the discriminator, the input is flattened and concatenated with the embedded label. The discriminator also has four dense layers, each followed by LeakyReLU activation layer with a slop of 0.2 and Dropout with a probability of 0.3. The output after the sigmoid layer is a single value between 0 and 1, predicting whether the image is real or fake.
+
+
+\subsubsection{Wasserstein GAN architecture}
+The architecture used in our experiments is illustrated in Figure \ref{fig:wgan_architecture}, which is based on a DCGAN structure \cite{radford2015unsupervised}. In the generator, the input noise is concatenated with the labels that are embedded into a one-hot vector, and fed into a ConvTranspose2D block (also known as a 2D Deconvolution block), followed by batch normalization and ReLU activation. We start with 8192 features and halve the depth while doubling the height and width for every subsequent block until we obtain a 256x256 image with 3 channels after 6 blocks, for a model with 256 features. Finally, we use the Tanh() layer to normalize the output within the range of -1 to 1.
+
+The discriminator architecture consists of a dense layer with 65536 units after one-hot encoding for the label input. The output is then reshaped into (1, 256, 256) and concatenated with the image to predict. This concatenated input is given to a block of 4x4 Conv2D layer, followed by an instance normalization layer (except for the first layer) and a LeakyReLU activation layer with a slop of 0.2. At each subsequent Conv2D layer, the height and width are reduced by half, but the depth is doubled. Finally, at the last layer, the input of (8192, 4, 4) is passed through a convolutional layer with a filter size of 4x4 to produce a single-valued output, which gives the label of the class.
+\begin{figure}[!h]
+	 \centerline{\includegraphics[width=0.8\textwidth]{src/approach/wgan_architecture.pdf}}
+	 {\caption{The architecture of our generator and discriminator in WGAN \label{fig:wgan_architecture}}
+\end{figure}
+
+\subsection{WGAN-GP architecture}
+Our WGAN-GP architecture is inspired by implementation of Jalola \cite{wgangp}. For WGAN-GP, we use a different architecture than WGAN by incorporating Upsampling Residual Blocks instead of ConvTranspose2D layers for the Generator and Downsampling Residual Blocks for the Discriminator. The Generator architecture is depicted in Figure \ref{fig:wgan_gp_gen}. The Upsampling Residual Block contains an UpSampleConv layer after the input, which is used as a shortcut to the output. This is followed by BatchNorm, ReLu layers, and Conv2D layer, which are repeated once more before being concatenated with the shortcut to produce the output. The Upsampling Residual Block has the same effect on the input size as the ConvTranspose2D, halving the depth while doubling the height and width. In the generator, the embedded Label and noise are concatenated and provided as input to a Conv2d layer, which is followed by four Upsampling Residual Blocks before being given to the another chain of BatchNorm, Conv2D and ReLU layers. Finally, the output is normalized using the tanh() layer.
+
+\begin{figure}[!h]
+	 \centerline{\includegraphics[width=0.8\textwidth]{src/approach/wgan_gp_gen.pdf}}
+	 {\caption{The architecture of our generator in WGAN-GP} \label{fig:wgan_gp_gen}}
+\end{figure}
+
+Figure \ref{fig:wgan_gp_dis} illustrates the architecture of the discriminator in WGAN-GP. The Residual Block of the discriminator differs from that of the generator in that it uses DownSampleConv instead of UpSampleConv right after the input. The image is concatenated with the embedded label and passed through a dense layer to reduce the number of neurons. This is then followed by four blocks of Residual Block with Downsampling before being given to a dense layer with an output size of one, which produces the final prediction.
+
+\begin{figure}[!h]
+	 \centerline{\includegraphics[width=0.8\textwidth]{src/approach/wgan_gp_dis.pdf}}
+	 {\caption{The architecture of our discriminator in WGAN-GP} \label{fig:wgan_gp_dis}}
+\end{figure}
+
+% In the context of our thesis, we can use conditional GANs to generate new images of marine wildlife for training our detection and classification models. We can train a GAN on a set of real images of marine wildlife and use it to generate new images that augment the training dataset. For example, we can use a GAN to generate new images of a bird species, such as the black guillemot (gryllteiste), that are underrepresented in our training dataset. However, training a GAN is computationally expensive, and since our dataset has 117 classes, it is not feasible to train a model large enough to memorize all features of each class. Therefore, we will reduce the dimension of the classes to only 10 classes that have few samples. By doing so, we can improve the performance of our marine wildlife detection and classification models.
+
+
