@@ -1,4 +1,24 @@
-\subsection{Encoder Adaptation}
+
+
+\subsection{Input Adapter}
+The ClimateInputAdapter is a specialized learnable preprocessing module designed to bridge the structural gap between multi-parameter atmospheric grids and the fixed input requirements of the Segment Anything Model (SAM). Since SAM is natively optimized for three-channel RGB imagery, this adapter compresses the 16 atmospheric variables from the ClimateNet dataset into a pseudo-RGB representation that preserves critical geophysical features. 
+
+As depicted in Figure \ref{fig:input_adapter}, the architecture follows a bottleneck convolutional design. It initiates with a 3x3 Conv2d layer to capture local spatial dependencies, followed by sequential 1x1 convolutions that reduce the feature dimensionality from 32 to 16, and ultimately to 3 channels. The module incorporates BatchNorm2d and ReLU activations for internal stabilization. A final Sigmoid activation function constrains the output values to a [0, 1] range, which are subsequently rescaled by 255.0 to align with the standard pixel intensity expected by the SAM image encoder.
+\vspace{-1em}
+\begin{figure}[!h]
+    \centering
+    % \includegraphics[width=1\textwidth]{graphics/approach/prompt_pipeline-1.pdf}
+    \makebox[\textwidth][c]{%
+    \includegraphics[width=1.3\textwidth]{graphics/approach/input_adapter.pdf}
+}
+\vspace{-1em}
+    \caption{Input Adapter Architecture}
+    \label{fig:input_adapter}
+\end{figure}
+
+
+To maintain physical grounding during the Adaptation Phase, the adapter employs an expert-knowledge initialization strategy. The weights for the most diagnostic variables TMQ, U850, V850, and PSL \cite{radke2024explaining} are set to 1.0 at the center of the convolution kernels. This initialization enables the model to prioritize the point-shaped extrema characteristic of Tropical Cyclones and the elongated moisture corridors of Atmospheric Rivers from the onset of training.
+\subsection{Encoder Adapter}
 
 \subsubsection{Learnable Token-based approach}
 
@@ -57,9 +77,9 @@ This dual-decoder design allows the model to learn class-specific localization p
     \label{fig:lora_architecture}
 \end{figure}
 
-\subsection{Automatical Prompt Generation}
+\subsection{Automatic Prompt Generator}
 
-\subsection{CGNet}
+\subsubsection{CGNet}
 
 \subsubsection{Multi-scale Fusion}
 

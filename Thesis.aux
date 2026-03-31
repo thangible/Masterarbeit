@@ -83,6 +83,7 @@
 \citation{hko_coriolis_tc}
 \citation{radke2024explaining}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2.1}Dataset Statistics}{8}{subsection.2.2.1}\protected@file@percent }
+\newlabel{dataset_stats}{{2.2.1}{8}{Dataset Statistics}{subsection.2.2.1}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {2.1}{\ignorespaces Class Distribution}}{8}{figure.caption.7}\protected@file@percent }
 \newlabel{fig:classdistribution}{{2.1}{8}{Class Distribution}{figure.caption.7}{}}
 \citation{gimeno2014atmospheric}
@@ -127,87 +128,105 @@
 \@writefile{lot}{\addvspace {10\p@ }}
 \@writefile{toc}{\contentsline {section}{\numberline {3.1}Pipeline}{18}{section.3.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{Phase 1: Adaptation and Encoder Refinement}{18}{section*.21}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces Suggested Pipeline}}{19}{figure.caption.20}\protected@file@percent }
-\newlabel{fig:pipeline}{{3.1}{19}{Suggested Pipeline}{figure.caption.20}{}}
-\citation{wu2025multi}
-\citation{zhang2024improving}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces Experiment Pipeline}}{19}{figure.caption.20}\protected@file@percent }
+\newlabel{fig:pipeline}{{3.1}{19}{Experiment Pipeline}{figure.caption.20}{}}
 \@writefile{toc}{\contentsline {subsubsection}{Phase 2: Automated Prompt Generation}{20}{section*.22}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {3.2}Dataset Preparation}{20}{section.3.2}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces Prompt Preparation Process}}{20}{figure.caption.23}\protected@file@percent }
 \newlabel{fig:prompt_pipeline}{{3.2}{20}{Prompt Preparation Process}{figure.caption.23}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.3}{\ignorespaces Overview}}{21}{figure.caption.24}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {3.4}{\ignorespaces Detail}}{21}{figure.caption.24}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {3.5}{\ignorespaces Token-based approach architecture}}{21}{figure.caption.24}\protected@file@percent }
-\newlabel{fig:stacked_architecture}{{3.5}{21}{Token-based approach architecture}{figure.caption.24}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.3}{\ignorespaces Sampling Negative and Positive Point Prompts}}{21}{figure.caption.24}\protected@file@percent }
+\newlabel{fig:point_prompt_generation}{{3.3}{21}{Sampling Negative and Positive Point Prompts}{figure.caption.24}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.4}{\ignorespaces Create Noisy Mask Prompts}}{21}{figure.caption.25}\protected@file@percent }
+\newlabel{fig:noisy_mask_generation}{{3.4}{21}{Create Noisy Mask Prompts}{figure.caption.25}{}}
+\citation{radke2024explaining}
+\@writefile{toc}{\contentsline {section}{\numberline {3.3}Architectures}{22}{section.3.3}\protected@file@percent }
+\newlabel{sec:architectures}{{3.3}{22}{Architectures}{section.3.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.1}Input Adapter}{22}{subsection.3.3.1}\protected@file@percent }
+\citation{wu2025multi}
+\citation{zhang2024improving}
 \citation{zhu2024melo}
 \citation{wu2025multi}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.6}{\ignorespaces Overview}}{22}{figure.caption.26}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {3.7}{\ignorespaces Detail}}{22}{figure.caption.26}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {3.8}{\ignorespaces Token-based approach architecture}}{22}{figure.caption.26}\protected@file@percent }
-\newlabel{fig:token_architecture}{{3.8}{22}{Token-based approach architecture}{figure.caption.26}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.3}Architectures}{22}{section.3.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.1}Encoder Adaptation}{22}{subsection.3.3.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Learnable Token-based approach}{22}{section*.25}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{LoRA approach}{22}{section*.27}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {3.9}{\ignorespaces Overview}}{23}{figure.caption.28}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {3.10}{\ignorespaces Detail}}{23}{figure.caption.28}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {3.11}{\ignorespaces LoRA adaptation architecture}}{23}{figure.caption.28}\protected@file@percent }
-\newlabel{fig:lora_architecture}{{3.11}{23}{LoRA adaptation architecture}{figure.caption.28}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.2}Automatical Prompt Generation}{24}{subsection.3.3.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.3}CGNet}{24}{subsection.3.3.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Multi-scale Fusion}{24}{section*.29}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {3.12}{\ignorespaces Multi-scale Fusion Module}}{24}{figure.caption.30}\protected@file@percent }
-\newlabel{fig:multiscalefusion}{{3.12}{24}{Multi-scale Fusion Module}{figure.caption.30}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.5}{\ignorespaces Input Adapter Architecture}}{23}{figure.caption.26}\protected@file@percent }
+\newlabel{fig:input_adapter}{{3.5}{23}{Input Adapter Architecture}{figure.caption.26}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.2}Encoder Adapter}{23}{subsection.3.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Learnable Token-based approach}{23}{section*.27}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{LoRA approach}{23}{section*.29}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.6}{\ignorespaces Overview}}{24}{figure.caption.28}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.7}{\ignorespaces Detail}}{24}{figure.caption.28}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.8}{\ignorespaces Token-based approach architecture}}{24}{figure.caption.28}\protected@file@percent }
+\newlabel{fig:token_architecture}{{3.8}{24}{Token-based approach architecture}{figure.caption.28}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.3}Automatic Prompt Generator}{24}{subsection.3.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{CGNet}{24}{section*.31}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Multi-scale Fusion}{24}{section*.32}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {3.4}Hyperparameter Optimisation}{24}{section.3.4}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.4.1}Loss Function}{24}{subsection.3.4.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Search Strategy and Configuration}{25}{section*.31}\protected@file@percent }
-\newlabel{searchstrat}{{3.4.1}{25}{Search Strategy and Configuration}{section*.31}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Search Space}{25}{section*.32}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {3.1}{\ignorespaces Hyperparameter search space for SAM adaptation on ClimateNet.}}{25}{table.caption.33}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {3.5}Metrics}{26}{section.3.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {chapter}{\numberline {4}Result}{27}{chapter.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.9}{\ignorespaces Overview}}{25}{figure.caption.30}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.10}{\ignorespaces Detail}}{25}{figure.caption.30}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.11}{\ignorespaces LoRA adaptation architecture}}{25}{figure.caption.30}\protected@file@percent }
+\newlabel{fig:lora_architecture}{{3.11}{25}{LoRA adaptation architecture}{figure.caption.30}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Search Strategy and Configuration}{25}{section*.34}\protected@file@percent }
+\newlabel{searchstrat}{{3.4.1}{25}{Search Strategy and Configuration}{section*.34}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.12}{\ignorespaces Multi-scale Fusion Module}}{26}{figure.caption.33}\protected@file@percent }
+\newlabel{fig:multiscalefusion}{{3.12}{26}{Multi-scale Fusion Module}{figure.caption.33}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Search Space}{27}{section*.35}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3.1}{\ignorespaces Hyperparameter search space for SAM adaptation on ClimateNet.}}{27}{table.caption.36}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3.5}Metrics}{27}{section.3.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {4}Result}{28}{chapter.4}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {4.1}Preliminary Result}{27}{section.4.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.1}Hyperparameter Optimisation}{27}{subsection.4.1.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Tversky Loss Parameters for Tropical Cyclones}{27}{section*.34}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Tversky Loss Parameters for Atmospheric Rivers}{27}{section*.36}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {4.1}{\ignorespaces Impact of Tversky $\alpha /\beta $ parameters on Tropical Cyclone segmentation.}}{28}{table.caption.35}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {4.2}{\ignorespaces Impact of Tversky $\alpha /\beta $ parameters on Atmospheric River segmentation.}}{28}{table.caption.37}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Focal Loss Alpha and Gamma for Tropical Cyclones}{28}{section*.38}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {4.3}{\ignorespaces Performance of Tropical Cyclone detection across Focal Gamma settings.}}{28}{table.caption.39}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Focal Loss Alpha and Gamma for Atmospheric Rivers}{28}{section*.40}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {4.4}{\ignorespaces Performance of Atmospheric River detection across Focal Gamma settings.}}{29}{table.caption.41}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Loss Component Weight}{29}{section*.42}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {4.5}{\ignorespaces Comparison of loss component magnitudes and resulting segmentation performance across different Focal weights.}}{29}{table.caption.43}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Summary of Hyperparameter Optimization Results}{30}{section*.44}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {4.6}{\ignorespaces Summary of optimal loss hyperparameters for ClimateSAM adaptation.}}{30}{table.caption.45}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4.2}Adapt SAM to ClimateNet}{30}{section.4.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.1}Lora}{30}{subsection.4.2.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Integrating single LoRA component to SAM}{30}{section*.46}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {4.7}{\ignorespaces LoRA Performance Comparison}}{30}{table.caption.47}\protected@file@percent }
-\newlabel{tab:lora_performance}{{4.7}{30}{LoRA Performance Comparison}{table.caption.47}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {4.8}{\ignorespaces Detailed Parameter Breakdown}}{31}{table.caption.48}\protected@file@percent }
-\newlabel{tab:lora_params_final}{{4.8}{31}{Detailed Parameter Breakdown}{table.caption.48}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces AR Validation IOU}}{31}{figure.caption.49}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {4.2}{\ignorespaces TC Validation IOU}}{31}{figure.caption.49}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {4.3}{\ignorespaces Validation IOU curves for AR and TC during training}}{31}{figure.caption.49}\protected@file@percent }
-\newlabel{fig:iou_lora_single}{{4.3}{31}{Validation IOU curves for AR and TC during training}{figure.caption.49}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.1}Preliminary Result}{28}{section.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.1}Hyperparameter Optimisation}{28}{subsection.4.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Tversky Loss Parameters for Tropical Cyclones}{28}{section*.37}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Tversky Loss Parameters for Atmospheric Rivers}{28}{section*.39}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4.1}{\ignorespaces Impact of Tversky $\alpha /\beta $ parameters on Tropical Cyclone segmentation.}}{29}{table.caption.38}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4.2}{\ignorespaces Impact of Tversky $\alpha /\beta $ parameters on Atmospheric River segmentation.}}{29}{table.caption.40}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Focal Loss Alpha and Gamma for Tropical Cyclones}{29}{section*.41}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4.3}{\ignorespaces Performance of Tropical Cyclone detection across Focal Gamma settings.}}{29}{table.caption.42}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4.4}{\ignorespaces Comparison of stability metrics between stable and overfitting configurations.}}{30}{table.caption.43}\protected@file@percent }
+\newlabel{tab:stability_comparison}{{4.4}{30}{Comparison of stability metrics between stable and overfitting configurations}{table.caption.43}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Focal Loss Alpha and Gamma for Atmospheric Rivers}{30}{section*.44}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4.5}{\ignorespaces Performance of Atmospheric River detection across Focal Gamma settings.}}{30}{table.caption.45}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Loss Component Weight}{30}{section*.46}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4.6}{\ignorespaces Comparison of loss component magnitudes and resulting segmentation performance across different Focal weights.}}{31}{table.caption.47}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Summary of Hyperparameter Optimization Results}{31}{section*.48}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4.7}{\ignorespaces Summary of optimal loss hyperparameters for ClimateSAM adaptation.}}{31}{table.caption.49}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.2}Adapt SAM to ClimateNet}{31}{section.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.1}Lora}{31}{subsection.4.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Integrating single LoRA component to SAM}{31}{section*.50}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4.8}{\ignorespaces LoRA Performance Comparison}}{32}{table.caption.51}\protected@file@percent }
+\newlabel{tab:lora_performance}{{4.8}{32}{LoRA Performance Comparison}{table.caption.51}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {4.9}{\ignorespaces Detailed Parameter Breakdown for LoRA-Adapted SAM}}{32}{table.caption.52}\protected@file@percent }
+\newlabel{tab:lora_params_final}{{4.9}{32}{Detailed Parameter Breakdown for LoRA-Adapted SAM}{table.caption.52}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Integrating single LoRA component to SAM [WITH AUGMENTATION]}{32}{section*.54}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces AR Validation IOU}}{33}{figure.caption.53}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.2}{\ignorespaces TC Validation IOU}}{33}{figure.caption.53}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.3}{\ignorespaces Validation IOU curves for AR and TC during training}}{33}{figure.caption.53}\protected@file@percent }
+\newlabel{fig:iou_lora_single}{{4.3}{33}{Validation IOU curves for AR and TC during training}{figure.caption.53}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.4}{\ignorespaces Augmentation Performance}}{33}{figure.caption.55}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.5}{\ignorespaces Comparison between standard LoRA and augmented training.}}{33}{figure.caption.55}\protected@file@percent }
+\newlabel{fig:lora_augmentation}{{4.5}{33}{Comparison between standard LoRA and augmented training}{figure.caption.55}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Integrating specialized LoRA components for ARs and TCs}{33}{section*.56}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.2}Token-based}{33}{subsection.4.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{SAM with Single infused token}{33}{section*.57}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4.10}{\ignorespaces Detailed Parameter Breakdown and Performance for Single Token SAM}}{34}{table.caption.58}\protected@file@percent }
+\newlabel{tab:single_token_params}{{4.10}{34}{Detailed Parameter Breakdown and Performance for Single Token SAM}{table.caption.58}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.6}{\ignorespaces Validation IOU of TCs and ARs curves for SAM with single Token}}{34}{figure.caption.59}\protected@file@percent }
+\newlabel{fig:iou_single_token}{{4.6}{34}{Validation IOU of TCs and ARs curves for SAM with single Token}{figure.caption.59}{}}
+\@writefile{toc}{\contentsline {subsubsection}{SAM with Infused Specialized Token}{34}{section*.60}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4.11}{\ignorespaces Performance Comparison for Infused Token SAM}}{35}{table.caption.61}\protected@file@percent }
+\newlabel{tab:infused_token_perf}{{4.11}{35}{Performance Comparison for Infused Token SAM}{table.caption.61}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {4.12}{\ignorespaces Detailed Parameter Breakdown and Training Duration for Infused Token SAM}}{35}{table.caption.62}\protected@file@percent }
+\newlabel{tab:infused_token_params}{{4.12}{35}{Detailed Parameter Breakdown and Training Duration for Infused Token SAM}{table.caption.62}{}}
+\@writefile{toc}{\contentsline {subsubsection}{SAM with Concatenated Specialized Token}{35}{section*.63}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.3}Automatic Prompt Generator for SAM}{35}{section.4.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.1}SAM with CGNet as helper}{35}{subsection.4.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.2}SAM with multi-scale feature infusion}{35}{subsection.4.3.2}\protected@file@percent }
 \bibstyle{plain}
 \bibdata{thesis}
-\@writefile{toc}{\contentsline {subsubsection}{Integrating single LoRA component to SAM [WITH AUGMENTATION]}{32}{section*.50}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {4.4}{\ignorespaces Augmentation Performance}}{32}{figure.caption.51}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {4.5}{\ignorespaces Comparison between standard LoRA and augmented training.}}{32}{figure.caption.51}\protected@file@percent }
-\newlabel{fig:lora_augmentation}{{4.5}{32}{Comparison between standard LoRA and augmented training}{figure.caption.51}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Integrating specialized LoRA components for ARs and TCs}{32}{section*.52}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.2}Token-based}{32}{subsection.4.2.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{SAM with Single infused token}{32}{section*.53}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{SAM with Infused Specialized Token}{32}{section*.54}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{SAM with Concatenated Specialized Token}{32}{section*.55}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4.3}Automatic Prompt Generator for SAM}{32}{section.4.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.1}SAM with CGNet as helper}{32}{subsection.4.3.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.2}SAM with multi-scale feature infusion}{32}{subsection.4.3.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {chapter}{Bibliography}{32}{section*.56}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {5}Discussion}{36}{chapter.5}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {chapter}{Bibliography}{36}{section*.64}\protected@file@percent }
 \bibcite{beckert2023three}{1}
 \bibcite{biard2019automated}{2}
 \bibcite{boukabara2021outlook}{3}
@@ -249,4 +268,4 @@
 \bibcite{zhou2024sam}{39}
 \bibcite{zhou2022learning}{40}
 \bibcite{zhu2024melo}{41}
-\gdef \@abspage@last{41}
+\gdef \@abspage@last{45}

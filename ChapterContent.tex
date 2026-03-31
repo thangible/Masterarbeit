@@ -13,6 +13,18 @@
 \section{Pipeline}
 \input{master_thesis_content/approach/approach_pipeline}
 \section{Architectures}
+\label{sec:architectures}
+
+This section describes the various architectural components utilized in the development of ClimateSAM. To adapt the SAM for ClimateNet Dataset, the framework incorporates specialized modules for data adaptation, feature refinement, and autonomous guidance. The overall architecture, as visualized in Figure \ref{fig:pipeline}, is designed to handle the 16-channel atmospheric grids of ClimateNet while transitioning SAM toward a prompt-free operational state.
+
+The system comprises three main architectural pillars:
+\begin{itemize}
+    \item \textbf{Input Adapter}: A newly suggested ClimateInputAdapter is implemented as a learnable bottleneck convolutional module. It compresses the high-dimensional atmospheric data into a 3-channel pseudo-RGB representation, ensuring compatibility with the SAM image encoder while preserving critical physical signals.
+    \item \textbf{Encoder Adapters}: Two Parameter-Efficient Fine-Tuning (PEFT) strategies are explored to adapt the frozen ViT backbone. These include a \textit{learnable token-based} mechanism to steer the model using latent representations and a \textit{LoRA-based} approach that utilizes low-rank matrix decomposition to update the query and value projections.
+    \item \textbf{Prompt Generators}: To achieve autonomous detection, the pipeline evaluates two prompter architectures. We utilize \textit{CGNet} an established lightweight convolutional network for semantic segmentation alongside a newly introduced \textit{Multi-scale Fusion Module}. This module leverages intermediate encoder features to generate auxiliary masks, which are then converted into sparse geometric prompts for the mask decoder.
+\end{itemize}
+
+
 \input{master_thesis_content/approach/approach_model}
 \section{Hyperparameter Optimisation}
 \input{master_thesis_content/approach/approach_hp}
@@ -31,6 +43,9 @@
 \input{master_thesis_content/results/result_cgnet}
 \subsection{SAM with multi-scale feature infusion}
 \input{master_thesis_content/results/result_multiscaled}
+
+\chapter{Discussion}
+
 % % \section{Motivation}
 % % \section{Research Questions}
 % \chapter{Approach}\label{approach}

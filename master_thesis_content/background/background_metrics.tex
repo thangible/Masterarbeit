@@ -1,6 +1,6 @@
 \subsection{Loss Functions}
 
-In the ClimateNet dataset, a significant challenge arises from the extreme class imbalance. Background pixels constitute approximately \textbf{93.9\%} of the data, while Atmospheric Rivers (ARs) represent \textbf{5.7\%} and Tropical Cyclones (TCs) represent only \textbf{0.5\%}. Furthermore, TCs are substantially rarer and smaller than ARs, with an average of only \textbf{2.6} TC masks per image compared to \textbf{7.4} for ARs. The ratio of background area to TC area is particularly skewed at \textbf{257:1}. 
+As described in \autoref{dataset_stats}, the dataset exhibits a severe class imbalance where background pixels dominate the majority of the samples. ARs and Tropical Cyclones TCs are both underrepresented, though TCs present a more significant challenge. TCs are notably rarer and smaller in scale than ARs, appearing less frequently per image and occupying a much smaller total area relative to the background.
 
 To effectively tackle these disparities and the ``ribbon-like" or ``circular" structures of these phenomena, a well-designed loss function is required. Originally, SAM utilized a hybrid approach combining Focal Loss and Dice Loss to balance pixel-level classification with regional overlap.
 
@@ -64,6 +64,6 @@ L_{Tversky} = 1 - \frac{TP}{TP + \alpha FP + \beta FN}
 If $\alpha = \beta = 0.5$, the function simplifies to the Dice Loss. If $\alpha = \beta = 1.0$, it simplifies to the Jaccard Index (IoU).
 
 \subsubsection{Hybrid Loss Functions}
-Modern segmentation adaptations, such as CAT-SAM \cite{xiao2024cat} and HQ-SAM, frequently employ hybrid loss strategies to leverage the strengths of both distribution-based and region-based functions. While the original SAM architecture focuses on a linear combination of Focal and Dice losses for general-purpose segmentation, domain-specific adaptations often swap Dice for Tversky to handle high-stakes sensitivity requirements.
+In CAT-SAM \cite{xiao2024cat} and HQ-SAM, hybrid loss strategies are employed to leverage the strengths of both distribution-based and region-based functions. While the original SAM architecture focuses on a linear combination of Focal and Dice losses for general-purpose segmentation, domain-specific adaptations often swap Dice for Tversky to handle high-stakes sensitivity requirements.
 
 In this study, we use the combination of Tversky and Focal Loss for adapting SAM to the ClimateNet domain. While the Tversky component ensures the model captures the full extent of weather features by prioritizing recall through $\beta$, the Focal component ensures the model classifies difficult boundary pixels that are otherwise lost in the massive background grid. This hybrid approach effectively mitigates the challenges posed by the extreme background-to-TC ratio.

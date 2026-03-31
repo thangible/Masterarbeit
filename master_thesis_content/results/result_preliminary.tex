@@ -58,6 +58,19 @@ $\alpha_{f\_tc}$ & $\gamma_{tc}$ & Mean Max IoU TC& Best Max IoU TC\\ \midrule
 \end{tabular}
 \caption{Performance of Tropical Cyclone detection across Focal Gamma settings.}
 \end{table}
+As shown in Table \ref{tab:stability_comparison} stable runs maintained a lower average $\gamma_{tc}$ of 2.33. In contrast overfitting runs utilized a higher average $\gamma_{tc}$ of 4.00 which led to an initial peak followed by a drop in performance. These results suggest that while high gamma helps at the beginning of the process it makes the model overly sensitive to specific training samples and reduces generalization. Maintaining $\gamma_{tc}$ between 2.0 and 3.0 is recommended to ensure Tropical Cyclone predictions remain stable until convergence.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+Run Category & Mean $\gamma_{tc}$ & Mean $\alpha_{tc\_tversky}$ \\ \midrule
+Stable & 2.33 & 0.30  \\
+Overfitting & 4.00 & 0.24 \\ \bottomrule
+\end{tabular}
+\caption{Comparison of stability metrics between stable and overfitting configurations.}
+\label{tab:stability_comparison}
+\end{table}
 
 \subsubsection{Focal Loss Alpha and Gamma for Atmospheric Rivers}
 For the AR class, a standard $\gamma_{ar}$ of 2.0 outperformed higher focus settings. This setting achieved the peak mIoU of 0.3028. Higher $\gamma$ values, such as 5.0, were less effective for ARs, reducing the peak performance to 0.2652. This confirms that for features with a moderate 17:1 ratio, extreme focal weighting is unnecessary and can potentially hinder the model's ability to learn the general shape of the atmospheric feature.

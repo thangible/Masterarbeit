@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.3.30)  30 MAR 2026 18:54
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.3.30)  31 MAR 2026 14:33
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -836,7 +836,7 @@ Package hyperref Info: Link coloring OFF on input line 212.
 \@outlinefile=\write4
 \openout4 = `Thesis.out'.
 
-<./src/uhhLogoL.pdf, id=168, 486.81876pt x 158.5925pt>
+<./src/uhhLogoL.pdf, id=172, 486.81876pt x 158.5925pt>
 File: ./src/uhhLogoL.pdf Graphic file (type pdf)
 <use ./src/uhhLogoL.pdf>
 Package pdftex.def Info: ./src/uhhLogoL.pdf  used on input line 226.
@@ -886,7 +886,7 @@ Chapter 2.
 (./master_thesis_content/background/background_relatedwork.tex [4
 
 ] [5] [6]) (./master_thesis_content/background/background_climatenet.tex [7]
-<graphics/background/data_distribution.png, id=370, 593.3367pt x 217.5327pt>
+<graphics/background/data_distribution.png, id=375, 593.3367pt x 217.5327pt>
 File: graphics/background/data_distribution.png Graphic file (type png)
 <use graphics/background/data_distribution.png>
 Package pdftex.def Info: graphics/background/data_distribution.png  used on input line 41.
@@ -899,7 +899,7 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 Underfull \vbox (badness 1701) has occurred while \output is active []
 
  [8 <./graphics/background/data_distribution.png>]
-<graphics/background/data_example_1.png, id=385, 711.8595pt x 348.3414pt>
+<graphics/background/data_example_1.png, id=390, 711.8595pt x 348.3414pt>
 File: graphics/background/data_example_1.png Graphic file (type png)
 <use graphics/background/data_example_1.png>
 Package pdftex.def Info: graphics/background/data_example_1.png  used on input line 85.
@@ -909,7 +909,7 @@ Overfull \hbox (10.0605pt too wide) in paragraph at lines 85--87
  [][] 
  []
 
-<graphics/background/data_example_2.png, id=386, 711.8595pt x 348.3414pt>
+<graphics/background/data_example_2.png, id=391, 711.8595pt x 348.3414pt>
 File: graphics/background/data_example_2.png Graphic file (type png)
 <use graphics/background/data_example_2.png>
 Package pdftex.def Info: graphics/background/data_example_2.png  used on input line 91.
@@ -919,7 +919,7 @@ Overfull \hbox (10.0605pt too wide) in paragraph at lines 91--93
  [][] 
  []
 
-<graphics/background/data_example_3.png, id=387, 711.8595pt x 348.3414pt>
+<graphics/background/data_example_3.png, id=392, 711.8595pt x 348.3414pt>
 File: graphics/background/data_example_3.png Graphic file (type png)
 <use graphics/background/data_example_3.png>
 Package pdftex.def Info: graphics/background/data_example_3.png  used on input line 99.
@@ -929,7 +929,7 @@ Overfull \hbox (10.0605pt too wide) in paragraph at lines 99--101
  [][] 
  []
 
-<graphics/background/data_example_4.png, id=388, 711.8595pt x 348.3414pt>
+<graphics/background/data_example_4.png, id=393, 711.8595pt x 348.3414pt>
 File: graphics/background/data_example_4.png Graphic file (type png)
 <use graphics/background/data_example_4.png>
 Package pdftex.def Info: graphics/background/data_example_4.png  used on input line 105.
@@ -943,18 +943,18 @@ Overfull \hbox (10.0605pt too wide) in paragraph at lines 105--107
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 ) (./master_thesis_content/background/background_sam.tex [9]
-<graphics/background/point_embedding.pdf, id=398, 427.5975pt x 225.7233pt>
+<graphics/background/point_embedding.pdf, id=403, 427.5975pt x 225.7233pt>
 File: graphics/background/point_embedding.pdf Graphic file (type pdf)
 <use graphics/background/point_embedding.pdf>
 Package pdftex.def Info: graphics/background/point_embedding.pdf  used on input line 18.
 (pdftex.def)             Requested size: 419.16621pt x 221.27275pt.
  [10 <./graphics/background/data_example_1.png> <./graphics/background/data_example_2.png> <./graphics/background/data_example_3.png> <./graphics/background/data_example_4.png>] [11 <./graphics/background/point_embedding.pdf>]
-<graphics/background/image_embedding.pdf, id=431, 537.92969pt x 304.2567pt>
+<graphics/background/image_embedding.pdf, id=436, 537.92969pt x 304.2567pt>
 File: graphics/background/image_embedding.pdf Graphic file (type pdf)
 <use graphics/background/image_embedding.pdf>
 Package pdftex.def Info: graphics/background/image_embedding.pdf  used on input line 44.
 (pdftex.def)             Requested size: 419.16621pt x 237.09178pt.
-<graphics/background/decoder.pdf, id=433, 572.1375pt x 734.745pt>
+<graphics/background/decoder.pdf, id=438, 572.1375pt x 734.745pt>
 File: graphics/background/decoder.pdf Graphic file (type pdf)
 <use graphics/background/decoder.pdf>
 Package pdftex.def Info: graphics/background/decoder.pdf  used on input line 58.
@@ -974,7 +974,7 @@ Overfull \hbox (0.30443pt too wide) in paragraph at lines 80--81
 [14]) (./master_thesis_content/background/background_metrics.tex [15] [16]) [17]
 Chapter 3.
 (./master_thesis_content/approach/approach_pipeline.tex
-<graphics/approach/pipeline.pdf, id=510, 593.3367pt x 588.27782pt>
+<graphics/approach/pipeline.pdf, id=516, 593.3367pt x 588.27782pt>
 File: graphics/approach/pipeline.pdf Graphic file (type pdf)
 <use graphics/approach/pipeline.pdf>
 Package pdftex.def Info: graphics/approach/pipeline.pdf  used on input line 16.
@@ -991,63 +991,74 @@ Overfull \hbox (11.89035pt too wide) in paragraph at lines 31--32
  []
 
 [19 <./graphics/approach/pipeline.pdf>]
-<graphics/approach/prompt_pipeline-1.pdf, id=548, 416.5161pt x 187.66109pt>
+<graphics/approach/prompt_pipeline-1.pdf, id=555, 416.5161pt x 187.66109pt>
 File: graphics/approach/prompt_pipeline-1.pdf Graphic file (type pdf)
 <use graphics/approach/prompt_pipeline-1.pdf>
 Package pdftex.def Info: graphics/approach/prompt_pipeline-1.pdf  used on input line 49.
 (pdftex.def)             Requested size: 502.99817pt x 226.6325pt.
-<graphics/approach/point_prompt.pdf, id=549, 181.6386pt x 129.6042pt>
+ [20 <./graphics/approach/prompt_pipeline-1.pdf>]
+<graphics/approach/point_prompt.pdf, id=585, 181.6386pt x 129.6042pt>
 File: graphics/approach/point_prompt.pdf Graphic file (type pdf)
 <use graphics/approach/point_prompt.pdf>
-Package pdftex.def Info: graphics/approach/point_prompt.pdf  used on input line 59.
+Package pdftex.def Info: graphics/approach/point_prompt.pdf  used on input line 62.
 (pdftex.def)             Requested size: 293.41507pt x 209.37424pt.
-<graphics/approach/noisy_mask.pdf, id=550, 280.1667pt x 135.6267pt>
+<graphics/approach/noisy_mask.pdf, id=586, 280.1667pt x 135.6267pt>
 File: graphics/approach/noisy_mask.pdf Graphic file (type pdf)
 <use graphics/approach/noisy_mask.pdf>
-Package pdftex.def Info: graphics/approach/noisy_mask.pdf  used on input line 68.
-(pdftex.def)             Requested size: 419.16621pt x 202.92215pt.
+Package pdftex.def Info: graphics/approach/noisy_mask.pdf  used on input line 76.
+(pdftex.def)             Requested size: 502.99817pt x 243.50493pt.
+) [21 <./graphics/approach/point_prompt.pdf> <./graphics/approach/noisy_mask.pdf>] (./master_thesis_content/approach/approach_model.tex
+<graphics/approach/input_adapter.pdf, id=635, 825.0825pt x 262.0992pt>
+File: graphics/approach/input_adapter.pdf Graphic file (type pdf)
+<use graphics/approach/input_adapter.pdf>
+Package pdftex.def Info: graphics/approach/input_adapter.pdf  used on input line 13.
+(pdftex.def)             Requested size: 544.91734pt x 173.10197pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-) (./master_thesis_content/approach/approach_model.tex
-<graphics/approach/token_based_overview.pdf, id=551, 334.3692pt x 419.64778pt>
+[22]
+<graphics/approach/token_based_overview.pdf, id=643, 334.3692pt x 419.64778pt>
 File: graphics/approach/token_based_overview.pdf Graphic file (type pdf)
 <use graphics/approach/token_based_overview.pdf>
-Package pdftex.def Info: graphics/approach/token_based_overview.pdf  used on input line 9.
+Package pdftex.def Info: graphics/approach/token_based_overview.pdf  used on input line 29.
 (pdftex.def)             Requested size: 188.6235pt x 236.73645pt.
-<graphics/approach/token_based_detail.pdf, id=552, 331.2375pt x 291.00719pt>
+<graphics/approach/token_based_detail.pdf, id=644, 331.2375pt x 291.00719pt>
 File: graphics/approach/token_based_detail.pdf Graphic file (type pdf)
 <use graphics/approach/token_based_detail.pdf>
-Package pdftex.def Info: graphics/approach/token_based_detail.pdf  used on input line 15.
+Package pdftex.def Info: graphics/approach/token_based_detail.pdf  used on input line 35.
 (pdftex.def)             Requested size: 188.6235pt x 165.71152pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [20 <./graphics/approach/prompt_pipeline-1.pdf>]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [21 <./graphics/approach/point_prompt.pdf> <./graphics/approach/noisy_mask.pdf>] [22 <./graphics/approach/token_based_overview.pdf> <./graphics/approach/token_based_detail.pdf>]
-<graphics/approach/lora_overview.pdf, id=684, 146.4672pt x 344.2461pt>
+[23 <./graphics/approach/input_adapter.pdf>]
+<graphics/approach/lora_overview.pdf, id=678, 146.4672pt x 344.2461pt>
 File: graphics/approach/lora_overview.pdf Graphic file (type pdf)
 <use graphics/approach/lora_overview.pdf>
-Package pdftex.def Info: graphics/approach/lora_overview.pdf  used on input line 47.
+Package pdftex.def Info: graphics/approach/lora_overview.pdf  used on input line 67.
 (pdftex.def)             Requested size: 209.5831pt x 492.6306pt.
-<graphics/approach/lora_detail.pdf, id=685, 130.5678pt x 136.5903pt>
+<graphics/approach/lora_detail.pdf, id=679, 130.5678pt x 136.5903pt>
 File: graphics/approach/lora_detail.pdf Graphic file (type pdf)
 <use graphics/approach/lora_detail.pdf>
-Package pdftex.def Info: graphics/approach/lora_detail.pdf  used on input line 53.
+Package pdftex.def Info: graphics/approach/lora_detail.pdf  used on input line 73.
 (pdftex.def)             Requested size: 188.6235pt x 197.3297pt.
-<graphics/approach/prompter.pdf, id=686, 801.95605pt x 587.3142pt>
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<graphics/approach/prompter.pdf, id=680, 801.95605pt x 587.3142pt>
 File: graphics/approach/prompter.pdf Graphic file (type pdf)
 <use graphics/approach/prompter.pdf>
-Package pdftex.def Info: graphics/approach/prompter.pdf  used on input line 70.
+Package pdftex.def Info: graphics/approach/prompter.pdf  used on input line 90.
 (pdftex.def)             Requested size: 502.99817pt x 368.37888pt.
- [23 <./graphics/approach/lora_overview.pdf> <./graphics/approach/lora_detail.pdf>]) (./master_thesis_content/approach/approach_hp.tex [24 <./graphics/approach/prompter.pdf>]
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+) (./master_thesis_content/approach/approach_hp.tex [24 <./graphics/approach/token_based_overview.pdf> <./graphics/approach/token_based_detail.pdf>]
+Underfull \vbox (badness 2050) has occurred while \output is active []
+
+ [25 <./graphics/approach/lora_overview.pdf> <./graphics/approach/lora_detail.pdf>] [26 <./graphics/approach/prompter.pdf>]
 Underfull \hbox (badness 4266) in paragraph at lines 32--32
 []\OT1/cmr/m/n/12 Balanced ap-proach for
  []
@@ -1097,43 +1108,80 @@ Underfull \hbox (badness 10000) in paragraph at lines 32--32
 []\OT1/cmr/m/n/12 Addresses the 17:1
  []
 
-) [25] [26]
+) [27]
 Chapter 4.
 (./master_thesis_content/results/result_preliminary.tex
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[27
+[28
 
-] [28]
-Overfull \hbox (35.29497pt too wide) in paragraph at lines 83--93
+] [29]
+Overfull \hbox (35.29497pt too wide) in paragraph at lines 96--106
  [][] 
  []
 
-[29]) (./master_thesis_content/results/result_lora.tex [30]
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[30]) (./master_thesis_content/results/result_lora.tex
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[31]
 Overfull \hbox (47.34134pt too wide) in paragraph at lines 29--39
  [][] 
  []
 
-<graphics/result/LORA_SING_AR.png, id=811, 1193.45876pt x 1193.45876pt>
+<graphics/result/LORA_SING_AR.png, id=854, 1193.45876pt x 1193.45876pt>
 File: graphics/result/LORA_SING_AR.png Graphic file (type png)
 <use graphics/result/LORA_SING_AR.png>
 Package pdftex.def Info: graphics/result/LORA_SING_AR.png  used on input line 51.
 (pdftex.def)             Requested size: 188.6235pt x 188.60812pt.
-<graphics/result/LORA_SINGLE_TC.png, id=812, 1193.45876pt x 1193.45876pt>
+<graphics/result/LORA_SINGLE_TC.png, id=855, 1193.45876pt x 1193.45876pt>
 File: graphics/result/LORA_SINGLE_TC.png Graphic file (type png)
 <use graphics/result/LORA_SINGLE_TC.png>
 Package pdftex.def Info: graphics/result/LORA_SINGLE_TC.png  used on input line 57.
 (pdftex.def)             Requested size: 188.6235pt x 188.60812pt.
-<graphics/result/lora_augmentation.png, id=814, 2271.48625pt x 1193.45876pt>
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<graphics/result/lora_augmentation.png, id=857, 2271.48625pt x 1193.45876pt>
 File: graphics/result/lora_augmentation.png Graphic file (type png)
 <use graphics/result/lora_augmentation.png>
 Package pdftex.def Info: graphics/result/lora_augmentation.png  used on input line 68.
 (pdftex.def)             Requested size: 335.33424pt x 176.18843pt.
+[32]) (./master_thesis_content/results/result_token.tex [33 <./graphics/result/LORA_SING_AR.png> <./graphics/result/LORA_SINGLE_TC.png> <./graphics/result/lora_augmentation.png>]
+Overfull \hbox (62.83008pt too wide) in paragraph at lines 11--19
+ [][] 
+ []
 
-Underfull \vbox (badness 1715) has occurred while \output is active []
+<graphics/result/vitbsingletoken.png, id=878, 1193.45876pt x 1193.45876pt>
+File: graphics/result/vitbsingletoken.png Graphic file (type png)
+<use graphics/result/vitbsingletoken.png>
+Package pdftex.def Info: graphics/result/vitbsingletoken.png  used on input line 35.
+(pdftex.def)             Requested size: 188.6235pt x 188.60812pt.
+<graphics/result/vitlsingletoken.png, id=879, 1193.45876pt x 1193.45876pt>
+File: graphics/result/vitlsingletoken.png Graphic file (type png)
+<use graphics/result/vitlsingletoken.png>
+Package pdftex.def Info: graphics/result/vitlsingletoken.png  used on input line 41.
+(pdftex.def)             Requested size: 188.6235pt x 188.60812pt.
 
- [31 <./graphics/result/LORA_SING_AR.png> <./graphics/result/LORA_SINGLE_TC.png>]) (./master_thesis_content/results/result_token.tex) (./master_thesis_content/results/result_cgnet.tex) (./master_thesis_content/results/result_multiscaled.tex)) (./Thesis.bbl [32 <./graphics/result/lora_augmentation.png>] [33
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Overfull \hbox (37.79132pt too wide) in paragraph at lines 81--91
+ [][] 
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[34 <./graphics/result/vitbsingletoken.png> <./graphics/result/vitlsingletoken.png>]) (./master_thesis_content/results/result_cgnet.tex) (./master_thesis_content/results/result_multiscaled.tex) [35]
+Chapter 5.
+) (./Thesis.bbl [36
+
+] [37
 
 ]
 Underfull \hbox (badness 4048) in paragraph at lines 68--72
@@ -1155,7 +1203,7 @@ Overfull \hbox (211.96161pt too wide) in paragraph at lines 68--72
 \OT1/cmtt/m/n/12 00150-[]why-[]do-[]tropical-[]cyclones-[]always-[]form-[]more-[]than-[]5-[]degrees-[]of-[]latitude-[]away-[]from-[]the-[]equator .
  []
 
-[34]
+[38]
 Underfull \hbox (badness 6641) in paragraph at lines 113--117
 []\OT1/cmr/m/n/12 National Oceanic and At-mo-spheric Ad-min-is-tra-tion.  Trop-i-cal cy-
  []
@@ -1165,7 +1213,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 113--117
 \OT1/cmr/m/n/12 clone in-tro-duc-tion.  []$\OT1/cmtt/m/n/12 https : / / www . noaa . gov / jetstream / tropical /
  []
 
-[35] [36]) [37] [38
+[39] [40]) [41] [42
 
 ] (./Thesis.aux)
  ***********
@@ -1173,21 +1221,21 @@ LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
  ***********
 Package rerunfilecheck Info: File `Thesis.out' has not changed.
-(rerunfilecheck)             Checksum: B4E791984195AB09EF6E254BEA962282;7397.
+(rerunfilecheck)             Checksum: 872E0231647F605F18BE106F79461DAA;7516.
  ) 
 Here is how much of TeX's memory you used:
- 20889 strings out of 467525
- 363013 string characters out of 5423209
- 806102 words of memory out of 5000000
- 49293 multiletter control sequences out of 15000+600000
+ 20933 strings out of 467525
+ 364296 string characters out of 5423209
+ 803836 words of memory out of 5000000
+ 49324 multiletter control sequences out of 15000+600000
  637956 words of font info for 79 fonts, out of 8000000 for 9000
  1142 hyphenation exceptions out of 8191
  83i,16n,102p,1641b,787s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><c:/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><c:/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><c:/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb><c:/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb><c:/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb><c:/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
-Output written on Thesis.pdf (41 pages, 3631753 bytes).
+Output written on Thesis.pdf (45 pages, 5068197 bytes).
 PDF statistics:
- 966 PDF objects out of 1000 (max. 8388607)
- 743 compressed objects within 8 object streams
- 188 named destinations out of 1000 (max. 500000)
- 434 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1036 PDF objects out of 1200 (max. 8388607)
+ 792 compressed objects within 8 object streams
+ 201 named destinations out of 1000 (max. 500000)
+ 457 words of extra memory for PDF output out of 10000 (max. 10000000)
 
