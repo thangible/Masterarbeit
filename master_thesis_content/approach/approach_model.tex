@@ -2,9 +2,8 @@
 
 \subsection{Input Adapter}
 The ClimateInputAdapter is a specialized learnable preprocessing module designed to bridge the structural gap between multi-parameter atmospheric grids and the fixed input requirements of the Segment Anything Model (SAM). Since SAM is natively optimized for three-channel RGB imagery, this adapter compresses the 16 atmospheric variables from the ClimateNet dataset into a pseudo-RGB representation that preserves critical geophysical features. 
+% \vspace{-1em}
 
-As depicted in Figure \ref{fig:input_adapter}, the architecture follows a bottleneck convolutional design. It initiates with a 3x3 Conv2d layer to capture local spatial dependencies, followed by sequential 1x1 convolutions that reduce the feature dimensionality from 32 to 16, and ultimately to 3 channels. The module incorporates BatchNorm2d and ReLU activations for internal stabilization. A final Sigmoid activation function constrains the output values to a [0, 1] range, which are subsequently rescaled by 255.0 to align with the standard pixel intensity expected by the SAM image encoder.
-\vspace{-1em}
 \begin{figure}[!h]
     \centering
     % \includegraphics[width=1\textwidth]{graphics/approach/prompt_pipeline-1.pdf}
@@ -17,65 +16,108 @@ As depicted in Figure \ref{fig:input_adapter}, the architecture follows a bottle
 \end{figure}
 
 
-To maintain physical grounding during the Adaptation Phase, the adapter employs an expert-knowledge initialization strategy. The weights for the most diagnostic variables TMQ, U850, V850, and PSL \cite{radke2024explaining} are set to 1.0 at the center of the convolution kernels. This initialization enables the model to prioritize the point-shaped extrema characteristic of Tropical Cyclones and the elongated moisture corridors of Atmospheric Rivers from the onset of training.
-\subsection{Encoder Adapter}
+As depicted in Figure \ref{fig:input_adapter}, the architecture follows a bottleneck convolutional design. It initiates with a 3x3 Conv2d layer to capture local spatial dependencies, followed by sequential 1x1 convolutions that reduce the feature dimensionality from 32 to 16, and ultimately to 3 channels. The module incorporates BatchNorm2d and ReLU activations for internal stabilization. A final Sigmoid activation function constrains the output values to a [0, 1] range, which are subsequently rescaled by 255.0 to align with the standard pixel intensity expected by the SAM image encoder.
 
+
+To maintain physical grounding during the Adaptation Phase, the adapter employs an expert-knowledge initialization strategy. The weights for the most diagnostic variables TMQ, U850, V850, and PSL \cite{radke2024explaining} are set to 1.0 at the center of the convolution kernels. This initialization enables the model to prioritize the point-shaped extrema characteristic of Tropical Cyclones and the elongated moisture corridors of Atmospheric Rivers from the onset of training.
+
+
+\subsection{Encoder Adapter}
+This subsection  describe SAM with LoRA and SAM with Learnable Tokens.
 \subsubsection{Learnable Token-based approach}
 
 \begin{figure}[!h]
     \centering
-    \begin{minipage}[b]{0.45\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{graphics/approach/token_based_overview.pdf}
-        \caption{Overview}
-    \end{minipage}
-    \hfill
-    \begin{minipage}[b]{0.45\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{graphics/approach/token_based_detail.pdf}
-        \caption{Detail}
-    \end{minipage}
-    \caption{Token-based approach architecture}
-    \label{fig:token_architecture}
+    % \includegraphics[width=1\textwidth]{graphics/approach/prompt_pipeline-1.pdf}
+    \makebox[0.9\textwidth][c]{%
+    \includegraphics[width=1.1\textwidth]{graphics/approach/single_token.pdf}
+}
+\vspace{-1em}
+    \caption{Single Token Architecture}
+    \label{fig:single_token_architecture}
 \end{figure}
 
-\subsubsection{LoRA approach}
-To adapt SAM to interpret multi-parameter atmospheric grids, we apply LoRA adapters to each layer of the Vision Transformer (ViT) encoder \cite{wu2025multi, zhang2024improving}. This "surgeon" approach specifically targets the Query ($q$), Key ($k$), and Value ($v$) projection layers within the multi-head self-attention mechanism, as these layers are critical for capturing the spatial relationships of complex weather phenomena. Mathematically, for an input feature $x \in \mathbb{R}^{1 \times d}$, the adapted forward pass for a given projection is expressed as:
-\begin{equation}
-h = W_{0}x + \Delta Wx = W_{0}x + BAx
-\end{equation}
-where $W_0$ is the frozen pre-trained weight, and $B \in \mathbb{R}^{d \times r}$ and $A \in \mathbb{R}^{r \times d}$ are the learnable low-rank matrices \cite{zhu2024melo, wu2025multi}. We initialize matrix $A$ with a Kaiming uniform distribution and matrix $B$ to zero so that the initial state of the model is identical to the original SAM. At the output stage, we introduce two specialized mask decoders with learnable parameters to handle the distinct morphological characteristics of the target classes:
 
-\begin{itemize}
-    \item \textbf{TC Decoder}: Optimized for the distinct circular structures of Tropical Cyclones, addressing a severe 257:1 background-to-foreground ratio.
-    \item \textbf{AR Decoder}: Tailored for the narrow, "ribbon-like" corridors of Atmospheric Rivers, which present a more moderate 17:1 class imbalance.
-\end{itemize}
+Inspired by CAT-SAM and HQ-SAM \cite{xiao2024cat, ke2023segment}, we implement a learnable token-based adaptation strategy to enable SAM to effectively process complex multi-parameter atmospheric data. This approach involves introducing learnable tokens designed to capture the unique spatial and morphological characteristics of TCs and ARs. We explore two architectural variants: a Single Token Architecture and a Dual Token Architecture. The learnable tokens are integrated into the ViT encoder of SAM, allowing the model to learn class-specific localization priors and structural discovery independently for each meteorological feature.
 
-This dual-decoder design allows the model to learn class-specific localization priors and structural discovery independently for each meteorological feature.
-
-% \ifdefined\pdfobjcompresslevel
-%   \pdfobjcompresslevel=0
-% \fi
-% \ifdefined\pdfvariable
-%   \pdfvariable objcompresslevel=0
-% \fi
-
+% \vspace{-1em}
 \begin{figure}[!h]
     \centering
-    \begin{minipage}[b]{0.5\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{graphics/approach/lora_overview.pdf}
-        \caption{Overview}
-    \end{minipage}
-    \hfill
-    \begin{minipage}[b]{0.45\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{graphics/approach/lora_detail.pdf}
-        \caption{Detail}
-    \end{minipage}
-    \caption{LoRA adaptation architecture}
+    % \includegraphics[width=1\textwidth]{graphics/approach/prompt_pipeline-1.pdf}
+    \makebox[0.9\textwidth][c]{%
+    \includegraphics[width=1.1\textwidth]{graphics/approach/two_tokens.pdf}
+}
+\vspace{-1em}
+    \caption{Dual Token Architecture}
+    \label{fig:dual_token_architecture}
+\end{figure}
+
+The distinct geometric and spatial patterns exhibited by TCs and ARs motivate our design choices. TCs are characterized by circular structures, while ARs manifest as narrow, ribbon-like corridors. Single Token Architecture: As illustrated in Figure \ref{fig:single_token_architecture}, a single learnable token and MLP are shared across both classes. This variant serves as a baseline for unified feature representation. Dual Token Architecture: As depicted in Figure \ref{fig:dual_token_architecture}, separate tokens are dedicated to TCs and ARs, respectively. This allows the model to specialize its attention for each phenomenon.
+
+Within the Dual Token Architecture, we experiment with two specific approaches for merging task-specific information. \textbf{Infused Token (Element-wise Addition)}: In the initial configuration, the two tokens are infused by averaging them via element-wise addition. However, during experimentation, we observed signs of catastrophic forgetting, where the model struggled to maintain distinct structural priors for both classes simultaneously as they competed for the same representational space. \textbf{Concat Token (Concatenation)}: To address this limitation, we transitioned to a concatenation strategy. In this variant, each adapter block outputs features with only half the dimension of the required prompt dimension. These are then concatenated to form a Merged Token. This design choice ensures that the spatial characteristics of TCs and ARs are preserved in separate subspaces, effectively mitigating feature interference and improving segmentation performance on the ClimateNet dataset.
+
+The adapter mechanism is built around task-specific projection layers. We initialize two sets of sequential adapter modules, Adapter AR and Adapter TC, corresponding to the total number of layers in the SAM image encoder blocks. Each individual adapter block follows a bottleneck-style structure, as shown in Figure \ref{fig:dual_token_architecture}. It consists of a Linear layer that projects from the token dimension (256) to a latent space $F$, followed by a GELU activation function and a final Linear layer that projects to the prompt dimension required by the ViT layers. The complexity of these projections is controlled by an \textbf{mlp\_ratio} (which we will experiment with 0.5, 0.75 and 1), which determines the width of the intermediate latent dimension.  For every layer in the encoder, the dedicated AR and TC tokens are passed through their respective projection sequences to generate layer-specific updated tokens. These tokens are then merged (either via element-wise addition or concatenation) to form the final prompt that is fed into the ViT layers.
+
+% \begin{figure}[!h]
+%     \centering
+%     \begin{minipage}[b]{0.45\textwidth}
+%         \centering
+%         \includegraphics[width=\textwidth]{graphics/approach/token_based_overview.pdf}
+%         \caption{Overview}
+%     \end{minipage}
+%     \hfill
+%     \begin{minipage}[b]{0.45\textwidth}
+%         \centering
+%         \includegraphics[width=\textwidth]{graphics/approach/token_based_detail.pdf}
+%         \caption{Detail}
+%     \end{minipage}
+%     \caption{Token-based approach architecture}
+%     \label{fig:token_architecture}
+% \end{figure}
+
+\subsubsection{LoRA approach}
+To adapt SAM to interpret multi-parameter atmospheric grids, we apply LoRA adapters to each layer of the Vision Transformer (ViT) encoder. This "surgeon" approach specifically targets the Query ($q$), Key ($k$), and Value ($v$) projection layers within the multi-head self-attention mechanism.
+\begin{figure}[!h]
+    \centering
+    % \includegraphics[width=1\textwidth]{graphics/approach/prompt_pipeline-1.pdf}
+    \makebox[0.9\textwidth][c]{%
+    \includegraphics[width=1.1\textwidth]{graphics/approach/lora_full.pdf}
+}
+\vspace{-1em}
+    \caption{SAM with LoRA Architecture}
     \label{fig:lora_architecture}
 \end{figure}
+
+The core principle of LoRA is to constrain the weight updates of a pre-trained layer by representing them as a product of two low-rank matrices. For a frozen pre-trained weight matrix $W_{0} \in \mathbb{R}^{d \times d}$ and an input feature $x \in \mathbb{R}^{d}$, the adapted forward pass is expressed as:
+\begin{equation}
+h = W_{0}x + \Delta Wx = W_{0}x + \frac{\alpha}{r}BAx
+\end{equation}
+where $B \in \mathbb{R}^{d \times r}$ and $A \in \mathbb{R}^{r \times d}$ are the learnable low-rank matrices with rank $r \ll d$. We initialize matrix $A$ using a Kaiming uniform distribution and matrix $B$ to zero, ensuring that the initial adaptation state is identical to the original SAM. A scaling factor $\frac{\alpha}{r}$ is applied to stabilize training when varying the rank $r$.
+
+As illustrated in Figure \ref{fig:lora_architecture}, the LoRA layers are integrated into the encoder adapter block. While a standard LoRA implementation uses a single set of adapters, we implement a specialized Dual LoRA architecture to address the distinct morphological characteristics of TCs and ARs.
+
+In the Dual LoRA configuration, the $qkv$ projection is modified to include separate adapter branches for each meteorological task: \textbf{TC Adapters:} Low-rank matrices $A_{tc}$ and $B_{tc}$ are optimized for the distinct circular structures of Tropical Cyclones. \textbf{AR Adapters:} Low-rank matrices $A_{ar}$ and $B_{ar}$ are tailored for the narrow, ribbon-like corridors of Atmospheric Rivers.
+
+During the forward pass, a task mode flag controls which adapters are active. This allows the frozen SAM backbone to produce task-specialized embeddings ($encoder\_image\_tc$ and $encoder\_image\_ar$) by simply switching the active low-rank path. These specialized embeddings are then fed into independent mask decoder heads (Decoder\_TC and Decoder\_AR). This dual-decoder and dual-adapter design allows the model to learn class-specific localization priors and structural discovery independently for each feature, effectively managing the significant class imbalances inherent in climate data.
+
+
+
+% \begin{figure}[!h]
+%     \centering
+%     \begin{minipage}[b]{0.5\textwidth}
+%         \centering
+%         \includegraphics[width=\textwidth]{graphics/approach/lora_overview.pdf}
+%         \caption{Overview}
+%     \end{minipage}
+%     \hfill
+%     \begin{minipage}[b]{0.45\textwidth}
+%         \centering
+%         \includegraphics[width=\textwidth]{graphics/approach/lora_detail.pdf}
+%         \caption{Detail}
+%     \end{minipage}
+%     \caption{LoRA adaptation architecture}
+%     \label{fig:lora_architecture}
+% \end{figure}
 
 \subsection{Automatic Prompt Generator}
 

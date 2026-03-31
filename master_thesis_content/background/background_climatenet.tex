@@ -36,6 +36,7 @@ The Figure \ref{fig:classdistribution} describes the class distribution of the d
 
 Due to natural atmospheric characteristics, there are fewer TC labels in comparison to AR labels. Specifically, there is an average of 7.4 AR masks per image, while there are only 2.6 TC masks in the same data point. It is also worth noting that these weather phenomena represent a very small proportion of the total area compared to the background. The average ratio per data point of background (0) to AR (2) is 17, and the ratio of background to TC (1) is 257. The Table \ref{tab:summary_stats} describes these statistics.
 
+\vspace{-2em}
 \begin{figure}[!h]
     \centering
     \includegraphics[width=1\textwidth]{graphics/background/data_distribution.png}
@@ -50,7 +51,7 @@ Due to natural atmospheric characteristics, there are fewer TC labels in compari
     
     % Use p{width} for columns where you need wrapping text.
     \begin{tabular}{llccc}
-        \toprule
+        % \toprule
         \textbf{Type} & \textbf{Statistic} & \thead{\textbf{\#Masks} \\ \textbf{per Data Point}} & \thead{\textbf{Background/} \\ \textbf{Object } \\ \textbf{Per Mask}}  & \thead{\textbf{Background/} \\ \textbf{Object} \\ \textbf{per Data Point} } \\
         \midrule
         \multirow{2}{*}{\textbf{AR}}
@@ -78,34 +79,66 @@ ARs has narrow corridors or ``ribbons'' forms. These phenomena occur in both the
 
 Consequently, when treating ClimateNet data points as spatial compositions, the geographic and geometric orientation of the corresponding labels is of critical importance. Because the formation of TCs and ARs are strictly governed by latitudinal physical constraints, the spatial context of these features is non-arbitrary. Therefore, standard geometric augmentation methods (e.g., vertical flipping or random rotations) should be avoided to ensure the model correctly learns the underlying geophysical semantics. Figure \ref{fig:world_projection_grid} illustrates four examples of data points from the ClimateNet dataset. As seen in these visualizations, the occurrence of these phenomena is variable; in some cases, TCs are not present within the provided time step, reflecting the natural distribution of extreme weather events.
 
+% \begin{figure}[!h]
+%     \centering
+%     \begin{minipage}{0.48\textwidth}
+%         \centering
+%         \includegraphics[width=1.05\textwidth]{graphics/background/data_example_1.png}
+%         % \caption{a}
+%     \end{minipage}
+%     \hfill
+%     \begin{minipage}{0.48\textwidth}
+%         \centering
+%         \includegraphics[width=1.05\textwidth]{graphics/background/data_example_2.png}
+%         % \caption{b}
+%     \end{minipage}
+    
+%     \vspace{0.5cm} % Add some vertical space
+    
+%     \begin{minipage}{0.48\textwidth}
+%         \centering
+%         \includegraphics[width=1.05\textwidth]{graphics/background/data_example_3.png}
+%         % \caption{c}
+%     \end{minipage}
+%     \hfill
+%     \begin{minipage}{0.48\textwidth}
+%         \centering
+%         \includegraphics[width=1.05\textwidth]{graphics/background/data_example_4.png}
+%         % \caption{d}
+%     \end{minipage}
+    
+%     \caption{World projection visualizations of atmospheric data. The blue ``Ribons" are AR masks while, the green ones are TCs. The red band denotes the equatorial region between 5\degree{}N and 5\degree{}S where TCs do not typically form. The green bands (5\degree{} to 30\degree{} in both hemispheres) indicate the primary regions for TC activity. The purple bands (30\degree{} to 60\degree{} in both hemispheres) represent the mid\_latitudes where ARs typically occur.}
+%     \label{fig:world_projection_grid}
+% \end{figure}
+
 \begin{figure}[!h]
     \centering
-    \begin{minipage}{0.48\textwidth}
-        \centering
-        \includegraphics[width=1.05\textwidth]{graphics/background/data_example_1.png}
-        % \caption{a}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.48\textwidth}
-        \centering
-        \includegraphics[width=1.05\textwidth]{graphics/background/data_example_2.png}
-        % \caption{b}
-    \end{minipage}
-    
-    \vspace{0.5cm} % Add some vertical space
-    
-    \begin{minipage}{0.48\textwidth}
-        \centering
-        \includegraphics[width=1.05\textwidth]{graphics/background/data_example_3.png}
-        % \caption{c}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.48\textwidth}
-        \centering
-        \includegraphics[width=1.05\textwidth]{graphics/background/data_example_4.png}
-        % \caption{d}
-    \end{minipage}
-    
+    \makebox[\textwidth][c]{%
+        \begin{minipage}{1.0\textwidth}
+            \centering
+            \begin{minipage}{0.48\textwidth}
+                \centering
+                \includegraphics[width=1.05\textwidth]{graphics/background/data_example_1.png}
+            \end{minipage}
+            \hfill
+            \begin{minipage}{0.48\textwidth}
+                \centering
+                \includegraphics[width=1.05\textwidth]{graphics/background/data_example_2.png}
+            \end{minipage}
+
+            % \vspace{0.5cm}
+
+            \begin{minipage}{0.48\textwidth}
+                \centering
+                \includegraphics[width=1.05\textwidth]{graphics/background/data_example_3.png}
+            \end{minipage}
+            \hfill
+            \begin{minipage}{0.48\textwidth}
+                \centering
+                \includegraphics[width=1.05\textwidth]{graphics/background/data_example_4.png}
+            \end{minipage}
+        \end{minipage}
+    }
     \caption{World projection visualizations of atmospheric data. The blue ``Ribons" are AR masks while, the green ones are TCs. The red band denotes the equatorial region between 5\degree{}N and 5\degree{}S where TCs do not typically form. The green bands (5\degree{} to 30\degree{} in both hemispheres) indicate the primary regions for TC activity. The purple bands (30\degree{} to 60\degree{} in both hemispheres) represent the mid\_latitudes where ARs typically occur.}
-    \label{fig:world_projection_grid}
+    \label{fig:data\_examples}
 \end{figure}
