@@ -1,5 +1,3 @@
-
-
 \subsection{Loss Function}
 To adapt the Segment Anything Model (SAM) to the unique characteristics of the ClimateNet dataset, a systematic hyperparameter optimization was conducted. The primary goal of this search was to identify the optimal balance between pixel-wise classification accuracy and regional mask overlap, specifically addressing the extreme class imbalance where background pixels constitute approximately 93.9\% of the data.
 
@@ -11,28 +9,49 @@ This methodology is grounded in several practical considerations:
 \begin{itemize}
 \item Efficiency: Training on a 20\% subset allows for a broader exploration of the parameter space within a fixed compute budget.
 \item Generalizability: Because ClimateNet consists of global atmospheric rasters with recurring geophysical patterns, a 20\% subset provides sufficient structural diversity—including circular TC structures and ribbon-like AR corridors—to identify robust hyperparameter trends that generalize to the full dataset.
-\item Architecture Consistency: Utilizing the ViT-B backbone ensures that the identified hyperparameters are optimized for the specific feature resolution (64 $\times$ 64 feature grid) and embedding space (256 dimensions) used in the final adaptation phase.
+\item Architecture Consistency: Utilizing the ViT-B backbone ensures that the identified hyperparameters are optimized for the specific feature resolution $(64 \times 64)$ feature grid and embedding space of 256 dimensions used in the final adaptation phase.
 \end{itemize}
-
-\subsubsection{Search Space}
-
-The search space was specifically designed to prioritize Recall $\beta$ over Precision $\alpha$ for TCs, as missing a rare storm event is considered a more significant failure in a meteorological context than a slight over-segmentation of its boundary.
 
 \begin{table}[h]
 \centering
 \begin{tblr}{
   colspec = {llXX}, % X column automatically calculates width and wraps text
-  hlines,           % Adds horizontal lines
 }
-Parameter & Feature & Search Values & Rationale \\ 
-Tversky ($\alpha, \beta$) & TC & (0.2, 0.8), (0.1, 0.9), (0.3, 0.7) & Prioritizes recall for rare circular structures. \\ 
-Tversky ($\alpha, \beta$) & AR & (0.3, 0.7), (0.4, 0.6), (0.5, 0.5) & Balanced approach for common ribbon forms. \\ 
-Focal ($\alpha, \gamma$) & TC & (0.99, 2.0), (0.99, 5.0), (0.995, 8.0) & Combats the 257:1 background-to-TC ratio. \\ 
-Focal ($\alpha, \gamma$) & AR & (0.80, 2.0), (0.85, 5.0), (0.90, 2.0) & Addresses the 17:1 background-to-AR ratio. \\ 
+Parameter & Feature & Search Values & Reasons \\ 
+\hline
+Tversky $(\alpha, \beta)$ & TC & (0.05, 0.95), (0.2, 0.8), (0.3, 0.7), (0.4, 0.6), (0.5, 0.5) & Prioritizes recall for rare circular structures; (0.5, 0.5) serves as the Dice baseline. \\ 
+Tversky $(\alpha, \beta)$ & AR & (0.3, 0.7), (0.4, 0.6), (0.5, 0.5), (0.6, 0.4) & Balanced approach for common ribbon forms; (0.5, 0.5) serves as the Dice baseline. \\ 
+Focal $(\alpha, \gamma)$ & TC & (0.95, 5), (0.99, 2.5), (0.99, 5), (0.995, 4), (0.995, 6), (0.995, 8), (1, 0) & Combats the 257:1 background to TC ratio; (1, 0) serves as the BCE baseline. \\ 
+Focal $(\alpha, \gamma)$ & AR & (0.80, 1), (0.85, 2), (0.85, 5), (0.90, 2), (0.95, 3), (1, 0) & Addresses the 17:1 background to AR ratio; (1, 0) serves as the BCE baseline. \\ 
+\hline
 \end{tblr}
 \caption{Hyperparameter search space for SAM adaptation on ClimateNet.}
+\label{tab:searchspace}
 \end{table}
 
-% ### Implementation and Stability
 
-During the adaptation phase, the loss weights for the Tversky and Focal components were held constant ($w=1.0$) to ensure gradient stability while the model learned to interpret the 16 multi-parameter atmospheric grids. The search utilized a fixed budget of 50 epochs per iteration. By varying the focusing parameter $\gamma$ up to 8.0, we forced the model to significantly down-weight "easy" background pixels and concentrate on the ambiguous boundaries of the atmospheric features.
+\subsubsection{Search Space}
+The search space was specifically designed to prioritize recall $\beta$ over precision $\alpha$ for TCs, as missing a rare storm event is considered a more significant failure in a meteorological context than a slight over-segmentation of its boundary. To establish a performance baseline against standard, unweighted loss components, the experiments included configurations where Focal loss reduces to standard Binary Cross-Entropy $(\gamma=0, \alpha=1)$ and Tversky loss reduces to the Dice coefficient $(\alpha=\beta=0.5)$. To combat the severe 257:1 imbalance of TCs, aggressive weighting was tested using high $\gamma$ values up to 8.0 and extreme Tversky ratios such as 0.05/0.95, forcing the model to focus on the sparse, hard pixels defining TC centers. In contrast, ARs required more moderate Focal $\gamma$ settings between 1.0 and 5.0 and Tversky ratios closer to parity due to their less extreme 17:1 imbalance, which helps maintain structural integrity without over-penalizing boundary pixels. Furthermore, while extreme recall settings facilitate localization, moderate values like $\alpha_{tc}=0.3$ were incorporated to mitigate the gradient instability that can occur with extremely aggressive settings during the adaptation phase. Table \ref{tab:searchspace} summarizes the specific hyperparameter combinations.
+
+\subsection{Spatial Label Smoothing}\label{spatial_smoothing}
+
+The atmospheric variables within the ClimateNet dataset lack the sharp edges found in natural imagery. Physical phenomena like Tropical Cyclones and Atmospheric Rivers transition gradually into the background space. Rigid binary ground truth masks force the model into making definitive choices on ambiguous boundary pixels. This rigid penalty structure causes the model to memorize specific noise, leading to overfitting for the smaller Tropical Cyclone class during later training epochs. Applying a Gaussian blur to the ground truth masks before calculating the hybrid loss creates a continuous spatial gradient. This smooth gradient acts as a spatial regularizer that aligns more accurately with the physical reality of gradual pressure drop offs.
+
+Empirical tests confirm that applying a baseline spatial blur with a kernel size of 3 and sigma of 1.0 for Tropical Cyclones, alongside a kernel size of 9 and sigma of 2.0 for Atmospheric Rivers, successfully mitigates this overfitting behavior. Motivated by this empirical success, we establish an independent grid search to identify the optimal blur configuration for each phenomenon. Because Tropical Cyclones and Atmospheric Rivers differ drastically in scale, the search space is divided into two independent phases to isolate the effects of the smoothing parameters.
+
+Table \ref{tab:smooth_search} summarizes the hyperparameter search space for the spatial label smoothing. During the search, when the parameters for one class are varied, the parameters for the other class are locked to their respective empirical baseline values to ensure an independent evaluation of the structural boundaries.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lll}
+Feature & Parameter & Search Values \\
+\hline
+TC & Kernel Size ($k\_{tc}$) & 3, 11, 21 \\
+TC & Sigma ($\sigma\_{tc}$) & 1, 5, 10 \\
+AR & Kernel Size ($k\_{ar}$) & 9, 21, 51 \\
+AR & Sigma ($\sigma\_{ar}$) & 2, 10, 20 \\
+\hline
+\end{tabular}
+\caption{Hyperparameter search space for spatial label smoothing.}
+\label{tab:smooth_search}
+\end{table}

@@ -96,7 +96,7 @@ where $B \in \mathbb{R}^{d \times r}$ and $A \in \mathbb{R}^{r \times d}$ are th
 
 As illustrated in Figure \ref{fig:lora_architecture}, the LoRA layers are integrated into the encoder adapter block. While a standard LoRA implementation uses a single set of adapters, we implement a specialized Dual LoRA architecture to address the distinct morphological characteristics of TCs and ARs.
 
-In the Dual LoRA configuration, the $qkv$ projection is modified to include separate adapter branches for each meteorological task: \textbf{TC Adapters:} Low-rank matrices $A_{tc}$ and $B_{tc}$ are optimized for the distinct circular structures of Tropical Cyclones. \textbf{AR Adapters:} Low-rank matrices $A_{ar}$ and $B_{ar}$ are tailored for the narrow, ribbon-like corridors of Atmospheric Rivers.
+In the Dual LoRA configuration, the $qkv$ projection is modified to include separate adapter branches for each meteorological task: TC Adapters: Low-rank matrices $A_{tc}$ and $B_{tc}$ are optimized for the distinct circular structures of Tropical Cyclones. AR Adapters: Low-rank matrices $A_{ar}$ and $B_{ar}$ are tailored for the narrow, ribbon-like corridors of Atmospheric Rivers.
 
 During the forward pass, a task mode flag controls which adapters are active. This allows the frozen SAM backbone to produce task-specialized embeddings ($encoder\_image\_tc$ and $encoder\_image\_ar$) by simply switching the active low-rank path. These specialized embeddings are then fed into independent mask decoder heads (Decoder\_TC and Decoder\_AR). This dual-decoder and dual-adapter design allows the model to learn class-specific localization priors and structural discovery independently for each feature, effectively managing the significant class imbalances inherent in climate data.
 
@@ -122,6 +122,12 @@ During the forward pass, a task mode flag controls which adapters are active. Th
 \subsection{Automatic Prompt Generator}
 
 \subsubsection{CGNet}
+CGNet is a Context Guided Network specifically designed for semantic segmentation with high computational efficiency, which contains only 494,232 parameters. The architecture is built upon the CGBlock, which follows a joint feature extraction and refinement strategy. The block first captures spatial dependencies by concatenating the outputs of a standard $3 \times 3$ convolution with a $3 \times 3$ dilated convolution. This allows the model to perceive both fine-grained local details and larger atmospheric structures simultaneously. Following concatenation, the representation is refined through a Global Context (FGlo) module. This module utilizes average pooling and a multi-layer-perceptron (MLP) to scale channels based on global image importance. To maintain the physical topology of global climate data—where the eastern and western edges of the raster are geographically continuous—the implementation utilizes circular padding instead of standard zero-padding.
+
+
+In the ClimateSAM pipeline, CGNet acts as a helper model during the second phase of training and inference. The process begins with Auxiliary Mask Prediction, where CGNet processes the diagnostic atmospheric variables, TMQ, U850, V850, and PSL, to produce a preliminary multiclass segmentation. These auxiliary masks are then passed to PromptMaker module, which performs Prompt Extraction to identify point coordinates and bounding boxes. Finally, these extracted prompts provide the necessary Decoder Guidance by replacing manual human input, guiding the adapted SAM mask decoder to produce the final, high-fidelity segmentation.
+\subsection{3.3.3 Automatic Prompt Generator}
+
 
 \subsubsection{Multi-scale Fusion}
 

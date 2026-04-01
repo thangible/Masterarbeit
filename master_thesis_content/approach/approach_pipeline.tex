@@ -36,8 +36,8 @@ By removing the variability of prompt quality, we can more accurately evaluate t
 Once the encoder is successfully adapted to the ClimateNet domain, we introduce a generator module to eliminate the need for manual intervention. This generator leverages the embeddings produced by the encoder to automatically predict the locations of TCs and ARs. By treating the image embeddings as a rich source of contextual information, the generator produces auxiliary segmentation masks. These masks are then processed to generate point and bounding box prompts, which are fed into the mask decoder to produce the final segmentation for evaluation.
 
 \section{Dataset Preparation}
-% Here I would write how the data from sources, z-normalize, make it images again by multiply by 255. 
-% How prompts is make, take the multimask ground truth, find connected component, filter out, get N positive points, or M negative points per object masks, bounding box, noisy mask (resize, iroduce noise, 
+% \subsection*{Data Preprocessing}
+% \subsection*{Prompt Preparation}
 
 The Figure \ref{fig:prompt_pipeline} illustrates the overall pipeline of prompt preparation for GAN. This includes creating point prompts, bounding box prompts, and noisy mask prompts for the input adapter in phase 1 as well as creating prompts from auxiliary masks from automatic prompt generator from phase 3.
 
