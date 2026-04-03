@@ -4,45 +4,45 @@ The top-level auxiliary file: Thesis.aux
 The style file: plain.bst
 Database file #1: thesis.bib
 Warning--can't use both volume and number fields in chen2025aop
-You've used 41 entries,
+You've used 43 entries,
             2118 wiz_defined-function locations,
-            721 strings with 14141 characters,
-and the built_in function-call counts, 18447 in all, are:
-= -- 1728
-> -- 1266
+            731 strings with 14498 characters,
+and the built_in function-call counts, 19090 in all, are:
+= -- 1791
+> -- 1301
 < -- 9
-+ -- 501
-- -- 458
-* -- 1513
-:= -- 3092
-add.period$ -- 126
-call.type$ -- 41
-change.case$ -- 346
++ -- 515
+- -- 470
+* -- 1559
+:= -- 3206
+add.period$ -- 132
+call.type$ -- 43
+change.case$ -- 358
 chr.to.int$ -- 0
-cite$ -- 42
-duplicate$ -- 529
-empty$ -- 1171
-format.name$ -- 458
-if$ -- 3719
+cite$ -- 44
+duplicate$ -- 550
+empty$ -- 1216
+format.name$ -- 470
+if$ -- 3846
 int.to.chr$ -- 0
-int.to.str$ -- 41
-missing$ -- 35
-newline$ -- 206
-num.names$ -- 82
-pop$ -- 358
+int.to.str$ -- 43
+missing$ -- 37
+newline$ -- 216
+num.names$ -- 86
+pop$ -- 368
 preamble$ -- 1
-purify$ -- 305
+purify$ -- 315
 quote$ -- 0
-skip$ -- 406
+skip$ -- 420
 stack$ -- 0
-substring$ -- 1077
-swap$ -- 132
+substring$ -- 1118
+swap$ -- 134
 text.length$ -- 9
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 164
+type$ -- 172
 warning$ -- 1
-while$ -- 145
-width$ -- 43
-write$ -- 443
+while$ -- 151
+width$ -- 45
+write$ -- 464
 (There was 1 warning)

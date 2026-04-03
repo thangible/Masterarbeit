@@ -9,6 +9,9 @@
 \babel@aux{english}{}
 \newlabel{sec:abstract}{{}{II}{Abstract}{section*.1}{}}
 \newlabel{sec:zusammenfassung}{{}{II}{Zusammenfassung}{section*.2}{}}
+\citation{wu2020cgnet}
+\citation{radke2024explaining}
+\citation{wu2020cgnet}
 \citation{prabhat2020climatenet}
 \citation{radke2024explaining}
 \citation{hewson2010objective}
@@ -77,6 +80,9 @@
 \citation{radke2024explaining}
 \citation{prabhat2020climatenet}
 \citation{radke2024explaining}
+\citation{prabhat2020climatenet}
+\citation{biard2019automated}
+\citation{radke2024explaining}
 \@writefile{toc}{\contentsline {section}{\numberline {2.2}ClimateNet Dataset}{7}{section.2.2}\protected@file@percent }
 \@writefile{lot}{\contentsline {table}{\numberline {2.1}{\ignorespaces Atmospheric variables contained in the ClimateNet dataset \cite  {prabhat2020climatenet, radke2024explaining}.}}{7}{table.caption.8}\protected@file@percent }
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
@@ -88,158 +94,170 @@
 \newlabel{dataset_stats}{{2.2.1}{8}{Dataset Statistics}{subsection.2.2.1}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {2.1}{\ignorespaces Class Distribution}}{8}{figure.caption.9}\protected@file@percent }
 \newlabel{fig:classdistribution}{{2.1}{8}{Class Distribution}{figure.caption.9}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.2}Geographical Features and Constraint}{8}{subsection.2.2.2}\protected@file@percent }
 \citation{gimeno2014atmospheric}
 \citation{radke2024explaining}
 \@writefile{lot}{\contentsline {table}{\numberline {2.2}{\ignorespaces Class Proportion and Object Statistics}}{9}{table.caption.10}\protected@file@percent }
 \newlabel{tab:summary_stats}{{2.2}{9}{Class Proportion and Object Statistics}{table.caption.10}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {2.3}Segment Anything Model}{9}{section.2.3}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {2.2}{\ignorespaces World projection visualizations of atmospheric data. The blue ``Ribons" are AR masks while, the green ones are TCs. The red band denotes the equatorial region between 5\ensuremath  {^\circ }{}N and 5\ensuremath  {^\circ }{}S where TCs do not typically form. The green bands (5\ensuremath  {^\circ }{} to 30\ensuremath  {^\circ }{} in both hemispheres) indicate the primary regions for TC activity. The purple bands (30\ensuremath  {^\circ }{} to 60\ensuremath  {^\circ }{} in both hemispheres) represent the mid\_latitudes where ARs typically occur.}}{10}{figure.caption.11}\protected@file@percent }
-\newlabel{fig:data\_examples}{{2.2}{10}{World projection visualizations of atmospheric data. The blue ``Ribons" are AR masks while, the green ones are TCs. The red band denotes the equatorial region between 5\degree {}N and 5\degree {}S where TCs do not typically form. The green bands (5\degree {} to 30\degree {} in both hemispheres) indicate the primary regions for TC activity. The purple bands (30\degree {} to 60\degree {} in both hemispheres) represent the mid\_latitudes where ARs typically occur}{figure.caption.11}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.2}Geographical Features and Constraint}{9}{subsection.2.2.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.2}{\ignorespaces World projection visualizations of atmospheric data. The blue ``Ribons" are AR masks while, the green ones are TCs. The red band denotes the equatorial region between 5\ensuremath  {^\circ }{}N and 5\ensuremath  {^\circ }{}S where TCs do not typically form. The green bands (5\ensuremath  {^\circ }{} to 30\ensuremath  {^\circ }{} in both hemispheres) indicate the primary regions for TC activity. The purple bands (30\ensuremath  {^\circ }{} to 60\ensuremath  {^\circ }{} in both hemispheres) represent the mid\_latitudes where ARs typically occur.}}{9}{figure.caption.11}\protected@file@percent }
+\newlabel{fig:data_examples}{{2.2}{9}{World projection visualizations of atmospheric data. The blue ``Ribons" are AR masks while, the green ones are TCs. The red band denotes the equatorial region between 5\degree {}N and 5\degree {}S where TCs do not typically form. The green bands (5\degree {} to 30\degree {} in both hemispheres) indicate the primary regions for TC activity. The purple bands (30\degree {} to 60\degree {} in both hemispheres) represent the mid\_latitudes where ARs typically occur}{figure.caption.11}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.3}Segment Anything Model}{10}{section.2.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.3.1}Geometric Prompts}{10}{subsection.2.3.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.2}Prompt Embeddings}{10}{subsection.2.3.2}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {2.3}{\ignorespaces Point Prompt Embedding}}{11}{figure.caption.12}\protected@file@percent }
 \newlabel{fig:point_embedding}{{2.3}{11}{Point Prompt Embedding}{figure.caption.12}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.2}Prompt Embeddings}{11}{subsection.2.3.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.3.3}Image Embeddings}{11}{subsection.2.3.3}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {2.4}{\ignorespaces Image Embedding}}{12}{figure.caption.13}\protected@file@percent }
 \newlabel{fig:image_embedding}{{2.4}{12}{Image Embedding}{figure.caption.13}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.3.4}Decoder}{12}{subsection.2.3.4}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {2.5}{\ignorespaces Mask Decoder Process}}{13}{figure.caption.14}\protected@file@percent }
 \newlabel{fig:decoder}{{2.5}{13}{Mask Decoder Process}{figure.caption.14}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {2.4}Parameter Efficient Fine-Tuning Techniques}{14}{section.2.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.4.1}LoRa}{14}{subsection.2.4.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Conceptual Framework}{14}{section*.15}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Implementation Details}{14}{section*.16}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Strategic Advantages}{14}{section*.17}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2.4}Metrics}{14}{section.2.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4.1}Loss Functions}{14}{subsection.2.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Focal Loss}{14}{section*.15}\protected@file@percent }
 \citation{xiao2024cat}
 \citation{ke2023segment}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.4.2}Learnable Token}{15}{subsection.2.4.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {2.5}Metrics}{15}{section.2.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.5.1}Loss Functions}{15}{subsection.2.5.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Focal Loss}{15}{section*.18}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Dice Loss}{16}{section*.19}\protected@file@percent }
-\citation{xiao2024cat}
-\@writefile{toc}{\contentsline {subsubsection}{Tversky Loss}{17}{section*.20}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Hybrid Loss Functions}{17}{section*.21}\protected@file@percent }
+\citation{rajput2021robustness}
+\@writefile{toc}{\contentsline {subsubsection}{Dice Loss}{15}{section*.16}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Tversky Loss}{15}{section*.17}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Hybrid Loss Functions}{16}{section*.18}\protected@file@percent }
 \citation{ke2023segment}
 \citation{xiao2024cat}
 \citation{zhang2024improving}
 \citation{xie2025self}
-\@writefile{toc}{\contentsline {chapter}{\numberline {3}Approach}{18}{chapter.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {3}Approach}{17}{chapter.3}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {3.1}Pipeline}{18}{section.3.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Phase 1: Adaptation and Encoder Refinement}{18}{section*.23}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces Experiment Pipeline}}{19}{figure.caption.22}\protected@file@percent }
-\newlabel{fig:pipeline}{{3.1}{19}{Experiment Pipeline}{figure.caption.22}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Phase 2: Automated Prompt Generation}{20}{section*.24}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {3.2}Dataset Preparation}{20}{section.3.2}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces Prompt Preparation Process}}{20}{figure.caption.25}\protected@file@percent }
-\newlabel{fig:prompt_pipeline}{{3.2}{20}{Prompt Preparation Process}{figure.caption.25}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.3}{\ignorespaces Sampling Negative and Positive Point Prompts}}{21}{figure.caption.26}\protected@file@percent }
-\newlabel{fig:point_prompt_generation}{{3.3}{21}{Sampling Negative and Positive Point Prompts}{figure.caption.26}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.4}{\ignorespaces Create Noisy Mask Prompts}}{21}{figure.caption.27}\protected@file@percent }
-\newlabel{fig:noisy_mask_generation}{{3.4}{21}{Create Noisy Mask Prompts}{figure.caption.27}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.1}Pipeline}{17}{section.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Phase 1: Adaptation and Encoder Refinement}{17}{section*.20}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces Experiment Pipeline}}{18}{figure.caption.19}\protected@file@percent }
+\newlabel{fig:pipeline}{{3.1}{18}{Experiment Pipeline}{figure.caption.19}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Phase 2: Automated Prompt Generation}{19}{section*.21}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3.2}Dataset Preparation}{19}{section.3.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces Prompt Preparation Process}}{19}{figure.caption.22}\protected@file@percent }
+\newlabel{fig:prompt_pipeline}{{3.2}{19}{Prompt Preparation Process}{figure.caption.22}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.3}{\ignorespaces Sampling Negative and Positive Point Prompts}}{20}{figure.caption.23}\protected@file@percent }
+\newlabel{fig:point_prompt_generation}{{3.3}{20}{Sampling Negative and Positive Point Prompts}{figure.caption.23}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.4}{\ignorespaces Create Noisy Mask Prompts}}{20}{figure.caption.24}\protected@file@percent }
+\newlabel{fig:noisy_mask_generation}{{3.4}{20}{Create Noisy Mask Prompts}{figure.caption.24}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.3}Architectures}{21}{section.3.3}\protected@file@percent }
+\newlabel{sec:architectures}{{3.3}{21}{Architectures}{section.3.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.1}Input Adapter}{21}{subsection.3.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Nonlinear Convolutional Adapter}{21}{section*.26}\protected@file@percent }
 \citation{radke2024explaining}
-\@writefile{toc}{\contentsline {section}{\numberline {3.3}Architectures}{22}{section.3.3}\protected@file@percent }
-\newlabel{sec:architectures}{{3.3}{22}{Architectures}{section.3.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.1}Input Adapter}{22}{subsection.3.3.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.5}{\ignorespaces Nonlinear Input Adapter Architecture}}{22}{figure.caption.25}\protected@file@percent }
+\newlabel{fig:input_adapter_nonlinear}{{3.5}{22}{Nonlinear Input Adapter Architecture}{figure.caption.25}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Linear Adapter}{22}{section*.27}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.6}{\ignorespaces Linear Input Adapter Architecture}}{22}{figure.caption.28}\protected@file@percent }
+\newlabel{fig:input_adapter_linear}{{3.6}{22}{Linear Input Adapter Architecture}{figure.caption.28}{}}
 \citation{xiao2024cat}
 \citation{ke2023segment}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.5}{\ignorespaces Input Adapter Architecture}}{23}{figure.caption.28}\protected@file@percent }
-\newlabel{fig:input_adapter}{{3.5}{23}{Input Adapter Architecture}{figure.caption.28}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.3.2}Encoder Adapter}{23}{subsection.3.3.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{Learnable Token-based approach}{23}{section*.29}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {3.6}{\ignorespaces Single Token Architecture}}{24}{figure.caption.30}\protected@file@percent }
-\newlabel{fig:single_token_architecture}{{3.6}{24}{Single Token Architecture}{figure.caption.30}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.7}{\ignorespaces Dual Token Architecture}}{25}{figure.caption.31}\protected@file@percent }
-\newlabel{fig:dual_token_architecture}{{3.7}{25}{Dual Token Architecture}{figure.caption.31}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.7}{\ignorespaces Single Token Architecture}}{24}{figure.caption.30}\protected@file@percent }
+\newlabel{fig:single_token_architecture}{{3.7}{24}{Single Token Architecture}{figure.caption.30}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.8}{\ignorespaces Dual Token Architecture}}{25}{figure.caption.31}\protected@file@percent }
+\newlabel{fig:dual_token_architecture}{{3.8}{25}{Dual Token Architecture}{figure.caption.31}{}}
 \@writefile{toc}{\contentsline {subsubsection}{LoRA approach}{25}{section*.32}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {3.8}{\ignorespaces SAM with LoRA Architecture}}{26}{figure.caption.33}\protected@file@percent }
-\newlabel{fig:lora_architecture}{{3.8}{26}{SAM with LoRA Architecture}{figure.caption.33}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.9}{\ignorespaces SAM with LoRA Architecture}}{26}{figure.caption.33}\protected@file@percent }
+\newlabel{fig:lora_architecture}{{3.9}{26}{SAM with LoRA Architecture}{figure.caption.33}{}}
+\citation{wu2020cgnet}
+\citation{radke2024explaining}
+\citation{wu2020cgnet}
+\citation{radke2024explaining}
+\citation{kapp2020spatio}
+\citation{wu2020cgnet}
+\citation{wu2020cgnet}
+\citation{wu2020cgnet}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.3.3}Automatic Prompt Generator}{27}{subsection.3.3.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{CGNet}{27}{section*.34}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.4}3.3.3 Automatic Prompt Generator}{27}{subsection.3.3.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Multi-scale Fusion}{27}{section*.35}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {3.4}Hyperparameter Optimisation}{27}{section.3.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.4.1}Loss Function}{27}{subsection.3.4.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {3.9}{\ignorespaces Multi-scale Fusion Module}}{28}{figure.caption.36}\protected@file@percent }
-\newlabel{fig:multiscalefusion}{{3.9}{28}{Multi-scale Fusion Module}{figure.caption.36}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Search Strategy and Configuration}{28}{section*.37}\protected@file@percent }
-\newlabel{searchstrat}{{3.4.1}{28}{Search Strategy and Configuration}{section*.37}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {3.1}{\ignorespaces Hyperparameter search space for SAM adaptation on ClimateNet.}}{29}{table.caption.38}\protected@file@percent }
-\newlabel{tab:searchspace}{{3.1}{29}{Hyperparameter search space for SAM adaptation on ClimateNet}{table.caption.38}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Search Space}{29}{section*.39}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.4.2}Spatial Label Smoothing}{30}{subsection.3.4.2}\protected@file@percent }
-\newlabel{spatial_smoothing}{{3.4.2}{30}{Spatial Label Smoothing}{subsection.3.4.2}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {3.2}{\ignorespaces Hyperparameter search space for spatial label smoothing.}}{30}{table.caption.40}\protected@file@percent }
-\newlabel{tab:smooth_search}{{3.2}{30}{Hyperparameter search space for spatial label smoothing}{table.caption.40}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.5}Metrics}{30}{section.3.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {chapter}{\numberline {4}Result}{31}{chapter.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.10}{\ignorespaces CGNet Architecture \cite  {wu2020cgnet}, Figure from Radke et al. \cite  {radke2024explaining}}}{27}{figure.caption.35}\protected@file@percent }
+\newlabel{fig:cg_net_architecture}{{3.10}{27}{CGNet Architecture \cite {wu2020cgnet}, Figure from Radke et al. \cite {radke2024explaining}}{figure.caption.35}{}}
+\citation{xie2025self}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.11}{\ignorespaces CGBlock Architecture, Figure from CG-Net paper \cite  {wu2020cgnet}}}{28}{figure.caption.36}\protected@file@percent }
+\newlabel{fig:cg_block_architecture}{{3.11}{28}{CGBlock Architecture, Figure from CG-Net paper \cite {wu2020cgnet}}{figure.caption.36}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Multi-scale Fusion}{28}{section*.37}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3.4}Hyperparameter Optimisation}{28}{section.3.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4.1}Loss Function}{28}{subsection.3.4.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.12}{\ignorespaces Multi-scale Fusion Module}}{29}{figure.caption.38}\protected@file@percent }
+\newlabel{fig:multiscalefusion}{{3.12}{29}{Multi-scale Fusion Module}{figure.caption.38}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Search Strategy and Configuration}{29}{section*.39}\protected@file@percent }
+\newlabel{searchstrat}{{3.4.1}{29}{Search Strategy and Configuration}{section*.39}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3.1}{\ignorespaces Hyperparameter search space for SAM adaptation on ClimateNet.}}{30}{table.caption.40}\protected@file@percent }
+\newlabel{tab:searchspace}{{3.1}{30}{Hyperparameter search space for SAM adaptation on ClimateNet}{table.caption.40}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Search Space}{30}{section*.41}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4.2}Spatial Label Smoothing}{31}{subsection.3.4.2}\protected@file@percent }
+\newlabel{spatial_smoothing}{{3.4.2}{31}{Spatial Label Smoothing}{subsection.3.4.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.13}{\ignorespaces Example of label smoothing with different kernel sizes and sigma values.}}{31}{figure.caption.42}\protected@file@percent }
+\newlabel{fig:blur_examples}{{3.13}{31}{Example of label smoothing with different kernel sizes and sigma values}{figure.caption.42}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3.2}{\ignorespaces Hyperparameter search space for spatial label smoothing.}}{32}{table.caption.43}\protected@file@percent }
+\newlabel{tab:smooth_search}{{3.2}{32}{Hyperparameter search space for spatial label smoothing}{table.caption.43}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.5}Metrics}{32}{section.3.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {4}Result}{33}{chapter.4}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {4.1}Preliminary Result}{31}{section.4.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.1}Loss Function Hyperparameter Optimization Results}{31}{subsection.4.1.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Tversky Loss Parameters for Tropical Cyclones}{31}{section*.41}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Tversky Loss Parameters for Atmospheric Rivers}{31}{section*.43}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {4.1}{\ignorespaces Impact of Tversky $\alpha /\beta $ parameters on Tropical Cyclone segmentation.}}{32}{table.caption.42}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {4.2}{\ignorespaces Impact of Tversky $\alpha /\beta $ parameters on Atmospheric River segmentation.}}{32}{table.caption.44}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Focal Loss Alpha and Gamma for Tropical Cyclones}{32}{section*.45}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {4.3}{\ignorespaces Performance of Tropical Cyclone detection across Focal Gamma settings.}}{32}{table.caption.46}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Focal Loss Alpha and Gamma for Atmospheric Rivers}{33}{section*.47}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {4.4}{\ignorespaces Performance of Atmospheric River detection across Focal Gamma settings.}}{33}{table.caption.48}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Loss Component Weight}{33}{section*.49}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {4.5}{\ignorespaces Comparison of loss component magnitudes and resulting segmentation performance across different Focal weights.}}{33}{table.caption.50}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Summary of Hyperparameter Optimization Results}{33}{section*.51}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {4.6}{\ignorespaces Summary of optimal loss hyperparameters for ClimateSAM adaptation.}}{34}{table.caption.52}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.2}Label Smoothing}{34}{subsection.4.1.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{First result}{34}{section*.53}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {4.7}{\ignorespaces Performance comparison of the infused token model with and without spatial label smoothing.}}{34}{table.caption.54}\protected@file@percent }
-\newlabel{tab:smooth_performance}{{4.7}{34}{Performance comparison of the infused token model with and without spatial label smoothing}{table.caption.54}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces Validation IoU curves demonstrating stabilized training and reduced overfitting after applying spatial label smoothing.}}{34}{figure.caption.55}\protected@file@percent }
-\newlabel{fig:smooth_curves}{{4.1}{34}{Validation IoU curves demonstrating stabilized training and reduced overfitting after applying spatial label smoothing}{figure.caption.55}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Hyperparameter Search for Label Smoothing}{35}{section*.56}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {4.8}{\ignorespaces Comparison of Smoothing Kernel Parameters for Tropical Cyclone and Atmospheric River Detection}}{35}{table.caption.57}\protected@file@percent }
-\newlabel{tab:smooth_optimal_results}{{4.8}{35}{Comparison of Smoothing Kernel Parameters for Tropical Cyclone and Atmospheric River Detection}{table.caption.57}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.2}{\ignorespaces IoU Curve of Label Smoothing HP Results.}}{36}{figure.caption.58}\protected@file@percent }
-\newlabel{fig:smooth_hp_curves}{{4.2}{36}{IoU Curve of Label Smoothing HP Results}{figure.caption.58}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.2}Adapt SAM to ClimateNet}{36}{section.4.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.1}Lora}{36}{subsection.4.2.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Integrating single LoRA component to SAM}{36}{section*.59}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {4.9}{\ignorespaces LoRA Performance Comparison}}{36}{table.caption.60}\protected@file@percent }
-\newlabel{tab:lora_performance}{{4.9}{36}{LoRA Performance Comparison}{table.caption.60}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {4.10}{\ignorespaces Detailed Parameter Breakdown for LoRA-Adapted SAM}}{37}{table.caption.61}\protected@file@percent }
-\newlabel{tab:lora_params_final}{{4.10}{37}{Detailed Parameter Breakdown for LoRA-Adapted SAM}{table.caption.61}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.3}{\ignorespaces AR Validation IOU}}{37}{figure.caption.62}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {4.4}{\ignorespaces TC Validation IOU}}{37}{figure.caption.62}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {4.5}{\ignorespaces Validation IOU curves for AR and TC during training}}{37}{figure.caption.62}\protected@file@percent }
-\newlabel{fig:iou_lora_single}{{4.5}{37}{Validation IOU curves for AR and TC during training}{figure.caption.62}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Integrating single LoRA component to SAM [WITH AUGMENTATION]}{38}{section*.63}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {4.6}{\ignorespaces Augmentation Performance}}{38}{figure.caption.64}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {4.7}{\ignorespaces Comparison between standard LoRA and augmented training.}}{38}{figure.caption.64}\protected@file@percent }
-\newlabel{fig:lora_augmentation}{{4.7}{38}{Comparison between standard LoRA and augmented training}{figure.caption.64}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Integrating specialized LoRA components for ARs and TCs}{38}{section*.65}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.2}Token-based}{38}{subsection.4.2.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{SAM with Single infused token}{38}{section*.66}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {4.11}{\ignorespaces Detailed Parameter Breakdown and Performance for Single Token SAM}}{39}{table.caption.67}\protected@file@percent }
-\newlabel{tab:single_token_params}{{4.11}{39}{Detailed Parameter Breakdown and Performance for Single Token SAM}{table.caption.67}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.8}{\ignorespaces Validation IOU of TCs and ARs curves for SAM with single Token}}{39}{figure.caption.68}\protected@file@percent }
-\newlabel{fig:iou_single_token}{{4.8}{39}{Validation IOU of TCs and ARs curves for SAM with single Token}{figure.caption.68}{}}
-\@writefile{toc}{\contentsline {subsubsection}{SAM with Infused Specialized Token}{39}{section*.69}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {4.12}{\ignorespaces Performance Comparison for Infused Token SAM}}{39}{table.caption.70}\protected@file@percent }
-\newlabel{tab:infused_token_perf}{{4.12}{39}{Performance Comparison for Infused Token SAM}{table.caption.70}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {4.13}{\ignorespaces Detailed Parameter Breakdown and Training Duration for Infused Token SAM}}{40}{table.caption.71}\protected@file@percent }
-\newlabel{tab:infused_token_params}{{4.13}{40}{Detailed Parameter Breakdown and Training Duration for Infused Token SAM}{table.caption.71}{}}
-\@writefile{toc}{\contentsline {subsubsection}{SAM with Concatenated Specialized Token}{40}{section*.72}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4.3}Automatic Prompt Generator for SAM}{40}{section.4.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.1}SAM with CGNet as helper}{40}{subsection.4.3.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.2}SAM with multi-scale feature infusion}{40}{subsection.4.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.1}Preliminary Result}{33}{section.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.1}Loss Function Hyperparameter Optimization Results}{33}{subsection.4.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Tversky Loss Parameters for Tropical Cyclones}{33}{section*.44}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Tversky Loss Parameters for Atmospheric Rivers}{33}{section*.46}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4.1}{\ignorespaces Impact of Tversky $\alpha /\beta $ parameters on Tropical Cyclone segmentation.}}{34}{table.caption.45}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4.2}{\ignorespaces Impact of Tversky $\alpha /\beta $ parameters on Atmospheric River segmentation.}}{34}{table.caption.47}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Focal Loss Alpha and Gamma for Tropical Cyclones}{34}{section*.48}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4.3}{\ignorespaces Performance of Tropical Cyclone detection across Focal Gamma settings.}}{34}{table.caption.49}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Focal Loss Alpha and Gamma for Atmospheric Rivers}{34}{section*.50}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4.4}{\ignorespaces Performance of Atmospheric River detection across Focal Gamma settings.}}{35}{table.caption.51}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Loss Component Weight}{35}{section*.52}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4.5}{\ignorespaces Comparison of loss component magnitudes and resulting segmentation performance across different Focal weights.}}{35}{table.caption.53}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Summary of Hyperparameter Optimization Results}{35}{section*.54}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.2}Label Smoothing}{35}{subsection.4.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{First result}{35}{section*.56}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4.6}{\ignorespaces Summary of optimal loss hyperparameters for ClimateSAM adaptation.}}{36}{table.caption.55}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4.7}{\ignorespaces Performance comparison of the infused token model with and without spatial label smoothing.}}{36}{table.caption.57}\protected@file@percent }
+\newlabel{tab:smooth_performance}{{4.7}{36}{Performance comparison of the infused token model with and without spatial label smoothing}{table.caption.57}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces Validation IoU curves demonstrating stabilized training and reduced overfitting after applying spatial label smoothing.}}{36}{figure.caption.58}\protected@file@percent }
+\newlabel{fig:smooth_curves}{{4.1}{36}{Validation IoU curves demonstrating stabilized training and reduced overfitting after applying spatial label smoothing}{figure.caption.58}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Hyperparameter Search for Label Smoothing}{37}{section*.59}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4.8}{\ignorespaces Comparison of Smoothing Kernel Parameters for Tropical Cyclone and Atmospheric River Detection}}{37}{table.caption.60}\protected@file@percent }
+\newlabel{tab:smooth_optimal_results}{{4.8}{37}{Comparison of Smoothing Kernel Parameters for Tropical Cyclone and Atmospheric River Detection}{table.caption.60}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.2}Adapt SAM to ClimateNet}{37}{section.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.1}Lora}{37}{subsection.4.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Integrating single LoRA component to SAM}{37}{section*.62}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.2}{\ignorespaces IoU Curve of Label Smoothing HP Results.}}{38}{figure.caption.61}\protected@file@percent }
+\newlabel{fig:smooth_hp_curves}{{4.2}{38}{IoU Curve of Label Smoothing HP Results}{figure.caption.61}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {4.9}{\ignorespaces LoRA Performance Comparison}}{38}{table.caption.63}\protected@file@percent }
+\newlabel{tab:lora_performance}{{4.9}{38}{LoRA Performance Comparison}{table.caption.63}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {4.10}{\ignorespaces Detailed Parameter Breakdown for LoRA-Adapted SAM}}{39}{table.caption.64}\protected@file@percent }
+\newlabel{tab:lora_params_final}{{4.10}{39}{Detailed Parameter Breakdown for LoRA-Adapted SAM}{table.caption.64}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.3}{\ignorespaces AR Validation IOU}}{39}{figure.caption.65}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.4}{\ignorespaces TC Validation IOU}}{39}{figure.caption.65}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.5}{\ignorespaces Validation IOU curves for AR and TC during training}}{39}{figure.caption.65}\protected@file@percent }
+\newlabel{fig:iou_lora_single}{{4.5}{39}{Validation IOU curves for AR and TC during training}{figure.caption.65}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Integrating single LoRA component to SAM [WITH AUGMENTATION]}{39}{section*.66}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.6}{\ignorespaces Augmentation Performance}}{40}{figure.caption.67}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.7}{\ignorespaces Comparison between standard LoRA and augmented training.}}{40}{figure.caption.67}\protected@file@percent }
+\newlabel{fig:lora_augmentation}{{4.7}{40}{Comparison between standard LoRA and augmented training}{figure.caption.67}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Integrating specialized LoRA components for ARs and TCs}{40}{section*.68}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.2}Token-based}{40}{subsection.4.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{SAM with Single infused token}{40}{section*.69}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4.11}{\ignorespaces Detailed Parameter Breakdown and Performance for Single Token SAM}}{40}{table.caption.70}\protected@file@percent }
+\newlabel{tab:single_token_params}{{4.11}{40}{Detailed Parameter Breakdown and Performance for Single Token SAM}{table.caption.70}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.8}{\ignorespaces Validation IOU of TCs and ARs curves for SAM with single Token}}{41}{figure.caption.71}\protected@file@percent }
+\newlabel{fig:iou_single_token}{{4.8}{41}{Validation IOU of TCs and ARs curves for SAM with single Token}{figure.caption.71}{}}
+\@writefile{toc}{\contentsline {subsubsection}{SAM with Infused Specialized Token}{41}{section*.72}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4.12}{\ignorespaces Performance Comparison for Infused Token SAM}}{41}{table.caption.73}\protected@file@percent }
+\newlabel{tab:infused_token_perf}{{4.12}{41}{Performance Comparison for Infused Token SAM}{table.caption.73}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {4.13}{\ignorespaces Detailed Parameter Breakdown and Training Duration for Infused Token SAM}}{42}{table.caption.74}\protected@file@percent }
+\newlabel{tab:infused_token_params}{{4.13}{42}{Detailed Parameter Breakdown and Training Duration for Infused Token SAM}{table.caption.74}{}}
+\@writefile{toc}{\contentsline {subsubsection}{SAM with Concatenated Specialized Token}{42}{section*.75}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.3}Automatic Prompt Generator for SAM}{42}{section.4.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.1}SAM with CGNet as helper}{42}{subsection.4.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.2}SAM with multi-scale feature infusion}{42}{subsection.4.3.2}\protected@file@percent }
 \bibstyle{plain}
 \bibdata{thesis}
-\@writefile{toc}{\contentsline {chapter}{\numberline {5}Discussion}{41}{chapter.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {5}Discussion}{43}{chapter.5}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {chapter}{Bibliography}{41}{section*.73}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{Bibliography}{43}{section*.76}\protected@file@percent }
 \bibcite{beckert2023three}{1}
 \bibcite{biard2019automated}{2}
 \bibcite{boukabara2021outlook}{3}
@@ -267,18 +285,20 @@
 \bibcite{niebler2022automated}{25}
 \bibcite{prabhat2020climatenet}{26}
 \bibcite{radke2024explaining}{27}
-\bibcite{rautenhaus2017visualization}{28}
-\bibcite{rebuffi2017learningmultiplevisualdomains}{29}
-\bibcite{shields2018atmospheric}{30}
-\bibcite{tian2023deep}{31}
-\bibcite{wei2024prompting}{32}
-\bibcite{wu2025multi}{33}
-\bibcite{xiao2024cat}{34}
-\bibcite{xie2025self}{35}
-\bibcite{xu2023adapternetworkopenvocabularysemantic}{36}
-\bibcite{zhang2024improving}{37}
-\bibcite{zhang2023personalize}{38}
-\bibcite{zhou2024sam}{39}
-\bibcite{zhou2022learning}{40}
-\bibcite{zhu2024melo}{41}
-\gdef \@abspage@last{51}
+\bibcite{rajput2021robustness}{28}
+\bibcite{rautenhaus2017visualization}{29}
+\bibcite{rebuffi2017learningmultiplevisualdomains}{30}
+\bibcite{shields2018atmospheric}{31}
+\bibcite{tian2023deep}{32}
+\bibcite{wei2024prompting}{33}
+\bibcite{wu2020cgnet}{34}
+\bibcite{wu2025multi}{35}
+\bibcite{xiao2024cat}{36}
+\bibcite{xie2025self}{37}
+\bibcite{xu2023adapternetworkopenvocabularysemantic}{38}
+\bibcite{zhang2024improving}{39}
+\bibcite{zhang2023personalize}{40}
+\bibcite{zhou2024sam}{41}
+\bibcite{zhou2022learning}{42}
+\bibcite{zhu2024melo}{43}
+\gdef \@abspage@last{54}

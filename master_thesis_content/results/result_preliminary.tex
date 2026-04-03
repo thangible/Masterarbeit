@@ -3,9 +3,6 @@
 Hyperparameter optimization uses a multi-fidelity approach employed by utilizing a ViT-B encoder and subsampling both the training and validation sets to 20\% of their original size, as described in \autoref{searchstrat}. To assess the effectiveness of each configuration, two primary metrics are reported: Best Max mIoU and Mean Max mIoU. 
 
 The Best Max mIoU represents the absolute peak performance achieved by a single run within a specific parameter group, indicating the model's highest potential under those conditions. Mean Max mIoU averages the peak mIoU across all runs sharing the same parameter setting, serving as an indicator of the setting's reliability and stability. High performance in both metrics suggests a configuration that is not only capable of reaching high accuracy but does so consistently.
-
-The experiments specifically targeted the extreme class imbalance within ClimateNet, where TCs occupy only 0.5\% of the global grid (a 257:1 background-to-foreground ratio) compared to 5.7\% for ARs (a 17:1 ratio).
-
 \subsubsection{Tversky Loss Parameters for Tropical Cyclones}
 For the TC class, the search space explored various $\alpha_{tc\_tversky}$ and $\beta_{tc\_tversky}$ combinations to manage the 257:1 imbalance. Experimental results indicate that an $\alpha_{tc\_tversky}$ of 0.30 paired with a $\beta_{tc\_tversky}$ of 0.70 yielded the most robust performance, achieving a peak mIoU of 0.5508. Increasing $\alpha_{tc\_tversky}$ beyond 0.30 generally led to a decrease in mean performance, suggesting that while recall is critical, an extreme bias can hinder the stability of the segmentation mask.
 

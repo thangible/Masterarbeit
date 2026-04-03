@@ -26,7 +26,7 @@ PSL & Sea level pressure & 101 $\times$ 10$^{3}$ & 1.46 $\times$ 10$^{3}$ & Pa \
 \label{tab:variables}
 \end{table}
 
-ClimateNet is a community-sourced, expert-labeled open dataset designed to bridge the gap between deep learning and climate science. It was developed to address the lack of high-quality, labeled data for training machine learning models to identify and track extreme weather events. Traditionally, climate scientists used heuristics to identify storms. These rules are often inconsistent. ClimateNet provides ground-truth labels created by human experts, allowing researchers to train segmentation models. The ClimateNet dataset consists of 16 atmospheric variable channels and 1 label channel, provided as global rasters with size of 1152x768. Each pixel has either 0 (background), 1 (part of a TC), or 2 (part of an AR).The dataset is split into \textbf{398 training samples  and 61 validation samples}. The table \ref{tab:variables} describes the 16 variables with their means, standard deviation and units. While the dataset contains 16 channels, most baseline models (CGNet, DeepLabv3+) prioritize a subset of four variables because they are the most diagnostic for TC and AR: TMQ, u850, V850, and PSL.
+ClimateNet is a community-sourced, expert-labeled open dataset designed to bridge the gap between deep learning and climate science. It was developed to address the lack of high-quality, labeled data for training machine learning models to identify and track extreme weather events. ClimateNet is downloadable at NERSC offical website\footnote{\url{https://portal.nersc.gov/project/ClimateNet/climatenet_new/}}. Traditionally, climate scientists used heuristics to identify storms. These rules are often inconsistent. ClimateNet provides ground-truth labels created by human experts, allowing researchers to train segmentation models. The ClimateNet dataset consists of 16 atmospheric variable channels and 1 label channel, provided as global rasters with size of 1152x768. Each pixel has either 0 (background), 1 (part of a TC), or 2 (part of an AR).The dataset is split into \textbf{398 training samples  and 61 validation samples}. The table \ref{tab:variables} describes the 16 variables with their means, standard deviation and units. While the dataset contains 16 channels, most baseline models (CGNet, DeepLabv3+)  prioritize a subset of four variables because they are the most diagnostic for TC and AR: TMQ, U850, V850, and PSL \cite{prabhat2020climatenet, biard2019automated,radke2024explaining}.
 
 
 \subsection{Dataset Statistics} \label{dataset_stats}
@@ -75,9 +75,41 @@ Due to natural atmospheric characteristics, there are fewer TC labels in compari
 \subsection{Geographical Features and Constraint}
 TCs are characterized by a distinct circular structure. Due to the lack of sufficient Coriolis force near the equator, these systems do not typically form within 5\degree{} of latitude. Instead, the vast majority of TCs originate within the latitudinal bands between 5\degree{} and 30\degree{} in both the Northern and Southern Hemispheres \cite{noaa_jetstream_tropical, hko_coriolis_tc}. Explainability analysis (LRP) confirms that CNNs indeed learn to look at point-shaped extrema in TMQ and circular wind motion to identify TCs \cite{radke2024explaining}.
 
+\begin{figure}[!h]
+    \centering
+    \makebox[\textwidth][c]{%
+        \begin{minipage}{1.0\textwidth}
+            \centering
+            \begin{minipage}{0.48\textwidth}
+                \centering
+                \includegraphics[width=1.05\textwidth]{graphics/background/data_example_1.png}
+            \end{minipage}
+            \hfill
+            \begin{minipage}{0.48\textwidth}
+                \centering
+                \includegraphics[width=1.05\textwidth]{graphics/background/data_example_2.png}
+            \end{minipage}
+
+            % \vspace{0.5cm}
+
+            \begin{minipage}{0.48\textwidth}
+                \centering
+                \includegraphics[width=1.05\textwidth]{graphics/background/data_example_3.png}
+            \end{minipage}
+            \hfill
+            \begin{minipage}{0.48\textwidth}
+                \centering
+                \includegraphics[width=1.05\textwidth]{graphics/background/data_example_4.png}
+            \end{minipage}
+        \end{minipage}
+    }
+    \caption{World projection visualizations of atmospheric data. The blue ``Ribons" are AR masks while, the green ones are TCs. The red band denotes the equatorial region between 5\degree{}N and 5\degree{}S where TCs do not typically form. The green bands (5\degree{} to 30\degree{} in both hemispheres) indicate the primary regions for TC activity. The purple bands (30\degree{} to 60\degree{} in both hemispheres) represent the mid\_latitudes where ARs typically occur.}
+    \label{fig:data_examples}
+\end{figure}
+
 ARs has narrow corridors or ``ribbons'' forms. These phenomena occur in both the Northern and Southern Hemispheres and are most commonly found in the mid-latitudes, typically between 30\degree{} and 60\degree{} \cite{gimeno2014atmospheric}. For AR detection, the models focus on elongated bands of high TMQ and eastward winds, which is physically plausible as ARs in both hemispheres are characterized by mid-latitude eastward moisture transport \cite{radke2024explaining}.
 
-Consequently, when treating ClimateNet data points as spatial compositions, the geographic and geometric orientation of the corresponding labels is of critical importance. Because the formation of TCs and ARs are strictly governed by latitudinal physical constraints, the spatial context of these features is non-arbitrary. Therefore, standard geometric augmentation methods (e.g., vertical flipping or random rotations) should be avoided to ensure the model correctly learns the underlying geophysical semantics. Figure \ref{fig:world_projection_grid} illustrates four examples of data points from the ClimateNet dataset. As seen in these visualizations, the occurrence of these phenomena is variable; in some cases, TCs are not present within the provided time step, reflecting the natural distribution of extreme weather events.
+Consequently, when treating ClimateNet data points as spatial compositions, the geographic and geometric orientation of the corresponding labels is of critical importance. Because the formation of TCs and ARs are strictly governed by latitudinal physical constraints, the spatial context of these features is non-arbitrary. Therefore, standard geometric augmentation methods (e.g., vertical flipping or random rotations) should be avoided to ensure the model correctly learns the underlying geophysical semantics. Figure \ref{fig:data_examples} illustrates four examples of data points from the ClimateNet dataset. As seen in these visualizations, the occurrence of these phenomena is variable; \textbf{in some cases, TCs are not present} reflecting the natural distribution of extreme weather events.
 
 % \begin{figure}[!h]
 %     \centering
@@ -110,35 +142,3 @@ Consequently, when treating ClimateNet data points as spatial compositions, the 
 %     \caption{World projection visualizations of atmospheric data. The blue ``Ribons" are AR masks while, the green ones are TCs. The red band denotes the equatorial region between 5\degree{}N and 5\degree{}S where TCs do not typically form. The green bands (5\degree{} to 30\degree{} in both hemispheres) indicate the primary regions for TC activity. The purple bands (30\degree{} to 60\degree{} in both hemispheres) represent the mid\_latitudes where ARs typically occur.}
 %     \label{fig:world_projection_grid}
 % \end{figure}
-
-\begin{figure}[!h]
-    \centering
-    \makebox[\textwidth][c]{%
-        \begin{minipage}{1.0\textwidth}
-            \centering
-            \begin{minipage}{0.48\textwidth}
-                \centering
-                \includegraphics[width=1.05\textwidth]{graphics/background/data_example_1.png}
-            \end{minipage}
-            \hfill
-            \begin{minipage}{0.48\textwidth}
-                \centering
-                \includegraphics[width=1.05\textwidth]{graphics/background/data_example_2.png}
-            \end{minipage}
-
-            % \vspace{0.5cm}
-
-            \begin{minipage}{0.48\textwidth}
-                \centering
-                \includegraphics[width=1.05\textwidth]{graphics/background/data_example_3.png}
-            \end{minipage}
-            \hfill
-            \begin{minipage}{0.48\textwidth}
-                \centering
-                \includegraphics[width=1.05\textwidth]{graphics/background/data_example_4.png}
-            \end{minipage}
-        \end{minipage}
-    }
-    \caption{World projection visualizations of atmospheric data. The blue ``Ribons" are AR masks while, the green ones are TCs. The red band denotes the equatorial region between 5\degree{}N and 5\degree{}S where TCs do not typically form. The green bands (5\degree{} to 30\degree{} in both hemispheres) indicate the primary regions for TC activity. The purple bands (30\degree{} to 60\degree{} in both hemispheres) represent the mid\_latitudes where ARs typically occur.}
-    \label{fig:data\_examples}
-\end{figure}

@@ -12,67 +12,62 @@
 \contentsline {subsection}{\numberline {2.1.3}Prompt Generator for SAM}{6}{subsection.2.1.3}%
 \contentsline {section}{\numberline {2.2}ClimateNet Dataset}{7}{section.2.2}%
 \contentsline {subsection}{\numberline {2.2.1}Dataset Statistics}{8}{subsection.2.2.1}%
-\contentsline {subsection}{\numberline {2.2.2}Geographical Features and Constraint}{8}{subsection.2.2.2}%
-\contentsline {section}{\numberline {2.3}Segment Anything Model}{9}{section.2.3}%
+\contentsline {subsection}{\numberline {2.2.2}Geographical Features and Constraint}{9}{subsection.2.2.2}%
+\contentsline {section}{\numberline {2.3}Segment Anything Model}{10}{section.2.3}%
 \contentsline {subsection}{\numberline {2.3.1}Geometric Prompts}{10}{subsection.2.3.1}%
-\contentsline {subsection}{\numberline {2.3.2}Prompt Embeddings}{10}{subsection.2.3.2}%
+\contentsline {subsection}{\numberline {2.3.2}Prompt Embeddings}{11}{subsection.2.3.2}%
 \contentsline {subsection}{\numberline {2.3.3}Image Embeddings}{11}{subsection.2.3.3}%
 \contentsline {subsection}{\numberline {2.3.4}Decoder}{12}{subsection.2.3.4}%
-\contentsline {section}{\numberline {2.4}Parameter Efficient Fine-Tuning Techniques}{14}{section.2.4}%
-\contentsline {subsection}{\numberline {2.4.1}LoRa}{14}{subsection.2.4.1}%
-\contentsline {subsubsection}{Conceptual Framework}{14}{section*.15}%
-\contentsline {subsubsection}{Implementation Details}{14}{section*.16}%
-\contentsline {subsubsection}{Strategic Advantages}{14}{section*.17}%
-\contentsline {subsection}{\numberline {2.4.2}Learnable Token}{15}{subsection.2.4.2}%
-\contentsline {section}{\numberline {2.5}Metrics}{15}{section.2.5}%
-\contentsline {subsection}{\numberline {2.5.1}Loss Functions}{15}{subsection.2.5.1}%
-\contentsline {subsubsection}{Focal Loss}{15}{section*.18}%
-\contentsline {subsubsection}{Dice Loss}{16}{section*.19}%
-\contentsline {subsubsection}{Tversky Loss}{17}{section*.20}%
-\contentsline {subsubsection}{Hybrid Loss Functions}{17}{section*.21}%
-\contentsline {chapter}{\numberline {3}Approach}{18}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Pipeline}{18}{section.3.1}%
-\contentsline {subsubsection}{Phase 1: Adaptation and Encoder Refinement}{18}{section*.23}%
-\contentsline {subsubsection}{Phase 2: Automated Prompt Generation}{20}{section*.24}%
-\contentsline {section}{\numberline {3.2}Dataset Preparation}{20}{section.3.2}%
-\contentsline {section}{\numberline {3.3}Architectures}{22}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}Input Adapter}{22}{subsection.3.3.1}%
+\contentsline {section}{\numberline {2.4}Metrics}{14}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}Loss Functions}{14}{subsection.2.4.1}%
+\contentsline {subsubsection}{Focal Loss}{14}{section*.15}%
+\contentsline {subsubsection}{Dice Loss}{15}{section*.16}%
+\contentsline {subsubsection}{Tversky Loss}{15}{section*.17}%
+\contentsline {subsubsection}{Hybrid Loss Functions}{16}{section*.18}%
+\contentsline {chapter}{\numberline {3}Approach}{17}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Pipeline}{17}{section.3.1}%
+\contentsline {subsubsection}{Phase 1: Adaptation and Encoder Refinement}{17}{section*.20}%
+\contentsline {subsubsection}{Phase 2: Automated Prompt Generation}{19}{section*.21}%
+\contentsline {section}{\numberline {3.2}Dataset Preparation}{19}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Architectures}{21}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Input Adapter}{21}{subsection.3.3.1}%
+\contentsline {subsubsection}{Nonlinear Convolutional Adapter}{21}{section*.26}%
+\contentsline {subsubsection}{Linear Adapter}{22}{section*.27}%
 \contentsline {subsection}{\numberline {3.3.2}Encoder Adapter}{23}{subsection.3.3.2}%
 \contentsline {subsubsection}{Learnable Token-based approach}{23}{section*.29}%
 \contentsline {subsubsection}{LoRA approach}{25}{section*.32}%
 \contentsline {subsection}{\numberline {3.3.3}Automatic Prompt Generator}{27}{subsection.3.3.3}%
 \contentsline {subsubsection}{CGNet}{27}{section*.34}%
-\contentsline {subsection}{\numberline {3.3.4}3.3.3 Automatic Prompt Generator}{27}{subsection.3.3.4}%
-\contentsline {subsubsection}{Multi-scale Fusion}{27}{section*.35}%
-\contentsline {section}{\numberline {3.4}Hyperparameter Optimisation}{27}{section.3.4}%
-\contentsline {subsection}{\numberline {3.4.1}Loss Function}{27}{subsection.3.4.1}%
-\contentsline {subsubsection}{Search Strategy and Configuration}{28}{section*.37}%
-\contentsline {subsubsection}{Search Space}{29}{section*.39}%
-\contentsline {subsection}{\numberline {3.4.2}Spatial Label Smoothing}{30}{subsection.3.4.2}%
-\contentsline {section}{\numberline {3.5}Metrics}{30}{section.3.5}%
-\contentsline {chapter}{\numberline {4}Result}{31}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Preliminary Result}{31}{section.4.1}%
-\contentsline {subsection}{\numberline {4.1.1}Loss Function Hyperparameter Optimization Results}{31}{subsection.4.1.1}%
-\contentsline {subsubsection}{Tversky Loss Parameters for Tropical Cyclones}{31}{section*.41}%
-\contentsline {subsubsection}{Tversky Loss Parameters for Atmospheric Rivers}{31}{section*.43}%
-\contentsline {subsubsection}{Focal Loss Alpha and Gamma for Tropical Cyclones}{32}{section*.45}%
-\contentsline {subsubsection}{Focal Loss Alpha and Gamma for Atmospheric Rivers}{33}{section*.47}%
-\contentsline {subsubsection}{Loss Component Weight}{33}{section*.49}%
-\contentsline {subsubsection}{Summary of Hyperparameter Optimization Results}{33}{section*.51}%
-\contentsline {subsection}{\numberline {4.1.2}Label Smoothing}{34}{subsection.4.1.2}%
-\contentsline {subsubsection}{First result}{34}{section*.53}%
-\contentsline {subsubsection}{Hyperparameter Search for Label Smoothing}{35}{section*.56}%
-\contentsline {section}{\numberline {4.2}Adapt SAM to ClimateNet}{36}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Lora}{36}{subsection.4.2.1}%
-\contentsline {subsubsection}{Integrating single LoRA component to SAM}{36}{section*.59}%
-\contentsline {subsubsection}{Integrating single LoRA component to SAM [WITH AUGMENTATION]}{38}{section*.63}%
-\contentsline {subsubsection}{Integrating specialized LoRA components for ARs and TCs}{38}{section*.65}%
-\contentsline {subsection}{\numberline {4.2.2}Token-based}{38}{subsection.4.2.2}%
-\contentsline {subsubsection}{SAM with Single infused token}{38}{section*.66}%
-\contentsline {subsubsection}{SAM with Infused Specialized Token}{39}{section*.69}%
-\contentsline {subsubsection}{SAM with Concatenated Specialized Token}{40}{section*.72}%
-\contentsline {section}{\numberline {4.3}Automatic Prompt Generator for SAM}{40}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}SAM with CGNet as helper}{40}{subsection.4.3.1}%
-\contentsline {subsection}{\numberline {4.3.2}SAM with multi-scale feature infusion}{40}{subsection.4.3.2}%
-\contentsline {chapter}{\numberline {5}Discussion}{41}{chapter.5}%
-\contentsline {chapter}{Bibliography}{41}{section*.73}%
+\contentsline {subsubsection}{Multi-scale Fusion}{28}{section*.37}%
+\contentsline {section}{\numberline {3.4}Hyperparameter Optimisation}{28}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}Loss Function}{28}{subsection.3.4.1}%
+\contentsline {subsubsection}{Search Strategy and Configuration}{29}{section*.39}%
+\contentsline {subsubsection}{Search Space}{30}{section*.41}%
+\contentsline {subsection}{\numberline {3.4.2}Spatial Label Smoothing}{31}{subsection.3.4.2}%
+\contentsline {section}{\numberline {3.5}Metrics}{32}{section.3.5}%
+\contentsline {chapter}{\numberline {4}Result}{33}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Preliminary Result}{33}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Loss Function Hyperparameter Optimization Results}{33}{subsection.4.1.1}%
+\contentsline {subsubsection}{Tversky Loss Parameters for Tropical Cyclones}{33}{section*.44}%
+\contentsline {subsubsection}{Tversky Loss Parameters for Atmospheric Rivers}{33}{section*.46}%
+\contentsline {subsubsection}{Focal Loss Alpha and Gamma for Tropical Cyclones}{34}{section*.48}%
+\contentsline {subsubsection}{Focal Loss Alpha and Gamma for Atmospheric Rivers}{34}{section*.50}%
+\contentsline {subsubsection}{Loss Component Weight}{35}{section*.52}%
+\contentsline {subsubsection}{Summary of Hyperparameter Optimization Results}{35}{section*.54}%
+\contentsline {subsection}{\numberline {4.1.2}Label Smoothing}{35}{subsection.4.1.2}%
+\contentsline {subsubsection}{First result}{35}{section*.56}%
+\contentsline {subsubsection}{Hyperparameter Search for Label Smoothing}{37}{section*.59}%
+\contentsline {section}{\numberline {4.2}Adapt SAM to ClimateNet}{37}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Lora}{37}{subsection.4.2.1}%
+\contentsline {subsubsection}{Integrating single LoRA component to SAM}{37}{section*.62}%
+\contentsline {subsubsection}{Integrating single LoRA component to SAM [WITH AUGMENTATION]}{39}{section*.66}%
+\contentsline {subsubsection}{Integrating specialized LoRA components for ARs and TCs}{40}{section*.68}%
+\contentsline {subsection}{\numberline {4.2.2}Token-based}{40}{subsection.4.2.2}%
+\contentsline {subsubsection}{SAM with Single infused token}{40}{section*.69}%
+\contentsline {subsubsection}{SAM with Infused Specialized Token}{41}{section*.72}%
+\contentsline {subsubsection}{SAM with Concatenated Specialized Token}{42}{section*.75}%
+\contentsline {section}{\numberline {4.3}Automatic Prompt Generator for SAM}{42}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}SAM with CGNet as helper}{42}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}SAM with multi-scale feature infusion}{42}{subsection.4.3.2}%
+\contentsline {chapter}{\numberline {5}Discussion}{43}{chapter.5}%
+\contentsline {chapter}{Bibliography}{43}{section*.76}%

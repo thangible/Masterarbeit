@@ -1,26 +1,56 @@
 
 
 \subsection{Input Adapter}
-The ClimateInputAdapter is a specialized learnable preprocessing module designed to bridge the structural gap between multi-parameter atmospheric grids and the fixed input requirements of the Segment Anything Model (SAM). Since SAM is natively optimized for three-channel RGB imagery, this adapter compresses the 16 atmospheric variables from the ClimateNet dataset into a pseudo-RGB representation that preserves critical geophysical features. 
+
+
+The ClimateInputAdapter is a specialized learnable preprocessing module designed to bridge the structural gap between multi-parameter atmospheric grids and the fixed input requirements of SAM. Since SAM is natively optimized for three-channel RGB imagery, this adapter compresses the 16 atmospheric variables from the ClimateNet dataset into a pseudo-RGB representation that preserves critical geophysical features. 
 % \vspace{-1em}
 
 \begin{figure}[!h]
     \centering
     % \includegraphics[width=1\textwidth]{graphics/approach/prompt_pipeline-1.pdf}
     \makebox[\textwidth][c]{%
-    \includegraphics[width=1.3\textwidth]{graphics/approach/input_adapter.pdf}
+    \includegraphics[width=1.1\textwidth]{graphics/approach/input_adapter_nonlinear.pdf}
 }
 \vspace{-1em}
-    \caption{Input Adapter Architecture}
-    \label{fig:input_adapter}
+    \caption{Nonlinear Input Adapter Architecture}
+    \label{fig:input_adapter_nonlinear}
 \end{figure}
 
+\subsubsection{Nonlinear Convolutional Adapter}
+As depicted in Figure \ref{fig:input_adapter_nonlinear}, the architecture follows a bottleneck convolutional design. It initiates with a 3x3 Conv2d layer to capture local spatial dependencies, followed by sequential 1x1 convolutions that reduce the feature dimensionality from 32 to 16, and ultimately to 3 channels. The module incorporates BatchNorm2d and ReLU activations for internal stabilization. A final Sigmoid activation function constrains the output values to a [0, 1] range, which are subsequently rescaled by 255.0 to align with the standard pixel intensity expected by the SAM image encoder.
 
-As depicted in Figure \ref{fig:input_adapter}, the architecture follows a bottleneck convolutional design. It initiates with a 3x3 Conv2d layer to capture local spatial dependencies, followed by sequential 1x1 convolutions that reduce the feature dimensionality from 32 to 16, and ultimately to 3 channels. The module incorporates BatchNorm2d and ReLU activations for internal stabilization. A final Sigmoid activation function constrains the output values to a [0, 1] range, which are subsequently rescaled by 255.0 to align with the standard pixel intensity expected by the SAM image encoder.
+To maintain physical grounding during the Adaptation Phase, the adapter employs an expert-knowledge initialization strategy. The weights for the most diagnostic variables TMQ, U850, V850 \cite{radke2024explaining} are set to 1.0 at the center of the convolution kernels. 
 
+\subsubsection{Linear Adapter}
 
-To maintain physical grounding during the Adaptation Phase, the adapter employs an expert-knowledge initialization strategy. The weights for the most diagnostic variables TMQ, U850, V850, and PSL \cite{radke2024explaining} are set to 1.0 at the center of the convolution kernels. This initialization enables the model to prioritize the point-shaped extrema characteristic of Tropical Cyclones and the elongated moisture corridors of Atmospheric Rivers from the onset of training.
+\begin{figure}[!h]
+    \centering
+    % \includegraphics[width=1\textwidth]{graphics/approach/prompt_pipeline-1.pdf}
+    \makebox[\textwidth][c]{%
+    \includegraphics[width=0.8\textwidth]{graphics/approach/input_adapter_linear.pdf}
+}
+\vspace{-1em}
+    \caption{Linear Input Adapter Architecture}
+    \label{fig:input_adapter_linear}
+\end{figure}
 
+After experimenting with the convolutional architecture, we observed that the performance of AR is significantly hindered by the spatial smoothing effect. To address this, we implemented a simpler Linear Adapter that directly projects the 16-channel input to 3 channels using a 2D convolution with a 1x1 kernel.  Similar to the nonlinear version, the weights corresponding to TMQ, U850, and V850 are initialized to 1.0, while the rest are initialized to zero, including the bias. The forward pass of this linear adapter can be mathematically expressed as:
+
+\begin{equation}
+Output_{n, i, j} = \sigma \left( \sum_{k=1}^{C_{in}} Input_{k, i, j} \cdot W_{n, k} + B_n \right)
+\end{equation}
+
+where $(i, j)$ represents the spatial coordinates, $k$ denotes the input channel index, and $B_{n}$ is the bias term for the $n$-th filter. Under this initialization, the weight matrix $W$ acts as a selection operator. For the three output channels intended to represent the RGB space, the initial state of the adapter simplifies to:
+
+\begin{equation}
+\begin{aligned}
+Output_{1, i, j} (R) &= Input_{TMQ, i, j} \\
+Output_{2, i, j} (G) &= Input_{U850, i, j} \\
+Output_{3, i, j} (B) &= Input_{V850, i, j}
+\end{aligned}
+\end{equation}
+This configuration ensures that at the onset of training, the Red, Green, and Blue channels are directly mapped to the TMQ, U850, and V850 variables, respectively. The model can then learn to adjust these weights during training to optimize the representation for both TCs and ARs. 
 
 \subsection{Encoder Adapter}
 This subsection  describe SAM with LoRA and SAM with Learnable Tokens.
@@ -94,7 +124,7 @@ h = W_{0}x + \Delta Wx = W_{0}x + \frac{\alpha}{r}BAx
 \end{equation}
 where $B \in \mathbb{R}^{d \times r}$ and $A \in \mathbb{R}^{r \times d}$ are the learnable low-rank matrices with rank $r \ll d$. We initialize matrix $A$ using a Kaiming uniform distribution and matrix $B$ to zero, ensuring that the initial adaptation state is identical to the original SAM. A scaling factor $\frac{\alpha}{r}$ is applied to stabilize training when varying the rank $r$.
 
-As illustrated in Figure \ref{fig:lora_architecture}, the LoRA layers are integrated into the encoder adapter block. While a standard LoRA implementation uses a single set of adapters, we implement a specialized Dual LoRA architecture to address the distinct morphological characteristics of TCs and ARs.
+As illustrated in Figure \ref{fig:lora_architecture}, the LoRA layers are integrated into the encoder adapter block. While a standard LoRA implementation uses a single set of adapters, we implement a specialized Dual LoRA architecture to address the distinct morphological characteristics of TCs and ARs. We name the first variant \textbf{Single LoRA} and the second variant \textbf{Dual LoRA}.
 
 In the Dual LoRA configuration, the $qkv$ projection is modified to include separate adapter branches for each meteorological task: TC Adapters: Low-rank matrices $A_{tc}$ and $B_{tc}$ are optimized for the distinct circular structures of Tropical Cyclones. AR Adapters: Low-rank matrices $A_{ar}$ and $B_{ar}$ are tailored for the narrow, ribbon-like corridors of Atmospheric Rivers.
 
@@ -122,19 +152,47 @@ During the forward pass, a task mode flag controls which adapters are active. Th
 \subsection{Automatic Prompt Generator}
 
 \subsubsection{CGNet}
-CGNet is a Context Guided Network specifically designed for semantic segmentation with high computational efficiency, which contains only 494,232 parameters. The architecture is built upon the CGBlock, which follows a joint feature extraction and refinement strategy. The block first captures spatial dependencies by concatenating the outputs of a standard $3 \times 3$ convolution with a $3 \times 3$ dilated convolution. This allows the model to perceive both fine-grained local details and larger atmospheric structures simultaneously. Following concatenation, the representation is refined through a Global Context (FGlo) module. This module utilizes average pooling and a multi-layer-perceptron (MLP) to scale channels based on global image importance. To maintain the physical topology of global climate data—where the eastern and western edges of the raster are geographically continuous—the implementation utilizes circular padding instead of standard zero-padding.
+We integrate CGNet as the auxiliary model for prompt generation for SAM pipeline. The implementation uses pretrained weights from the CG-Net model trained on the ClimateNet dataset, which are accessible via the official portal \footnote{\url{https://portal.nersc.gov/project/ClimateNet/climatenet_new/model/weights.pth}}. Figure \ref{fig:cg_net_architecture} illustrates the architecture of CGNet.
+
+\begin{figure}[!h]
+    \centering
+    % \includegraphics[width=1\textwidth]{graphics/approach/prompt_pipeline-1.pdf}
+    \makebox[0.9\textwidth][c]{%
+    \includegraphics[width=1.1\textwidth]{graphics/approach/cg_net.png}
+}
+\vspace{-1em}
+    \caption{CGNet Architecture \cite{wu2020cgnet}, Figure from Radke et al. \cite{radke2024explaining}}
+    \label{fig:cg_net_architecture}
+\end{figure}
 
 
-In the ClimateSAM pipeline, CGNet acts as a helper model during the second phase of training and inference. The process begins with Auxiliary Mask Prediction, where CGNet processes the diagnostic atmospheric variables, TMQ, U850, V850, and PSL, to produce a preliminary multiclass segmentation. These auxiliary masks are then passed to PromptMaker module, which performs Prompt Extraction to identify point coordinates and bounding boxes. Finally, these extracted prompts provide the necessary Decoder Guidance by replacing manual human input, guiding the adapted SAM mask decoder to produce the final, high-fidelity segmentation.
-\subsection{3.3.3 Automatic Prompt Generator}
+CGNet is a Context Guided Network specifically designed for semantic segmentation with high computational efficiency. , This specific model contains only 494,232 parameters \cite{kapp2020spatio}. The architecture is built upon the CGBlock, which follows a joint feature extraction and refinement strategy. Figure \ref{fig:cg_block_architecture} illustrates the architecture of the CGBlock. The block first captures spatial dependencies by concatenating the outputs of a standard $3 \times 3$ convolution with a $3 \times 3$ dilated convolution. This allows the model to perceive both fine-grained local details and larger atmospheric structures simultaneously. Following concatenation, the representation is refined through a Global Context (FGlo) module. This module uses average pooling and a multi-layer-perceptron (MLP) to scale channels based on global image importance. To maintain the physical topology of global climate data—where the eastern and western edges of the raster are geographically continuous—the implementation utilizes circular padding instead of standard zero-padding.
 
+\begin{figure}[!h]
+    \centering
+    % \includegraphics[width=1\textwidth]{graphics/approach/prompt_pipeline-1.pdf}
+    \makebox[0.9\textwidth][c]{%
+    \includegraphics[width=1.1\textwidth]{graphics/approach/CGBlock.png}
+}
+% \vspace{-1em}
+    \caption{CGBlock Architecture, Figure from CG-Net paper \cite{wu2020cgnet}}
+    \label{fig:cg_block_architecture}
+\end{figure}
+
+
+We will retrain CGNet on the ClimateNet dataset with the same fashion of the pipeline, but with Jaccard Loss like orginal CGNet paper \cite{wu2020cgnet} instead of our custom loss. These masks will then be fed into the PromptMaker module to generate the final prompts for SAM.
 
 \subsubsection{Multi-scale Fusion}
+Self-Prompt SAM in area of 3D medical imaging proposed a multi-scale prompt generator (MSPGenerator) combined with the image encoder that employs the Vision Transformer (ViT) architecture \cite{xie2025self}. The MSPGenerator is a hierarchical structure built by 3D convolutional and transpose convolution layers. Starting with the deepest feature map, it is gradually upsampled to 2x the size and then concatenates with shallower feature maps.
+
+Because the implementation of the original MSPGenerator is not explicitly described in the paper, we design our own version of the module based inspired the general description and the figure provided in the paper. 
+ Figure \ref{fig:multiscalefusion} illustrated our implementation With limited computational resources, we replace the Convolutional transpose layers with bilinear upsampling, and we group the features maps in to groups of three then concat them together then fused. We still keepot he hierachical structure by gradually upsampling the feature maps and fusing them with shallower features. At the end of every fusion block of a group, we apply a convolutional layer to get the intermediate output for the loss function. 
+
 
 \begin{figure}[!h]
     \centering
     \makebox[\textwidth][c]{%
-        \includegraphics[width=1.2\textwidth]{graphics/approach/prompter.pdf}
+        \includegraphics[width=1.1\textwidth]{graphics/approach/prompter.pdf}
     }
     \caption{Multi-scale Fusion Module}
     \label{fig:multiscalefusion}

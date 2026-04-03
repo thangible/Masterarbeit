@@ -31,13 +31,49 @@ Focal $(\alpha, \gamma)$ & AR & (0.80, 1), (0.85, 2), (0.85, 5), (0.90, 2), (0.9
 
 
 \subsubsection{Search Space}
-The search space was specifically designed to prioritize recall $\beta$ over precision $\alpha$ for TCs, as missing a rare storm event is considered a more significant failure in a meteorological context than a slight over-segmentation of its boundary. To establish a performance baseline against standard, unweighted loss components, the experiments included configurations where Focal loss reduces to standard Binary Cross-Entropy $(\gamma=0, \alpha=1)$ and Tversky loss reduces to the Dice coefficient $(\alpha=\beta=0.5)$. To combat the severe 257:1 imbalance of TCs, aggressive weighting was tested using high $\gamma$ values up to 8.0 and extreme Tversky ratios such as 0.05/0.95, forcing the model to focus on the sparse, hard pixels defining TC centers. In contrast, ARs required more moderate Focal $\gamma$ settings between 1.0 and 5.0 and Tversky ratios closer to parity due to their less extreme 17:1 imbalance, which helps maintain structural integrity without over-penalizing boundary pixels. Furthermore, while extreme recall settings facilitate localization, moderate values like $\alpha_{tc}=0.3$ were incorporated to mitigate the gradient instability that can occur with extremely aggressive settings during the adaptation phase. Table \ref{tab:searchspace} summarizes the specific hyperparameter combinations.
+The search space was specifically designed to prioritize recall $\beta$ over precision $\alpha$ for TCs, as models tend to miss TC events. To establish a performance baseline against standard, unweighted loss components, the experiments included configurations where Focal loss reduces to standard Binary Cross-Entropy $(\gamma=0, \alpha=1)$ and Tversky loss reduces to the Dice coefficient $(\alpha=\beta=0.5)$. 
+
+To combat the severe 257:1 imbalance of TCs, aggressive weighting was tested using high $\gamma$ values up to 8.0 and extreme Tversky ratios such as 0.05/0.95, forcing the model to focus on the sparse, hard pixels defining TC centers. ARs required more moderate Focal $\gamma$ settings between 1.0 and 5.0 and Tversky ratios closer to parity (standard Dice Loss) due to their less extreme 17:1 imbalance, which helps maintain structural integrity without over-penalizing boundary pixels. Furthermore, while extreme recall settings facilitate localization, moderate values like $\alpha_{tc}=0.3$ were incorporated to test the gradient instability that can occur with extremely aggressive settings during the adaptation phase. Table \ref{tab:searchspace} summarizes the specific hyperparameter combinations. 
 
 \subsection{Spatial Label Smoothing}\label{spatial_smoothing}
 
-The atmospheric variables within the ClimateNet dataset lack the sharp edges found in natural imagery. Physical phenomena like Tropical Cyclones and Atmospheric Rivers transition gradually into the background space. Rigid binary ground truth masks force the model into making definitive choices on ambiguous boundary pixels. This rigid penalty structure causes the model to memorize specific noise, leading to overfitting for the smaller Tropical Cyclone class during later training epochs. Applying a Gaussian blur to the ground truth masks before calculating the hybrid loss creates a continuous spatial gradient. This smooth gradient acts as a spatial regularizer that aligns more accurately with the physical reality of gradual pressure drop offs.
+The atmospheric variables within the ClimateNet dataset lack the sharp edges found in natural imagery. Physical phenomena like Tropical Cyclones and Atmospheric Rivers transition gradually into the background space. Rigid binary ground truth masks force the model into making definitive choices on ambiguous boundary pixels. This rigid penalty structure causes the model to memorize specific noise, leading to overfitting for the smaller TC class during later training epochs, as empirically observed. Applying a Gaussian blur to the ground truth masks before calculating the hybrid loss creates a continuous spatial gradient. This smooth gradient acts as a spatial regularizer that aligns more accurately with the physical reality of gradual pressure drop offs. Figures \ref{fig:blur_examples} illustrate the effect of label smoothing with varying kernel sizes and sigma values.
 
-Empirical tests confirm that applying a baseline spatial blur with a kernel size of 3 and sigma of 1.0 for Tropical Cyclones, alongside a kernel size of 9 and sigma of 2.0 for Atmospheric Rivers, successfully mitigates this overfitting behavior. Motivated by this empirical success, we establish an independent grid search to identify the optimal blur configuration for each phenomenon. Because Tropical Cyclones and Atmospheric Rivers differ drastically in scale, the search space is divided into two independent phases to isolate the effects of the smoothing parameters.
+
+\begin{figure}[!h]
+    \centering
+    \makebox[\textwidth][c]{%
+        \begin{minipage}{1.0\textwidth}
+            \centering
+            \begin{minipage}{0.48\textwidth}
+                \centering
+                \includegraphics[width=1.05\textwidth]{graphics/approach/blur_0.png}
+            \end{minipage}
+            \hfill
+            \begin{minipage}{0.48\textwidth}
+                \centering
+                \includegraphics[width=1.05\textwidth]{graphics/approach/blur_1.png}
+            \end{minipage}
+
+            % \vspace{0.5cm}
+
+            \begin{minipage}{0.48\textwidth}
+                \centering
+                \includegraphics[width=1.05\textwidth]{graphics/approach/blur_2.png}
+            \end{minipage}
+            \hfill
+            \begin{minipage}{0.48\textwidth}
+                \centering
+                \includegraphics[width=1.05\textwidth]{graphics/approach/blur_3.png}
+            \end{minipage}
+        \end{minipage}
+    }
+    \caption{Example of label smoothing with different kernel sizes and sigma values.}
+    \label{fig:blur_examples}
+\end{figure}
+
+
+Empirical tests confirm that applying a baseline spatial blur with a kernel size of 3 and sigma of 1.0 for Tropical Cyclones, alongside a kernel size of 9 and sigma of 2.0 for Atmospheric Rivers, successfully mitigates this overfitting behavior and significantly improves performance. Motivated by this success, we establish an independent grid search to identify the optimal blur configuration for each phenomenon. Because TCs and ARs differ drastically in scale, the search space is divided into two independent phases to isolate the effects of the smoothing parameters.
 
 Table \ref{tab:smooth_search} summarizes the hyperparameter search space for the spatial label smoothing. During the search, when the parameters for one class are varied, the parameters for the other class are locked to their respective empirical baseline values to ensure an independent evaluation of the structural boundaries.
 

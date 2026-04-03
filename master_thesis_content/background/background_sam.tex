@@ -1,4 +1,4 @@
-SAM is a 2D guided model that requires a geometric prompt (or user prompt) to segment an image. The output is a set of segmentation masks at different levels and a confidence score for each. A segmentation mask is a 2D array with the same size as the image input. SAM consists of an encoder and a decoder. The encoder takes the image and geometric prompt to produce an image embedding, image position embedding, and geometric prompt embedding. The decoder takes in these various embeddings to produce segmentation masks and confidence scores.
+SAM is a 2D guided model that requires a user prompt (geometric prompt) to segment an image. The output is a set of segmentation masks at different levels and a confidence score for each. A segmentation mask is a 2D array with the same size as the image input. SAM consists of an encoder and a decoder. The encoder takes the image and geometric prompt to produce an image embedding, image position embedding, and geometric prompt embedding. The decoder takes in these various embeddings to produce segmentation masks and confidence scores.
 
 \subsection{Geometric Prompts}
 SAM supports three kinds of geometric prompts: points, bounding boxes, and dense masks. Points and bounding boxes are defined as sparse prompts, while dense masks are categorized as dense prompts.
@@ -63,30 +63,30 @@ The four mask tokens serve as queries for the transformer. The attended mask tok
 
 
 
-\section{Parameter Efficient Fine-Tuning Techniques}
-\subsection{LoRa}
-To maintain the foundational knowledge of the pre-trained Segment Anything Model (SAM) while specializing it for meteorological features, we utilize Low-Rank Adaptation (LoRA)[cite: 341]. This approach is particularly effective for adapting SAM to the ClimateNet domain, as it allows for domain-specific refinement without the prohibitive computational cost of full parameter fine-tuning[cite: 301, 341].
+% \section{Parameter Efficient Fine-Tuning Techniques}
+% \subsection{Low-Rank Adaptation (LoRA)}
+% To maintain the foundational knowledge of the pre-trained SAM while specializing it for meteorological features, we use Low-Rank Adaptation (LoRA). 
 
-\subsubsection{Conceptual Framework}
-LoRA operates on the principle that the updates to the weights during adaptation have a low ``intrinsic rank". Instead of updating the massive original weight matrix $W$, we represent the update $\Delta W$ as the product of two much smaller, trainable matrices, $A$ and $B$. For a given input $x$, the modified forward pass is calculated as:
+% \subsubsection{Conceptual Framework}
+% LoRA operates on the principle that the updates to the weights during adaptation have a low ``intrinsic rank". Instead of updating the massive original weight matrix $W$, we represent the update $\Delta W$ as the product of two much smaller, trainable matrices, $A$ and $B$. For a given input $x$, the modified forward pass is calculated as:
 
-\begin{equation}
-    y = Wx + \Delta Wx = Wx + BAx
-\end{equation}
+% \begin{equation}
+%     y = Wx + \Delta Wx = Wx + BAx
+% \end{equation}
 
-During the training phase, the original weight matrix $W$ remains frozen, and only the low-rank matrices $A$ and $B$ are updated. This significantly reduces the number of trainable parameters while allowing the model to capture the complex, non-image atmospheric patterns of Tropical Cyclones and Atmospheric Rivers.
+% During the training phase, the original weight matrix $W$ remains frozen, and only the low-rank matrices $A$ and $B$ are updated. This significantly reduces the number of trainable parameters while allowing the model to capture the complex, non-image atmospheric patterns of Tropical Cyclones and Atmospheric Rivers.
 
-\subsubsection{Implementation Details}
-Our implementation focuses on injecting these adapters into the Transformer blocks of the SAM image encoder. Specifically, we target the Query ($q$) and Value ($v$) projection layers within the multi-head self-attention mechanism, as these layers are critical for internalizing the spatial relationships of weather phenomena.
+% \subsubsection{Implementation Details}
+% Our implementation focuses on injecting these adapters into the Transformer blocks of the SAM image encoder. Specifically, we target the Query ($q$) and Value ($v$) projection layers within the multi-head self-attention mechanism, as these layers are critical for internalizing the spatial relationships of weather phenomena.
 
-\begin{itemize}
-    \item \textbf{Rank Selection}: We utilize a small rank $r$ to ensure the adaptation remains efficient and prevents over-fitting to the sparse labels in the ClimateNet dataset.
-    \item \textbf{Layer Injection}: Adapters are placed in parallel with the original linear layers, specifically targeting the $q$ and $v$ slices of the $qkv$ projection.
-    \item \textbf{Initialization}: Matrix $A$ is initialized using a Kaiming uniform distribution to provide a stable starting gradient, while Matrix $B$ is initialized to zero. This ensures that at the beginning of training, the "shortcut" has zero impact, and the model starts with the exact behavior of the vanilla SAM.
-\end{itemize}
+% \begin{itemize}
+%     \item \textbf{Rank Selection}: We utilize a small rank $r$ to ensure the adaptation remains efficient and prevents over-fitting to the sparse labels in the ClimateNet dataset.
+%     \item \textbf{Layer Injection}: Adapters are placed in parallel with the original linear layers, specifically targeting the $q$ and $v$ slices of the $qkv$ projection.
+%     \item \textbf{Initialization}: Matrix $A$ is initialized using a Kaiming uniform distribution to provide a stable starting gradient, while Matrix $B$ is initialized to zero. This ensures that at the beginning of training, the "shortcut" has zero impact, and the model starts with the exact behavior of the vanilla SAM.
+% \end{itemize}
 
-\subsubsection{Strategic Advantages}
-By employing LoRA, we isolate the adaptation process of the encoder[cite: 343]. This methodology ensures that the model focuses exclusively on learning to extract high-quality, diagnostic features from the 16 multi-parameter atmospheric grids[cite: 344]. This is vital for recognizing the "ribbon-like" corridors of ARs and the "circular" structures of TCs, which differ significantly from the high-frequency edges found in traditional RGB images[cite: 345].
+% \subsubsection{Strategic Advantages}
+% By employing LoRA, we isolate the adaptation process of the encoder. This methodology ensures that the model focuses exclusively on learning to extract high-quality, diagnostic features from the 16 multi-parameter atmospheric grids. This is vital for recognizing the "ribbon-like" corridors of ARs and the "circular" structures of TCs, which differ significantly from the high-frequency edges found in traditional RGB images.
 
-\subsection{Learnable Token}
-In CAT-SAM-T and HQ-SAM, a small learnable token of dimension 1×256 is introduced \cite{xiao2024cat, ke2023segment}. This token is combined via element-wise addition with the original IoU token embedding to initialize a refined IoU token. Following processing through the transformer blocks, the updated token incorporates global image context, critical geometric and categorical information from the prompt tokens, and latent mask information from other output tokens. The refined token is then passed through an MLP and subsequently undergoes a spatially point-wise product with the fused image features to facilitate high-quality mask generation.
+% \subsection{Learnable Token}
+% In CAT-SAM-T and HQ-SAM, a small learnable token of dimension 1×256 is introduced \cite{xiao2024cat, ke2023segment}. This token is combined via element-wise addition with the original IoU token embedding to initialize a refined IoU token. Following processing through the transformer blocks, the updated token incorporates global image context, critical geometric and categorical information from the prompt tokens, and latent mask information from other output tokens. The refined token is then passed through an MLP and subsequently undergoes a spatially point-wise product with the fused image features to facilitate high-quality mask generation.
