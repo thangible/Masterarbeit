@@ -157,7 +157,7 @@ We integrate CGNet as the auxiliary model for prompt generation for SAM pipeline
 \begin{figure}[!h]
     \centering
     % \includegraphics[width=1\textwidth]{graphics/approach/prompt_pipeline-1.pdf}
-    \makebox[0.9\textwidth][c]{%
+    \makebox[0.7\textwidth][c]{%
     \includegraphics[width=1.1\textwidth]{graphics/approach/cg_net.png}
 }
 \vspace{-1em}
@@ -171,11 +171,11 @@ CGNet is a Context Guided Network specifically designed for semantic segmentatio
 \begin{figure}[!h]
     \centering
     % \includegraphics[width=1\textwidth]{graphics/approach/prompt_pipeline-1.pdf}
-    \makebox[0.9\textwidth][c]{%
+    \makebox[0.7\textwidth][c]{%
     \includegraphics[width=1.1\textwidth]{graphics/approach/CGBlock.png}
 }
 % \vspace{-1em}
-    \caption{CGBlock Architecture, Figure from CG-Net paper \cite{wu2020cgnet}}
+    \caption{CGBlock Architecture, Figure from original CG-Net paper \cite{wu2020cgnet}}
     \label{fig:cg_block_architecture}
 \end{figure}
 
@@ -183,17 +183,30 @@ CGNet is a Context Guided Network specifically designed for semantic segmentatio
 We will retrain CGNet on the ClimateNet dataset with the same fashion of the pipeline, but with Jaccard Loss like orginal CGNet paper \cite{wu2020cgnet} instead of our custom loss. These masks will then be fed into the PromptMaker module to generate the final prompts for SAM.
 
 \subsubsection{Multi-scale Fusion}
-Self-Prompt SAM in area of 3D medical imaging proposed a multi-scale prompt generator (MSPGenerator) combined with the image encoder that employs the Vision Transformer (ViT) architecture \cite{xie2025self}. The MSPGenerator is a hierarchical structure built by 3D convolutional and transpose convolution layers. Starting with the deepest feature map, it is gradually upsampled to 2x the size and then concatenates with shallower feature maps.
-
-Because the implementation of the original MSPGenerator is not explicitly described in the paper, we design our own version of the module based inspired the general description and the figure provided in the paper. 
- Figure \ref{fig:multiscalefusion} illustrated our implementation With limited computational resources, we replace the Convolutional transpose layers with bilinear upsampling, and we group the features maps in to groups of three then concat them together then fused. We still keepot he hierachical structure by gradually upsampling the feature maps and fusing them with shallower features. At the end of every fusion block of a group, we apply a convolutional layer to get the intermediate output for the loss function. 
-
+The Self Prompt SAM framework for medical image segmentation introduces a multiscale prompt generator, known as the MSPGenerator, which operates in conjunction with a modified Vision Transformer image encoder \cite{xie2025self}. The MSPGenerator is a hierarchical structure built by 3D convolutional and transpose convolution layers. It sequentially processes feature maps starting from the deepest level, progressively upsampling and concatenating them with shallower feature maps. The architecture also incorporates deep supervision by applying supervision loss at multiple hierarchical levels
 
 \begin{figure}[!h]
     \centering
-    \makebox[\textwidth][c]{%
-        \includegraphics[width=1.1\textwidth]{graphics/approach/prompter.pdf}
+    \makebox[1.1\textwidth][c]{%
+        \includegraphics[width=1.2\textwidth]{graphics/approach/prompter.pdf}
     }
     \caption{Multi-scale Fusion Module}
     \label{fig:multiscalefusion}
 \end{figure}
+
+Since the precise architectural details and code of the original MSPGenerator are not fully disclosed, we designed a custom implementation inspired by the general structural descriptions provided in the source literature. Figure \ref{fig:multiscalefusion} illustrates our proposed module. To accommodate limited computational resources, we replaced the computationally expensive transpose convolutional layers with bilinear upsampling operations. In our implementation, the extracted feature maps are processed in reverse order and divided into discrete blocks consisting of three features each. Within each block, the features undergo channel reduction via a 1x1 convolution, are bilinearly upsampled to matching spatial dimensions, and are then concatenated. A fusion sequence utilizing 1x1 and 3x3 convolutions is subsequently applied to the concatenated group. We maintain the overall hierarchical design by continuously upsampling these fused outputs and concatenating them with the preceding fused blocks. Furthermore, to facilitate the required deep supervision, an intermediate convolutional layer is applied at the conclusion of each block to generate multilevel mask predictions for the loss function.
+
+
+To enable multi level supervision within the prompt generator, the training objective incorporates deep supervision by summing the losses across all resolutions. The total generator loss combines the final high resolution loss with the weighted intermediate losses from earlier blocks.
+
+\begin{equation}
+\mathcal{L} = w_{1} \cdot \mathcal{L}_{1} + w_{2} \cdot \mathcal{L}_{2} + w_{3} \cdot \mathcal{L}_{3} + \dots + w_{n} \cdot \mathcal{L}_{n}
+\end{equation}
+
+Where:
+\begin{itemize}
+    \item $\mathcal{L}_{1}$ represents the loss at the final and highest resolution.
+    \item $\mathcal{L}_{2} \dots \mathcal{L}_{n}$ represent the losses from the intermediate masks. To compute these, the ground truth mask is downsampled to match each intermediate spatial dimension.
+    \item $w_{i}$ represents the weighting factor for each level. The weights decrease for coarser resolutions (e.g., halving with each decrease in resolution, $w_{2} = \frac{1}{2} \cdot w_{1}$) to assign greater importance to the finer and high resolution features.
+\end{itemize}
+

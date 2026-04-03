@@ -1,0 +1,36 @@
+\section{Loss Function}
+To adapt the Segment Anything Model (SAM) to the unique characteristics of the ClimateNet dataset, a systematic hyperparameter optimization was conducted. The primary goal of this search was to identify the optimal balance between pixel-wise classification accuracy and regional mask overlap, specifically addressing the extreme class imbalance where background pixels constitute approximately 93.9\% of the data.
+
+\subsection*{Search Strategy and Configuration}\label{searchstrat}  
+
+We implemented a random search strategy over 40 iterations to explore the high-dimensional space of the hybrid loss function. To ensure computational efficiency during this search phase, the models were trained on a representative subset consisting of 20\% of the training data. Validation was performed using the ViT-B (Vision Transformer Base) version of the SAM image encoder. 
+This methodology is grounded in several practical considerations:
+
+\begin{itemize}
+\item Efficiency: Training on a 20\% subset allows for a broader exploration of the parameter space within a fixed compute budget.
+\item Generalizability: Because ClimateNet consists of global atmospheric rasters with recurring geophysical patterns, a 20\% subset provides sufficient structural diversity—including circular TC structures and ribbon-like AR corridors—to identify robust hyperparameter trends that generalize to the full dataset.
+\item Architecture Consistency: Utilizing the ViT-B backbone ensures that the identified hyperparameters are optimized for the specific feature resolution $(64 \times 64)$ feature grid and embedding space of 256 dimensions used in the final adaptation phase.
+\end{itemize}
+
+\begin{table}[h]
+\centering
+\begin{tblr}{
+  colspec = {llXX}, % X column automatically calculates width and wraps text
+}
+Parameter & Feature & Search Values & Reasons \\ 
+\hline
+Tversky $(\alpha, \beta)$ & TC & (0.05, 0.95), (0.2, 0.8), (0.3, 0.7), (0.4, 0.6), (0.5, 0.5) & Prioritizes recall for rare circular structures; (0.5, 0.5) serves as the Dice baseline. \\ 
+Tversky $(\alpha, \beta)$ & AR & (0.3, 0.7), (0.4, 0.6), (0.5, 0.5), (0.6, 0.4) & Balanced approach for common ribbon forms; (0.5, 0.5) serves as the Dice baseline. \\ 
+Focal $(\alpha, \gamma)$ & TC & (0.95, 5), (0.99, 2.5), (0.99, 5), (0.995, 4), (0.995, 6), (0.995, 8), (1, 0) & Combats the 257:1 background to TC ratio; (1, 0) serves as the BCE baseline. \\ 
+Focal $(\alpha, \gamma)$ & AR & (0.80, 1), (0.85, 2), (0.85, 5), (0.90, 2), (0.95, 3), (1, 0) & Addresses the 17:1 background to AR ratio; (1, 0) serves as the BCE baseline. \\ 
+\hline
+\end{tblr}
+\caption{Hyperparameter search space for SAM adaptation on ClimateNet.}
+\label{tab:searchspace}
+\end{table}
+
+
+\subsection*{Search Space}
+The search space was specifically designed to prioritize recall $\beta$ over precision $\alpha$ for TCs, as models tend to miss TC events. To establish a performance baseline against standard, unweighted loss components, the experiments included configurations where Focal loss reduces to standard Binary Cross-Entropy $(\gamma=0, \alpha=1)$ and Tversky loss reduces to the Dice coefficient $(\alpha=\beta=0.5)$. 
+
+To combat the severe 257:1 imbalance of TCs, aggressive weighting was tested using high $\gamma$ values up to 8.0 and extreme Tversky ratios such as 0.05/0.95, forcing the model to focus on the sparse, hard pixels defining TC centers. ARs required more moderate Focal $\gamma$ settings between 1.0 and 5.0 and Tversky ratios closer to parity (standard Dice Loss) due to their less extreme 17:1 imbalance, which helps maintain structural integrity without over-penalizing boundary pixels. Furthermore, while extreme recall settings facilitate localization, moderate values like $\alpha_{tc}=0.3$ were incorporated to test the gradient instability that can occur with extremely aggressive settings during the adaptation phase. Table \ref{tab:searchspace} summarizes the specific hyperparameter combinations. 

@@ -1,4 +1,5 @@
-\subsubsection{SAM with Single infused token}
+\subsection{Token-based}
+\subsubsection{Single Token SAM}
 This section evaluates SAM using a single token prompt strategy. As shown in 
 Table \ref{tab:single_token_params}, vit\_b achieves a peak IoU of 0.3771 for 
 ARs, while vit\_l performs better on TCs at 0.5694. However, the larger capacity 
@@ -48,7 +49,7 @@ phenomena due to task interference during LoRA adaptation.
 
 
 
-\subsubsection{SAM with Infused Specialized Token}
+\subsubsection{Infused Token SAM}
 
 The training results indicate a positive correlation between the percentage of 
 trainable parameters and model performance. As shown in Table 
@@ -95,4 +96,4 @@ vit\_b & 0.50 & 1.21M & 3.17M & 4.38M & 98.12M & 4.46\% & 2.15 \\
 Despite the specialization of tokens, the model continues to struggle with catastrophic forgetting, as optimization for large scale ARs structures appears to overwrite the representations required for TCs. This task interference is likely exacerbated by the token integration mechanism; because the tokens are combined via element wise addition and divided by two, the resulting averaging effect may dilute specialized signals and hinder the maintenance of distinct representational boundaries. Consequently, while the larger vit\_l backbone provides increased capacity, the inherent token blending and task interference prevent a stable multi objective balance, leading to the observed decline in TCs performance as the model converges on ARs.
 
 
-\subsubsection{SAM with Concatenated Specialized Token}
+\subsubsection{Concat Token SAM}
